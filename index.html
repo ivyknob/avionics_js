@@ -3,36 +3,38 @@
 <body>
 
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500" enable-background="new 0 0 500 500">
-    <defs>
-      <linearGradient id="backHorizon" x1="0" y1="0" x2="0" y2="100%">
-        <stop offset="0.5" stop-color="#503723" />
-+       <stop offset="0.5" stop-color="#558EBB" />
-  	  </linearGradient>
+    <g id="rotor" transform="translate(250 250)">
+      <defs>
+        <linearGradient id="backHorizon" x1="0" y1="0" x2="0" y2="100%">
+          <stop offset="0.5" stop-color="#558EBB" />
+          <stop offset="0.5" stop-color="#503723" />
+        </linearGradient>
 
-      <line id="small-pitch" x1="-14" y1="0" x2="14" y2="0" stroke="white" stroke-width="2" />
-      <line id="medium-pitch" x1="-29" y1="0" x2="29" y2="0" stroke="white" stroke-width="2" />
-      <line id="large-pitch" x1="-41" y1="0" x2="41" y2="0" stroke="white" stroke-width="3" />
-    </defs>
+        <line id="small-pitch" x1="-14" y1="0" x2="14" y2="0" stroke="white" stroke-width="2" />
+        <line id="medium-pitch" x1="-29" y1="0" x2="29" y2="0" stroke="white" stroke-width="2" />
+        <line id="large-pitch" x1="-41" y1="0" x2="41" y2="0" stroke="white" stroke-width="3" />
+      </defs>
 
-    <rect x="0" y="0" width="500" height="500" fill="url(#backHorizon)" />
+      <rect x="-500" y="-500" width="1000" height="1000" fill="url(#backHorizon)" />
 
-    <use x="250" y="270" xlink:href="#small-pitch"/>
-    <use x="250" y="290" xlink:href="#medium-pitch"/>
-    <use x="250" y="310" xlink:href="#small-pitch"/>
-    <use x="250" y="330" xlink:href="#large-pitch"/>
-    <use x="250" y="350" xlink:href="#small-pitch"/>
-    <use x="250" y="370" xlink:href="#medium-pitch"/>
-    <use x="250" y="390" xlink:href="#small-pitch"/>
+      <use x="0" y="20" xlink:href="#small-pitch"/>
+      <use x="0" y="40" xlink:href="#medium-pitch"/>
+      <use x="0" y="60" xlink:href="#small-pitch"/>
+      <use x="0" y="80" xlink:href="#large-pitch"/>
+      <use x="0" y="100" xlink:href="#small-pitch"/>
+      <use x="0" y="120" xlink:href="#medium-pitch"/>
+      <use x="0" y="140" xlink:href="#small-pitch"/>
 
-    <line x1="0" y1="250" x2="500" y2="250" stroke="white" stroke-width="2" />
+      <line x1="-500" y1="0" x2="500" y2="0" stroke="white" stroke-width="2" />
 
-    <use x="250" y="230" xlink:href="#small-pitch"/>
-    <use x="250" y="210" xlink:href="#medium-pitch"/>
-    <use x="250" y="190" xlink:href="#small-pitch"/>
-    <use x="250" y="170" xlink:href="#large-pitch"/>
-    <use x="250" y="150" xlink:href="#small-pitch"/>
-    <use x="250" y="130" xlink:href="#medium-pitch"/>
-    <use x="250" y="110" xlink:href="#small-pitch"/>
+      <use x="0" y="-20" xlink:href="#small-pitch"/>
+      <use x="0" y="-40" xlink:href="#medium-pitch"/>
+      <use x="0" y="-60" xlink:href="#small-pitch"/>
+      <use x="0" y="-80" xlink:href="#large-pitch"/>
+      <use x="0" y="-100" xlink:href="#small-pitch"/>
+      <use x="0" y="-120" xlink:href="#medium-pitch"/>
+      <use x="0" y="-140" xlink:href="#small-pitch"/>
+    </g>
   </svg>
 
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500">
@@ -73,5 +75,14 @@
     <use x="12" y="250" xlink:href="#airspeed"/>
 
   </svg>
+
+  <br>
+  <input type="range" value="0" min="-180" max="180">
+  <script>
+    var rotor = document.getElementById('rotor');
+    document.querySelector('input[type=range]').addEventListener('input', function(){
+      rotor.setAttribute("transform", `translate(250 250) rotate(${this.value})`);
+    })
+  </script>
 </body>
 </html>
