@@ -4,18 +4,17 @@
 
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500" enable-background="new 0 0 500 500">
     <defs>
-      <linearGradient id="backHorizon_1_" gradientUnits="userSpaceOnUse" x1="250.667" y1="350.0991" x2="250.667" y2="150.5659">
-  		  <stop  offset="0.4999" style="stop-color:#503723"/>
-  		  <stop  offset="0.5001" style="stop-color:#558EBB"/>
+      <linearGradient id="backHorizon" gradientUnits="userSpaceOnUse" x1="250.667" y1="350.0991" x2="250.667" y2="150.5659">
+        <stop  offset="0.5" stop-color="#503723" />
++       <stop  offset="0.5" stop-color="#558EBB" />
   	  </linearGradient>
 
-      <line id="small-pitch" x1="-14" y1="0" x2="14" y2="0" style="stroke:white;stroke-width:2"/>
-      <line id="medium-pitch" x1="-29" y1="0" x2="29" y2="0" style="stroke:white;stroke-width:2"/>
-      <line id="large-pitch" x1="-41" y1="0" x2="41" y2="0" style="stroke:white;stroke-width:3"/>
+      <line id="small-pitch" x1="-14" y1="0" x2="14" y2="0" stroke="white" stroke-width="2" />
+      <line id="medium-pitch" x1="-29" y1="0" x2="29" y2="0" stroke="white" stroke-width="2" />
+      <line id="large-pitch" x1="-41" y1="0" x2="41" y2="0" stroke="white" stroke-width="3" />
     </defs>
 
-    <rect x="0" y="0" width="500" height="500"
-    style="fill:url(#backHorizon_1_)" />
+    <rect x="0" y="0" width="500" height="500" fill="url(#backHorizon)" />
 
     <use x="250" y="270" xlink:href="#small-pitch"/>
     <use x="250" y="290" xlink:href="#medium-pitch"/>
@@ -25,8 +24,7 @@
     <use x="250" y="370" xlink:href="#medium-pitch"/>
     <use x="250" y="390" xlink:href="#small-pitch"/>
 
-
-    <line x1="0" y1="250" x2="500" y2="250" style="stroke:white;stroke-width:2"/>
+    <line x1="0" y1="250" x2="500" y2="250" stroke="white" stroke-width="2" />
 
     <use x="250" y="230" xlink:href="#small-pitch"/>
     <use x="250" y="210" xlink:href="#medium-pitch"/>
@@ -35,48 +33,45 @@
     <use x="250" y="150" xlink:href="#small-pitch"/>
     <use x="250" y="130" xlink:href="#medium-pitch"/>
     <use x="250" y="110" xlink:href="#small-pitch"/>
-
   </svg>
 
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500">
     <defs>
       <g id="triangles">
-        <line x1="-129" y1="0" x2="-88" y2="0" style="stroke:yellow;stroke-width:2"/>
-        <line x1="88" y1="0" x2="129" y2="0" style="stroke:yellow;stroke-width:2"/>
-        <polyline points="0,0 -79,42 -54,42 0,0" style="fill:yellow;stroke:black;stroke-width:1"/>
-        <polyline points="0,0 54,42 79,42 0,0" style="fill:yellow;stroke:black;stroke-width:1"/>
+        <line x1="-129" y1="0" x2="-88" y2="0" stroke="yellow" stroke-width="2"/>
+        <line x1="88" y1="0" x2="129" y2="0" stroke="yellow" stroke-width="2"/>
+        <polyline points="0,0 -79,42 -54,42 0,0" fill="yellow" stroke="black" stroke-width="1"/>
+        <polyline points="0,0 54,42 79,42 0,0" fill="yellow" stroke="black" stroke-width="1"/>
 
-        <polyline points="0,0 -54,42 -33,42 0,0" style="fill:none;stroke:black;stroke-width:1"/>
-        <polyline points="0,0 33,42 54,42 0,0" style="fill:none;stroke:black;stroke-width:1"/>
+        <polyline points="0,0 -54,42 -33,42 0,0" fill="none" stroke="black" stroke-width="1"/>
+        <polyline points="0,0 33,42 54,42 0,0" fill="none" stroke="black" stroke-width="1"/>
       </g>
 
       <g id="altitude">
-        <polyline points="0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10" style="fill:black;stroke:white;stroke-width:1"/>
+        <polyline points="0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10" fill="black" stroke="white" stroke-width="1" />
       </g>
 
       <g id="airspeed">
-        <polyline points="0,-24 55,-24, 55,-48, 80,-48 80,-10 90,0 80,10 80,48, 55,48, 55,24 0,24" style="fill:black;stroke:white;stroke-width:1"/>
+        <polyline points="0,-24 55,-24, 55,-48, 80,-48 80,-10 90,0 80,10 80,48, 55,48, 55,24 0,24" fill="black" stroke="white" stroke-width="1" />
       </g>
     </defs>
 
-    <rect id="airspeed_background" x="0" y="0" width="100" height="500" style="fill:black;stroke:white;stroke-width: 1;opacity:0.1" />
+    <rect id="airspeed_background" x="0" y="0" width="100" height="500" fill="black" stroke="white" stroke-width="1" opacity="0.1" />
 
-    <rect id="heading_background" x="100" y="0" width="266" height="38" style="fill:black;stroke:white;stroke-width: 2;opacity:0.1" />
+    <rect id="heading_background" x="100" y="0" width="266" height="38" fill="black" stroke="white" stroke-width="2" opacity="0.1" />
 
-    <rect id="altitude_background" x="366" y="32" width="134" height="468" style="fill:black;stroke:white;stroke-width: 1;opacity:0.1" />
+    <rect id="altitude_background" x="366" y="32" width="134" height="468" fill="black" stroke="white" stroke-width="1" opacity="0.1" />
 
-    <rect id="barometric_setting" x="366" y="468" width="132" height="30" style="fill:black;stroke:blue;stroke-width: 2;opacity:0.1" />
+    <rect id="barometric_setting" x="366" y="468" width="132" height="30" fill="black" stroke="blue" stroke-width="2" opacity="0.1" />
 
-    <rect id="selected_altitude" x="366" y="0" width="132" height="32" style="fill:black;stroke:white;stroke-width: 1;"/>
+    <rect id="selected_altitude" x="366" y="0" width="132" height="32" fill="black" stroke="white" stroke-width="1" />
 
-    <rect id="ground_speed" x="0" y="468" width="100" height="32" style="fill:black;stroke:white;stroke-width: 1;"/>
+    <rect id="ground_speed" x="0" y="468" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
 
     <use x="250" y="250" xlink:href="#triangles"/>
     <use x="380" y="250" xlink:href="#altitude"/>
     <use x="12" y="250" xlink:href="#airspeed"/>
 
   </svg>
-
-
 </body>
 </html>
