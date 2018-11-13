@@ -16,24 +16,7 @@
       </defs>
 
       <rect x="-500" y="-500" width="1000" height="1000" fill="url(#backHorizon)" />
-
-      <use y="20" xlink:href="#small-pitch"/>
-      <use y="40" xlink:href="#medium-pitch"/>
-      <use y="60" xlink:href="#small-pitch"/>
-      <use y="80" xlink:href="#large-pitch"/>
-      <use y="100" xlink:href="#small-pitch"/>
-      <use y="120" xlink:href="#medium-pitch"/>
-      <use y="140" xlink:href="#small-pitch"/>
-
       <line x1="-500" y1="0" x2="500" y2="0" stroke="white" stroke-width="2" />
-
-      <use y="-20" xlink:href="#small-pitch"/>
-      <use y="-40" xlink:href="#medium-pitch"/>
-      <use y="-60" xlink:href="#small-pitch"/>
-      <use y="-80" xlink:href="#large-pitch"/>
-      <use y="-100" xlink:href="#small-pitch"/>
-      <use y="-120" xlink:href="#medium-pitch"/>
-      <use y="-140" xlink:href="#small-pitch"/>
     </g>
 
     <defs>
@@ -45,10 +28,12 @@
 
       <g id="altitude">
         <polyline points="0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10 0,0" fill="black" stroke="white" stroke-width="1" />
+        <text dx="12" dy="12" fill="white" style="font-size:38px;">95336</text>
       </g>
 
       <g id="airspeed">
         <polyline points="0,-24 55,-24, 55,-48, 80,-48 80,-10 90,0 80,10 80,48, 55,48, 55,24 0,24 0,-24" fill="black" stroke="white" stroke-width="1" />
+        <text dx="2" dy="16" fill="white" style="font-size:50px">999</text>
       </g>
     </defs>
 
@@ -62,6 +47,30 @@
 
       <use x="250" y="250" xlink:href="#triangles"/>
       <use x="250" y="250" xlink:href="#triangles" transform="scale(-1,1) translate(-500,0)"/>
+      <g transform='translate(250, 250)'>
+        <defs>
+          <clipPath id="cut-off-bottom">
+            <rect x="-200" y="-250" width="400" height="150" />
+          </clipPath>
+
+        </defs>
+        <circle cx="0" cy="0" r="200"/ fill="none" stroke="white" clip-path="url(#cut-off-bottom)" />
+        <line x1="0" y1="-200" x2="0" y2="-190" stroke="white" stroke-width="1.5" id="degree" />
+        <use xlink:href="#degree" transform="rotate(-60)"/>
+        <use xlink:href="#degree" transform="rotate(-50)"/>
+        <use xlink:href="#degree" transform="rotate(-40)"/>
+        <use xlink:href="#degree" transform="rotate(-30)"/>
+        <use xlink:href="#degree" transform="rotate(-20)"/>
+        <use xlink:href="#degree" transform="rotate(-10)"/>
+        <use xlink:href="#degree" transform="rotate(10)"/>
+        <use xlink:href="#degree" transform="rotate(20)"/>
+        <use xlink:href="#degree" transform="rotate(30)"/>
+        <use xlink:href="#degree" transform="rotate(40)"/>
+        <use xlink:href="#degree" transform="rotate(50)"/>
+        <use xlink:href="#degree" transform="rotate(60)"/>
+        <polygon points="0,-200 -5,-210 5,-210" fill="white" />
+        <polygon points="0,-200 -5,-190 5,-190" fill="white" id="roll_triangle" />
+      </g>
       <use x="380" y="250" xlink:href="#altitude"/>
       <use x="12" y="250" xlink:href="#airspeed"/>
     </g>
@@ -71,6 +80,7 @@
 
   <script>
     var rotor = document.getElementById('rotor');
+    var roll_triangle = document.getElementById('roll_triangle');
 
     var rollValue = 0;
     var pitchValue = 0;
@@ -92,7 +102,40 @@
       }
 
       rotor.setAttribute("transform", `rotate(${rollValue}) translate(0 ${parseInt(pitchValue)})`);
-    }
+      roll_triangle.setAttribute("transform", `rotate(${rollValue})`);
+    };
+
+    (function(){
+      var large = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+      large.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#large-pitch');
+      var medium = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+      medium.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#medium-pitch');
+      var small = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+      small.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#small-pitch');
+      var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+      text.style.fill = 'white';
+      text.setAttribute('text-anchor', 'end');
+      text.setAttribute('x', -45);
+      text.setAttribute('dy', 5);
+
+      for (var i=-180;i<=180;i+=2.5) {
+        if (i == 0) {
+          continue;
+        } else if (i%10 == 0) {
+          use = large.cloneNode();
+          var cloneText = text.cloneNode();
+          cloneText.textContent = Math.abs(i);
+          cloneText.setAttribute('y', -i*8);
+          rotor.appendChild(cloneText);
+        } else if (i%5 == 0) {
+          use = medium.cloneNode();
+        } else if (i%2.5 == 0) {
+          use = small.cloneNode();
+        }
+        use.setAttribute('y', i*8);
+        rotor.appendChild(use);
+      }
+    })()
   </script>
 </body>
 </html>
