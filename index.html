@@ -1,9 +1,36 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <style>
+    html, body, svg {
+      width: 100%; height: 100%;
+    }
+    svg {
+      display: block;
+    }
+    body {
+      margin: 0;
+    }
+    .airspeed-value {
+      font-size: 40px;
+      letter-spacing: 5px;
+    }
+    .altitude-value {
+      font-size:30px;
+      letter-spacing: 3px;
+    }
+  </style>
+</head>
 <body>
 
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="-250 -250 500 500">
-    <g id="rotor">
+    <defs>
+      <!-- <mask id="mask" fill="#fff">
+        <rect x="-50%" y="-250" width="100%" height="200" fill="#fff"  />
+        <rect x="0" y="0" width="300" height="300" fill="#fff" />
+      </mask> -->
+    </defs>
+    <g id="rotor" mask="url(#mask)">
       <defs>
         <linearGradient id="backHorizon" x1="0" y1="0" x2="0" y2="100%">
           <stop offset="0.5" stop-color="#558EBB" />
@@ -13,6 +40,8 @@
         <line id="small-pitch" x1="-14" y1="0" x2="14" y2="0" stroke="white" stroke-width="2" />
         <line id="medium-pitch" x1="-29" y1="0" x2="29" y2="0" stroke="white" stroke-width="2" />
         <line id="large-pitch" x1="-41" y1="0" x2="41" y2="0" stroke="white" stroke-width="3" />
+
+
       </defs>
 
       <rect x="-500" y="-500" width="1000" height="1000" fill="url(#backHorizon)" />
@@ -28,12 +57,12 @@
 
       <g id="altitude">
         <polyline points="0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10 0,0" fill="black" stroke="white" stroke-width="1" />
-        <text dx="12" dy="12" fill="white" style="font-size:38px;">95336</text>
+        <text dx="16" dy="10" fill="white" class='altitude-value'>95336</text>
       </g>
 
       <g id="airspeed">
         <polyline points="0,-24 55,-24, 55,-48, 80,-48 80,-10 90,0 80,10 80,48, 55,48, 55,24 0,24 0,-24" fill="black" stroke="white" stroke-width="1" />
-        <text dx="2" dy="16" fill="white" style="font-size:50px">999</text>
+        <text dx="6" dy="13" fill="white" class="airspeed-value">999</text>
       </g>
     </defs>
 
@@ -52,7 +81,6 @@
           <clipPath id="cut-off-bottom">
             <rect x="-200" y="-250" width="400" height="150" />
           </clipPath>
-
         </defs>
         <circle cx="0" cy="0" r="200"/ fill="none" stroke="white" clip-path="url(#cut-off-bottom)" />
         <line x1="0" y1="-200" x2="0" y2="-190" stroke="white" stroke-width="1.5" id="degree" />
@@ -68,15 +96,13 @@
         <use xlink:href="#degree" transform="rotate(40)"/>
         <use xlink:href="#degree" transform="rotate(50)"/>
         <use xlink:href="#degree" transform="rotate(60)"/>
-        <polygon points="0,-200 -5,-210 5,-210" fill="white" />
-        <polygon points="0,-200 -5,-190 5,-190" fill="white" id="roll_triangle" />
+        <polygon points="0,-200 -7.5,-215 7.5,-215" fill="white" />
+        <polygon points="0,-200 -7.5,-185 7.5,-185" fill="white" id="roll_triangle" />
       </g>
       <use x="380" y="250" xlink:href="#altitude"/>
       <use x="12" y="250" xlink:href="#airspeed"/>
     </g>
   </svg>
-
-  <h3>keys: left, up, right, down</h3>
 
   <script>
     var rotor = document.getElementById('rotor');
@@ -112,21 +138,26 @@
       medium.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#medium-pitch');
       var small = document.createElementNS("http://www.w3.org/2000/svg", 'use');
       small.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#small-pitch');
-      var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-      text.style.fill = 'white';
-      text.setAttribute('text-anchor', 'end');
-      text.setAttribute('x', -45);
-      text.setAttribute('dy', 5);
+      var textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+      textLeft.style.fill = 'white';
+      textLeft.style.fontWeight = 'bold';
+      textLeft.setAttribute('dy', 5);
+      var textRight = textLeft.cloneNode();
+      textLeft.setAttribute('text-anchor', 'end');
+      textLeft.setAttribute('x', -45);
+      textRight.setAttribute('x', 45);
 
       for (var i=-180;i<=180;i+=2.5) {
         if (i == 0) {
           continue;
         } else if (i%10 == 0) {
           use = large.cloneNode();
-          var cloneText = text.cloneNode();
-          cloneText.textContent = Math.abs(i);
-          cloneText.setAttribute('y', -i*8);
-          rotor.appendChild(cloneText);
+          var texts = [textLeft.cloneNode(), textRight.cloneNode()];
+          texts.forEach(text => {
+            text.textContent = Math.abs(i);
+            text.setAttribute('y', -i*8);
+            rotor.appendChild(text);
+          });
         } else if (i%5 == 0) {
           use = medium.cloneNode();
         } else if (i%2.5 == 0) {
