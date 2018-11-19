@@ -1,0 +1,17 @@
+html, body, svg {
+  width: 100%; height: 100%;
+}
+svg {
+  display: block;
+}
+body {
+  margin: 0;
+}
+.airspeed-value {
+  font-size: 40px;
+  letter-spacing: 5px;
+}
+.altitude-value {
+  font-size:30px;
+  letter-spacing: 3px;
+}

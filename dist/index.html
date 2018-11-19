@@ -1,28 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    html, body, svg {
-      width: 100%; height: 100%;
-    }
-    svg {
-      display: block;
-    }
-    body {
-      margin: 0;
-    }
-    .airspeed-value {
-      font-size: 40px;
-      letter-spacing: 5px;
-    }
-    .altitude-value {
-      font-size:30px;
-      letter-spacing: 3px;
-    }
-  </style>
+  <title>Avionics js</title>
 </head>
 <body>
-
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="-250 -250 500 500">
     <defs>
       <!-- <mask id="mask" fill="#fff">
@@ -57,12 +38,12 @@
 
       <g id="altitude">
         <polyline points="0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10 0,0" fill="black" stroke="white" stroke-width="1" />
-        <text dx="16" dy="10" fill="white" class='altitude-value'>95336</text>
+        <text dx="16" dy="10" fill="white" class='altitude-value' id='altitude_value'>95336</text>
       </g>
 
       <g id="airspeed">
         <polyline points="0,-24 55,-24, 55,-48, 80,-48 80,-10 90,0 80,10 80,48, 55,48, 55,24 0,24 0,-24" fill="black" stroke="white" stroke-width="1" />
-        <text dx="6" dy="13" fill="white" class="airspeed-value">999</text>
+        <text dx="6" dy="13" fill="white" class="airspeed-value" id="airspeed_value">999</text>
       </g>
     </defs>
 
@@ -104,69 +85,11 @@
     </g>
   </svg>
 
+  <script src="bundle.js"></script>
   <script>
-    var rotor = document.getElementById('rotor');
-    var roll_triangle = document.getElementById('roll_triangle');
-
-    var rollValue = 0;
-    var pitchValue = 0;
-
-    document.onkeydown = function(e){
-      switch (e.keyCode) {
-        case 37:
-          rollValue-=2;
-          break;
-        case 39:
-          rollValue+=2;
-          break;
-        case 38:
-          pitchValue+=8;
-          break;
-        case 40:
-          pitchValue-=8;
-          break;
-      }
-
-      rotor.setAttribute("transform", `rotate(${rollValue}) translate(0 ${parseInt(pitchValue)})`);
-      roll_triangle.setAttribute("transform", `rotate(${rollValue})`);
-    };
-
-    (function(){
-      var large = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-      large.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#large-pitch');
-      var medium = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-      medium.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#medium-pitch');
-      var small = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-      small.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#small-pitch');
-      var textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-      textLeft.style.fill = 'white';
-      textLeft.style.fontWeight = 'bold';
-      textLeft.setAttribute('dy', 5);
-      var textRight = textLeft.cloneNode();
-      textLeft.setAttribute('text-anchor', 'end');
-      textLeft.setAttribute('x', -45);
-      textRight.setAttribute('x', 45);
-
-      for (var i=-180;i<=180;i+=2.5) {
-        if (i == 0) {
-          continue;
-        } else if (i%10 == 0) {
-          use = large.cloneNode();
-          var texts = [textLeft.cloneNode(), textRight.cloneNode()];
-          texts.forEach(text => {
-            text.textContent = Math.abs(i);
-            text.setAttribute('y', -i*8);
-            rotor.appendChild(text);
-          });
-        } else if (i%5 == 0) {
-          use = medium.cloneNode();
-        } else if (i%2.5 == 0) {
-          use = small.cloneNode();
-        }
-        use.setAttribute('y', i*8);
-        rotor.appendChild(use);
-      }
-    })()
+    Avionics.airspeed = parseInt(Math.random()*999);
+    Avionics.altitude = parseInt(Math.random()*99999);
   </script>
+
 </body>
 </html>

@@ -1,0 +1,31 @@
+{
+  "name": "avionics_js",
+  "version": "1.0.0",
+  "description": "js all in one avionics module",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "webpack-dev-server",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivyknob/avionics_js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivyknob/avionics_js/issues"
+  },
+  "homepage": "https://github.com/ivyknob/avionics_js#readme",
+  "devDependencies": {
+    "coffee-loader": "^0.9.0",
+    "coffee-script": "^1.12.7",
+    "coffeescript": "^2.3.2",
+    "css-loader": "^1.0.1",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.26.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
