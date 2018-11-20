@@ -6,27 +6,37 @@
 <body>
   <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="-250 -250 500 500">
     <defs>
-      <!-- <mask id="mask" fill="#fff">
-        <rect x="-50%" y="-250" width="100%" height="200" fill="#fff"  />
-        <rect x="0" y="0" width="300" height="300" fill="#fff" />
-      </mask> -->
+      <clipPath id="pitchClip">
+        <path d="M-100 400 -100 -100 C -50 -160, 50 -160, 100 -100 L 100 400z" transform="translate(0, -40)" />
+      </clipPath>
     </defs>
-    <g id="rotor" mask="url(#mask)">
+    <g id='horizont'>
       <defs>
         <linearGradient id="backHorizon" x1="0" y1="0" x2="0" y2="100%">
           <stop offset="0.5" stop-color="#558EBB" />
           <stop offset="0.5" stop-color="#503723" />
         </linearGradient>
+      </defs>
+      <rect x="-500" y="-500" width="1000" height="1000" fill="url(#backHorizon)" />
+      <line x1="-500" y1="0" x2="500" y2="0" stroke="white" stroke-width="2" />
+    </g>
 
+    <g id="rotor" clip-path="url(#pitchClip)">
+      <g id='pitch'>
         <line id="small-pitch" x1="-14" y1="0" x2="14" y2="0" stroke="white" stroke-width="2" />
         <line id="medium-pitch" x1="-29" y1="0" x2="29" y2="0" stroke="white" stroke-width="2" />
         <line id="large-pitch" x1="-41" y1="0" x2="41" y2="0" stroke="white" stroke-width="3" />
+      </g>
+    </g>
 
-
+    <g transform="translate(0,-235)">
+      <defs>
+        <line x1="0" y1="0" x2="0" y2="-2" stroke="#fff" stroke-width="1.5" id="heading_scale_marker" />
+        <line x1="0" y1="0" x2="0" y2="-5" stroke="#fff" stroke-width="1.5" id="heading_scale_large_marker" />
       </defs>
-
-      <rect x="-500" y="-500" width="1000" height="1000" fill="url(#backHorizon)" />
-      <line x1="-500" y1="0" x2="500" y2="0" stroke="white" stroke-width="2" />
+      <g id="heading_scale" transform="translate(0,5)"></g>
+      <polyline points="0,0 5,-5 10,-5 10,-15 -10,-15 -10,-5, -5,-5 0,0" fill="#000" stroke="#fff" stroke-width="1" />
+      <text fill="#fff" style="font-size:9px;font-weight:bold;" text-anchor='middle' dy="-7" id="heading_current_value">360</text>
     </g>
 
     <defs>
@@ -89,6 +99,7 @@
   <script>
     Avionics.airspeed = parseInt(Math.random()*999);
     Avionics.altitude = parseInt(Math.random()*99999);
+    Avionics.currentHeading = 350;
   </script>
 
 </body>

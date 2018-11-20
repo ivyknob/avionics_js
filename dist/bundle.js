@@ -93,7 +93,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _avionics_coffee__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
-/* harmony import */ var _avionics_coffee__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_avionics_coffee__WEBPACK_IMPORTED_MODULE_1__);
 
 
 
@@ -720,17 +719,25 @@ module.exports = function (css) {
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {global.Avionics = {
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _prints_coffee__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+
+
+global.Avionics = {
   _rollValue: 0,
   _pitchValue: 0,
-  airspeedElem: airspeed_value,
   _airspeed: 0,
+  _altitube: 0,
+  _currentHeading: 360,
+  airspeedElem: airspeed_value,
   altitudeElem: altitude_value,
   rotor: rotor,
+  horizont: horizont,
+  pitchElem: pitch,
   roll_triangle: roll_triangle,
-  _altitube: 0,
   _pad: function(number, n) {
     var arr;
     arr = number.toString().split("");
@@ -755,7 +762,9 @@ Object.defineProperty(Avionics, 'altitude', {
 Object.defineProperty(Avionics, 'roll', {
   set: function(value) {
     this._rollValue = value;
-    this.rotor.setAttribute("transform", `rotate(${this._rollValue}) translate(0 ${parseInt(this._pitchValue)})`);
+    this.horizont.setAttribute("transform", `rotate(${this._rollValue}) translate(0 ${parseInt(this._pitchValue * 0.5)})`);
+    this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
+    this.pitchElem.setAttribute("transform", `translate(0 ${parseInt(this._pitchValue)})`);
     return this.roll_triangle.setAttribute("transform", `rotate(${this._rollValue})`);
   },
   get: function() {
@@ -766,10 +775,22 @@ Object.defineProperty(Avionics, 'roll', {
 Object.defineProperty(Avionics, 'pitch', {
   set: function(value) {
     this._pitchValue = value;
-    return this.rotor.setAttribute("transform", `rotate(${this._rollValue}) translate(0 ${parseInt(this._pitchValue)})`);
+    this.horizont.setAttribute("transform", `rotate(${this._rollValue}) translate(0 ${parseInt(this._pitchValue * 0.5)})`);
+    this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
+    return this.pitchElem.setAttribute("transform", `translate(0 ${parseInt(this._pitchValue)})`);
   },
   get: function() {
     return this._pitchValue;
+  }
+});
+
+Object.defineProperty(Avionics, 'currentHeading', {
+  set: function(value) {
+    var delta;
+    this._currentHeading = value === 0 ? 360 : value;
+    heading_current_value.textContent = this._pad(this._currentHeading, 3);
+    delta = this._currentHeading > 180 ? (360 - this._currentHeading) * 10 : -this._currentHeading * 10;
+    return heading_scale.setAttribute("transform", `translate(${delta},5)`);
   }
 });
 
@@ -786,47 +807,9 @@ document.onkeydown = (e) => {
   }
 };
 
-(function() {
-  var i, large, medium, results, small, textLeft, textRight, texts, use;
-  large = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  large.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#large-pitch');
-  medium = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  medium.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#medium-pitch');
-  small = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  small.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#small-pitch');
-  textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-  textLeft.style.fill = 'white';
-  textLeft.style.fontWeight = 'bold';
-  textLeft.setAttribute('dy', 5);
-  textRight = textLeft.cloneNode();
-  textLeft.setAttribute('text-anchor', 'end');
-  textLeft.setAttribute('x', -45);
-  textRight.setAttribute('x', 45);
-  i = -180;
-  results = [];
-  while (i <= 180) {
-    if (i === 0) {
-      i += 2.5;
-      continue;
-    } else if (i % 10 === 0) {
-      use = large.cloneNode();
-      texts = [textLeft.cloneNode(), textRight.cloneNode()];
-      texts.forEach(function(text) {
-        text.textContent = Math.abs(i);
-        text.setAttribute('y', -i * 8);
-        rotor.appendChild(text);
-      });
-    } else if (i % 5 === 0) {
-      use = medium.cloneNode();
-    } else if (i % 2.5 === 0) {
-      use = small.cloneNode();
-    }
-    use.setAttribute('y', i * 8);
-    rotor.appendChild(use);
-    results.push(i += 2.5);
-  }
-  return results;
-})();
+Object(_prints_coffee__WEBPACK_IMPORTED_MODULE_0__["printPitch"])();
+
+Object(_prints_coffee__WEBPACK_IMPORTED_MODULE_0__["printHeading"])();
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(7)))
 
@@ -854,6 +837,95 @@ try {
 // easier to handle this case. if(!global) { ...}
 
 module.exports = g;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printPitch", function() { return printPitch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printHeading", function() { return printHeading; });
+var printHeading, printPitch;
+
+printPitch = function() {
+  var i, large, medium, results, small, textLeft, textRight, texts, use;
+  large = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+  large.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#large-pitch');
+  medium = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+  medium.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#medium-pitch');
+  small = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+  small.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#small-pitch');
+  textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+  textLeft.style.fill = 'white';
+  textLeft.style.fontWeight = 'bold';
+  textLeft.setAttribute('dy', 5);
+  textRight = textLeft.cloneNode();
+  textLeft.setAttribute('text-anchor', 'end');
+  textLeft.setAttribute('x', -45);
+  textRight.setAttribute('x', 45);
+  i = -180;
+  results = [];
+  while (i <= 180) {
+    if (i === 0) {
+      i += 2.5;
+      continue;
+    } else if (i % 10 === 0) {
+      use = large.cloneNode();
+      texts = [textLeft.cloneNode(), textRight.cloneNode()];
+      texts.forEach(function(text) {
+        text.textContent = Math.abs(i);
+        text.setAttribute('y', -i * 8);
+        pitch.appendChild(text);
+      });
+    } else if (i % 5 === 0) {
+      use = medium.cloneNode();
+    } else if (i % 2.5 === 0) {
+      use = small.cloneNode();
+    }
+    use.setAttribute('y', i * 8);
+    pitch.appendChild(use);
+    results.push(i += 2.5);
+  }
+  return results;
+};
+
+printHeading = function() {
+  var clone, cloneText, i, large_marker, marker, results, text;
+  marker = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+  marker.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#heading_scale_marker');
+  large_marker = document.createElementNS("http://www.w3.org/2000/svg", 'use');
+  large_marker.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#heading_scale_large_marker');
+  text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+  text.style.fill = '#fff';
+  text.style.fontSize = '8px';
+  text.style.fontWeight = 'bold';
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('y', -10);
+  i = -180;
+  results = [];
+  while (i <= 180) {
+    if (i % 10 === 0) {
+      clone = large_marker.cloneNode();
+      cloneText = text.cloneNode();
+      cloneText.setAttribute('x', i * 10);
+      cloneText.textContent = i <= 0 ? 360 + i : i;
+      heading_scale.appendChild(cloneText);
+    } else if (i % 5 === 0) {
+      clone = large_marker.cloneNode();
+      cloneText = text.cloneNode();
+    } else {
+      clone = marker.cloneNode();
+    }
+    clone.setAttribute('x', i * 10);
+    heading_scale.appendChild(clone);
+    results.push(i += 1);
+  }
+  return results;
+};
+
+
 
 
 /***/ })
