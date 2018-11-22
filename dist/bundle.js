@@ -131,7 +131,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "html, body, svg {\n  width: 100%; height: 100%;\n}\nsvg {\n  display: block;\n}\nbody {\n  margin: 0;\n}\n.airspeed-value {\n  font-size: 40px;\n  letter-spacing: 5px;\n}\n.altitude-value {\n  font-size:30px;\n  letter-spacing: 3px;\n}\n", ""]);
+exports.push([module.i, "html, body, svg {\n  width: 100%; height: 100%;\n}\nsvg {\n  display: block;\n}\nbody {\n  margin: 0;\n}\n.airspeed-value {\n  font-size: 40px;\n  letter-spacing: 5px;\n}\n.altitude-value {\n  font-size:30px;\n  letter-spacing: 3px;\n}\n\n#ground_speed_value {\n  font-size: 30px;\n  font-weight: bold;\n  fill: #c748a2;\n  text-anchor: end;\n}\n\n#selected_altitude_value {\n  font-size: 30px;\n  font-weight: bold;\n  fill: #47cfe0;\n  text-anchor: end;\n}\n", ""]);
 
 // exports
 
@@ -790,7 +790,19 @@ Object.defineProperty(Avionics, 'currentHeading', {
     this._currentHeading = value === 0 ? 360 : value;
     heading_current_value.textContent = this._pad(this._currentHeading, 3);
     delta = this._currentHeading > 180 ? (360 - this._currentHeading) * 10 : -this._currentHeading * 10;
-    return heading_scale.setAttribute("transform", `translate(${delta},5)`);
+    return heading_scale.setAttribute("transform", `translate(${delta},22.5)`);
+  }
+});
+
+Object.defineProperty(Avionics, 'groundSpeed', {
+  set: function(value) {
+    return ground_speed_value.textContent = value;
+  }
+});
+
+Object.defineProperty(Avionics, 'selectedAltitude', {
+  set: function(value) {
+    return selected_altitude_value.textContent = value;
   }
 });
 
@@ -899,7 +911,7 @@ printHeading = function() {
   large_marker.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#heading_scale_large_marker');
   text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
   text.style.fill = '#fff';
-  text.style.fontSize = '8px';
+  text.style.fontSize = '16px';
   text.style.fontWeight = 'bold';
   text.setAttribute('text-anchor', 'middle');
   text.setAttribute('y', -10);

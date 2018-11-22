@@ -15,3 +15,17 @@ body {
   font-size:30px;
   letter-spacing: 3px;
 }
+
+#ground_speed_value {
+  font-size: 30px;
+  font-weight: bold;
+  fill: #c748a2;
+  text-anchor: end;
+}
+
+#selected_altitude_value {
+  font-size: 30px;
+  font-weight: bold;
+  fill: #47cfe0;
+  text-anchor: end;
+}

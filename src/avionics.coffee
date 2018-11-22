@@ -56,7 +56,15 @@ Object.defineProperty Avionics, 'currentHeading',
       (360 - @_currentHeading)*10
     else
       -@_currentHeading*10
-    heading_scale.setAttribute("transform", "translate(#{delta},5)")
+    heading_scale.setAttribute("transform", "translate(#{delta},22.5)")
+
+Object.defineProperty Avionics, 'groundSpeed',
+  set: (value)->
+    ground_speed_value.textContent = value
+
+Object.defineProperty Avionics, 'selectedAltitude',
+  set: (value)->
+    selected_altitude_value.textContent = value
 
 document.onkeydown = (e) =>
   switch e.keyCode

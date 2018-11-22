@@ -9,6 +9,9 @@
       <clipPath id="pitchClip">
         <path d="M-100 400 -100 -100 C -50 -160, 50 -160, 100 -100 L 100 400z" transform="translate(0, -40)" />
       </clipPath>
+      <clipPath id="headingClip">
+        <rect x="-150" y="-15" width="266" height="38" fill="black" />
+      </clipPath>
     </defs>
     <g id='horizont'>
       <defs>
@@ -29,14 +32,16 @@
       </g>
     </g>
 
-    <g transform="translate(0,-235)">
+    <g transform="translate(0,-235)" clip-path="url(#headingClip)">
       <defs>
         <line x1="0" y1="0" x2="0" y2="-2" stroke="#fff" stroke-width="1.5" id="heading_scale_marker" />
         <line x1="0" y1="0" x2="0" y2="-5" stroke="#fff" stroke-width="1.5" id="heading_scale_large_marker" />
       </defs>
       <g id="heading_scale" transform="translate(0,5)"></g>
-      <polyline points="0,0 5,-5 10,-5 10,-15 -10,-15 -10,-5, -5,-5 0,0" fill="#000" stroke="#fff" stroke-width="1" />
-      <text fill="#fff" style="font-size:9px;font-weight:bold;" text-anchor='middle' dy="-7" id="heading_current_value">360</text>
+      <g transform="translate(0,17)">
+        <polyline points="0,0 10,-10 20,-10 20,-30 -20,-30 -20,-10, -10,-10 0,0" fill="#000" stroke="#fff" stroke-width="1" />
+        <text fill="#fff" style="font-size:18px;font-weight:bold;" text-anchor='middle' dy="-14" id="heading_current_value">360</text>
+      </g>
     </g>
 
     <defs>
@@ -62,8 +67,6 @@
       <rect id="heading_background" x="100" y="0" width="266" height="38" fill="black" stroke="white" stroke-width="2" opacity="0.1" />
       <rect id="altitude_background" x="366" y="32" width="134" height="468" fill="black" stroke="white" stroke-width="1" opacity="0.1" />
       <rect id="barometric_setting" x="366" y="468" width="132" height="30" fill="black" stroke="blue" stroke-width="2" opacity="0.1" />
-      <rect id="selected_altitude" x="366" y="0" width="132" height="32" fill="black" stroke="white" stroke-width="1" />
-      <rect id="ground_speed" x="0" y="468" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
 
       <use x="250" y="250" xlink:href="#triangles"/>
       <use x="250" y="250" xlink:href="#triangles" transform="scale(-1,1) translate(-500,0)"/>
@@ -93,6 +96,14 @@
       <use x="380" y="250" xlink:href="#altitude"/>
       <use x="12" y="250" xlink:href="#airspeed"/>
     </g>
+    <g transform="translate(116,-250)">
+      <rect id="selected_altitude" x="0" y="0" width="134" height="32" fill="black" stroke="white" stroke-width="1" />
+      <text dx='129' dy='26' id='selected_altitude_value'>0</text>
+    </g>
+    <g transform="translate(-250,218)">
+      <rect id="ground_speed" x="0" y="0" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
+      <text dx='95' dy='26' id='ground_speed_value'>0</text>
+    </g>
   </svg>
 
   <script src="bundle.js"></script>
@@ -100,6 +111,8 @@
     Avionics.airspeed = parseInt(Math.random()*999);
     Avionics.altitude = parseInt(Math.random()*99999);
     Avionics.currentHeading = 350;
+    Avionics.groundSpeed = 109;
+    Avionics.selectedAltitude = 250;
   </script>
 
 </body>

@@ -47,7 +47,7 @@ printHeading = ->
 
   text = document.createElementNS("http://www.w3.org/2000/svg", 'text')
   text.style.fill = '#fff'
-  text.style.fontSize = '8px'
+  text.style.fontSize = '16px'
   text.style.fontWeight = 'bold'
   text.setAttribute('text-anchor', 'middle')
   text.setAttribute('y', -10)
