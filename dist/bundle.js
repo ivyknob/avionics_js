@@ -738,6 +738,15 @@ global.Avionics = {
   horizont: horizont,
   pitchElem: pitch,
   roll_triangle: roll_triangle,
+  horizontTransform: function() {
+    if (this.pitch > 720) {
+      return this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(720 - this.pitch * 0.5)})`);
+    } else if (this.pitch < -720) {
+      return this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(-720 - this.pitch * 0.5)})`);
+    } else {
+      return this.horizont.setAttribute("transform", `rotate(${this.roll}) translate(0 ${parseInt(this.pitch * 0.5)})`);
+    }
+  },
   _pad: function(number, n) {
     var arr;
     arr = number.toString().split("");
@@ -762,7 +771,7 @@ Object.defineProperty(Avionics, 'altitude', {
 Object.defineProperty(Avionics, 'roll', {
   set: function(value) {
     this._rollValue = value;
-    this.horizont.setAttribute("transform", `rotate(${this._rollValue}) translate(0 ${parseInt(this._pitchValue * 0.5)})`);
+    this.horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
     this.pitchElem.setAttribute("transform", `translate(0 ${parseInt(this._pitchValue)})`);
     return this.roll_triangle.setAttribute("transform", `rotate(${this._rollValue})`);
@@ -775,7 +784,7 @@ Object.defineProperty(Avionics, 'roll', {
 Object.defineProperty(Avionics, 'pitch', {
   set: function(value) {
     this._pitchValue = value;
-    this.horizont.setAttribute("transform", `rotate(${this._rollValue}) translate(0 ${parseInt(this._pitchValue * 0.5)})`);
+    this.horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
     return this.pitchElem.setAttribute("transform", `translate(0 ${parseInt(this._pitchValue)})`);
   },
@@ -807,15 +816,38 @@ Object.defineProperty(Avionics, 'selectedAltitude', {
 });
 
 document.onkeydown = (e) => {
+  var new_pitch, new_roll;
   switch (e.keyCode) {
     case 37:
-      return Avionics.roll -= 2;
+      new_roll = Avionics.roll - 2;
+      if (new_roll < -180) {
+        return Avionics.roll = new_roll + 360;
+      } else {
+        return Avionics.roll -= 2;
+      }
+      break;
     case 39:
-      return Avionics.roll += 2;
+      new_roll = Avionics.roll + 2;
+      if (new_roll > 180) {
+        return Avionics.roll = new_roll - 360;
+      } else {
+        return Avionics.roll += 2;
+      }
+      break;
     case 38:
-      return Avionics.pitch += 8;
+      new_pitch = Avionics.pitch + 8;
+      if (new_pitch > 1440) {
+        return Avionics.pitch = new_pitch - 2880;
+      } else {
+        return Avionics.pitch = new_pitch;
+      }
+      break;
     case 40:
-      return Avionics.pitch -= 8;
+      if (new_pitch < -1440) {
+        return Avionics.pitch = new_pitch + 2880;
+      } else {
+        return Avionics.pitch -= 8;
+      }
   }
 };
 

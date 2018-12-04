@@ -12,6 +12,13 @@ global.Avionics =
   horizont: horizont
   pitchElem: pitch
   roll_triangle: roll_triangle
+  horizontTransform: ->
+    if @pitch > 720
+      @horizont.setAttribute("transform", "rotate(#{@roll}) scale(1,-1) translate(0 #{parseInt(720 - @pitch*0.5)})")
+    else if @pitch < -720
+      @horizont.setAttribute("transform", "rotate(#{@roll}) scale(1,-1) translate(0 #{parseInt(-720 - @pitch*0.5)})")
+    else
+      @horizont.setAttribute("transform", "rotate(#{@roll}) translate(0 #{parseInt(@pitch*0.5)})")
   _pad: (number, n)->
     arr = number.toString().split("")
     (new Array(n - arr.length)).fill('0').concat(arr).join("")
@@ -28,8 +35,8 @@ Object.defineProperty Avionics, 'altitude',
 
 Object.defineProperty Avionics, 'roll',
   set: (value)->
-    this._rollValue = value
-    @horizont.setAttribute("transform", "rotate(#{@_rollValue}) translate(0 #{parseInt(@_pitchValue*0.5)})")
+    @_rollValue = value
+    @horizontTransform()
     @rotor.setAttribute("transform", "rotate(#{@_rollValue})")
     @pitchElem.setAttribute("transform", "translate(0 #{parseInt(@_pitchValue)})")
     @roll_triangle.setAttribute("transform", "rotate(#{@_rollValue})")
@@ -38,8 +45,8 @@ Object.defineProperty Avionics, 'roll',
 
 Object.defineProperty Avionics, 'pitch',
   set: (value)->
-    this._pitchValue = value
-    @horizont.setAttribute("transform", "rotate(#{@_rollValue}) translate(0 #{parseInt(@_pitchValue*0.5)})")
+    @_pitchValue = value
+    @horizontTransform()
     @rotor.setAttribute("transform", "rotate(#{@_rollValue})")
     @pitchElem.setAttribute("transform", "translate(0 #{parseInt(@_pitchValue)})")
   get: ->
@@ -69,13 +76,28 @@ Object.defineProperty Avionics, 'selectedAltitude',
 document.onkeydown = (e) =>
   switch e.keyCode
     when 37
-      Avionics.roll -= 2
+      new_roll = Avionics.roll - 2
+      if new_roll < -180
+        Avionics.roll = new_roll + 360
+      else
+        Avionics.roll -= 2
     when 39
-      Avionics.roll += 2
+      new_roll = Avionics.roll + 2
+      if new_roll > 180
+        Avionics.roll = new_roll - 360
+      else
+        Avionics.roll += 2
     when 38
-      Avionics.pitch += 8
+      new_pitch = Avionics.pitch + 8
+      if new_pitch > 1440
+        Avionics.pitch = new_pitch-2880
+      else
+        Avionics.pitch = new_pitch
     when 40
-      Avionics.pitch -= 8
+      if new_pitch < -1440
+        Avionics.pitch = new_pitch+2880
+      else
+        Avionics.pitch -= 8
 
 do printPitch
 do printHeading
