@@ -91,13 +91,18 @@ document.onkeydown = (e) =>
       new_pitch = Avionics.pitch + 8
       if new_pitch > 1440
         Avionics.pitch = new_pitch-2880
+      else if new_pitch < -1440
+        Avionics.pitch = new_pitch+2880
       else
         Avionics.pitch = new_pitch
     when 40
+      new_pitch = Avionics.pitch - 8
       if new_pitch < -1440
         Avionics.pitch = new_pitch+2880
+      else if new_pitch > 1440
+        Avionics.pitch = new_pitch-2880
       else
-        Avionics.pitch -= 8
+        Avionics.pitch = new_pitch
 
 do printPitch
 do printHeading

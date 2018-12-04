@@ -838,15 +838,20 @@ document.onkeydown = (e) => {
       new_pitch = Avionics.pitch + 8;
       if (new_pitch > 1440) {
         return Avionics.pitch = new_pitch - 2880;
+      } else if (new_pitch < -1440) {
+        return Avionics.pitch = new_pitch + 2880;
       } else {
         return Avionics.pitch = new_pitch;
       }
       break;
     case 40:
+      new_pitch = Avionics.pitch - 8;
       if (new_pitch < -1440) {
         return Avionics.pitch = new_pitch + 2880;
+      } else if (new_pitch > 1440) {
+        return Avionics.pitch = new_pitch - 2880;
       } else {
-        return Avionics.pitch -= 8;
+        return Avionics.pitch = new_pitch;
       }
   }
 };
