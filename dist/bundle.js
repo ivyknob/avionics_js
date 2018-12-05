@@ -914,9 +914,9 @@ printPitch = function() {
   textLeft.setAttribute('text-anchor', 'end');
   textLeft.setAttribute('x', -45);
   textRight.setAttribute('x', 45);
-  i = -180;
+  i = -220;
   results = [];
-  while (i <= 180) {
+  while (i <= 220) {
     if (i === 0) {
       i += 2.5;
       continue;
@@ -924,7 +924,9 @@ printPitch = function() {
       use = large.cloneNode();
       texts = [textLeft.cloneNode(), textRight.cloneNode()];
       texts.forEach(function(text) {
-        text.textContent = Math.abs(i);
+        var value;
+        value = Math.abs(i);
+        text.textContent = value > 180 ? 360 - value : value;
         text.setAttribute('y', -i * 8);
         pitch.appendChild(text);
       });

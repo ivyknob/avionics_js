@@ -14,8 +14,8 @@ printPitch = ->
   textLeft.setAttribute('x', -45)
   textRight.setAttribute('x', 45)
 
-  i = -180
-  while i <= 180
+  i = -220
+  while i <= 220
     if i == 0
       i += 2.5
       continue
@@ -26,7 +26,8 @@ printPitch = ->
         textRight.cloneNode()
       ]
       texts.forEach (text) ->
-        text.textContent = Math.abs(i)
+        value = Math.abs(i)
+        text.textContent = if value > 180 then 360 - value else value
         text.setAttribute 'y', -i * 8
         pitch.appendChild text
         return
