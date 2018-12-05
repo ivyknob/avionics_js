@@ -13,12 +13,12 @@ global.Avionics =
   pitchElem: pitch
   roll_triangle: roll_triangle
   horizontTransform: ->
-    if @pitch > 720
-      @horizont.setAttribute("transform", "rotate(#{@roll}) scale(1,-1) translate(0 #{parseInt(720 - @pitch*0.5)})")
-    else if @pitch < -720
-      @horizont.setAttribute("transform", "rotate(#{@roll}) scale(1,-1) translate(0 #{parseInt(-720 - @pitch*0.5)})")
+    if @pitch > 90
+      @horizont.setAttribute("transform", "rotate(#{@roll}) scale(1,-1) translate(0 #{parseInt(720 - @pitch*4)})")
+    else if @pitch < -90
+      @horizont.setAttribute("transform", "rotate(#{@roll}) scale(1,-1) translate(0 #{parseInt(-720 - @pitch*4)})")
     else
-      @horizont.setAttribute("transform", "rotate(#{@roll}) translate(0 #{parseInt(@pitch*0.5)})")
+      @horizont.setAttribute("transform", "rotate(#{@roll}) translate(0 #{parseInt(@pitch*4)})")
   _pad: (number, n)->
     arr = number.toString().split("")
     (new Array(n - arr.length)).fill('0').concat(arr).join("")
@@ -35,20 +35,20 @@ Object.defineProperty Avionics, 'altitude',
 
 Object.defineProperty Avionics, 'roll',
   set: (value)->
-    @_rollValue = value
+    @_rollValue = parseInt(value)
     @horizontTransform()
     @rotor.setAttribute("transform", "rotate(#{@_rollValue})")
-    @pitchElem.setAttribute("transform", "translate(0 #{parseInt(@_pitchValue)})")
+    @pitchElem.setAttribute("transform", "translate(0 #{@_pitchValue*8})")
     @roll_triangle.setAttribute("transform", "rotate(#{@_rollValue})")
   get: ->
     this._rollValue
 
 Object.defineProperty Avionics, 'pitch',
   set: (value)->
-    @_pitchValue = value
+    @_pitchValue = parseInt(value)
     @horizontTransform()
     @rotor.setAttribute("transform", "rotate(#{@_rollValue})")
-    @pitchElem.setAttribute("transform", "translate(0 #{parseInt(@_pitchValue)})")
+    @pitchElem.setAttribute("transform", "translate(0 #{@_pitchValue*8})")
   get: ->
     this._pitchValue
 
@@ -88,19 +88,19 @@ document.onkeydown = (e) =>
       else
         Avionics.roll += 2
     when 38
-      new_pitch = Avionics.pitch + 8
-      if new_pitch > 1440
-        Avionics.pitch = new_pitch-2880
-      else if new_pitch < -1440
-        Avionics.pitch = new_pitch+2880
+      new_pitch = Avionics.pitch + 1
+      if new_pitch > 180
+        Avionics.pitch = new_pitch-360
+      else if new_pitch < -180
+        Avionics.pitch = new_pitch+360
       else
         Avionics.pitch = new_pitch
     when 40
-      new_pitch = Avionics.pitch - 8
-      if new_pitch < -1440
-        Avionics.pitch = new_pitch+2880
-      else if new_pitch > 1440
-        Avionics.pitch = new_pitch-2880
+      new_pitch = Avionics.pitch - 1
+      if new_pitch < -180
+        Avionics.pitch = new_pitch+360
+      else if new_pitch > 180
+        Avionics.pitch = new_pitch-360
       else
         Avionics.pitch = new_pitch
 

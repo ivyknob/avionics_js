@@ -739,12 +739,12 @@ global.Avionics = {
   pitchElem: pitch,
   roll_triangle: roll_triangle,
   horizontTransform: function() {
-    if (this.pitch > 720) {
-      return this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(720 - this.pitch * 0.5)})`);
-    } else if (this.pitch < -720) {
-      return this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(-720 - this.pitch * 0.5)})`);
+    if (this.pitch > 90) {
+      return this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(720 - this.pitch * 4)})`);
+    } else if (this.pitch < -90) {
+      return this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(-720 - this.pitch * 4)})`);
     } else {
-      return this.horizont.setAttribute("transform", `rotate(${this.roll}) translate(0 ${parseInt(this.pitch * 0.5)})`);
+      return this.horizont.setAttribute("transform", `rotate(${this.roll}) translate(0 ${parseInt(this.pitch * 4)})`);
     }
   },
   _pad: function(number, n) {
@@ -770,10 +770,10 @@ Object.defineProperty(Avionics, 'altitude', {
 
 Object.defineProperty(Avionics, 'roll', {
   set: function(value) {
-    this._rollValue = value;
+    this._rollValue = parseInt(value);
     this.horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
-    this.pitchElem.setAttribute("transform", `translate(0 ${parseInt(this._pitchValue)})`);
+    this.pitchElem.setAttribute("transform", `translate(0 ${this._pitchValue * 8})`);
     return this.roll_triangle.setAttribute("transform", `rotate(${this._rollValue})`);
   },
   get: function() {
@@ -783,10 +783,10 @@ Object.defineProperty(Avionics, 'roll', {
 
 Object.defineProperty(Avionics, 'pitch', {
   set: function(value) {
-    this._pitchValue = value;
+    this._pitchValue = parseInt(value);
     this.horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
-    return this.pitchElem.setAttribute("transform", `translate(0 ${parseInt(this._pitchValue)})`);
+    return this.pitchElem.setAttribute("transform", `translate(0 ${this._pitchValue * 8})`);
   },
   get: function() {
     return this._pitchValue;
@@ -835,21 +835,21 @@ document.onkeydown = (e) => {
       }
       break;
     case 38:
-      new_pitch = Avionics.pitch + 8;
-      if (new_pitch > 1440) {
-        return Avionics.pitch = new_pitch - 2880;
-      } else if (new_pitch < -1440) {
-        return Avionics.pitch = new_pitch + 2880;
+      new_pitch = Avionics.pitch + 1;
+      if (new_pitch > 180) {
+        return Avionics.pitch = new_pitch - 360;
+      } else if (new_pitch < -180) {
+        return Avionics.pitch = new_pitch + 360;
       } else {
         return Avionics.pitch = new_pitch;
       }
       break;
     case 40:
-      new_pitch = Avionics.pitch - 8;
-      if (new_pitch < -1440) {
-        return Avionics.pitch = new_pitch + 2880;
-      } else if (new_pitch > 1440) {
-        return Avionics.pitch = new_pitch - 2880;
+      new_pitch = Avionics.pitch - 1;
+      if (new_pitch < -180) {
+        return Avionics.pitch = new_pitch + 360;
+      } else if (new_pitch > 180) {
+        return Avionics.pitch = new_pitch - 360;
       } else {
         return Avionics.pitch = new_pitch;
       }
