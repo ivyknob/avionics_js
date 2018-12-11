@@ -994,9 +994,10 @@ websocket.onopen = function(evt) {
 
 websocket.onmessage = function(evt) {
   console.log(evt.data);
-  const data = JSON.parse(evt.data);
+  var data = JSON.parse(evt.data);
   Avionics.roll = data.roll;
   Avionics.pitch = data.pitch;
+  Avionics.currentHeading = data.heading;
 }
 
 websocket.onclose = function(evt) {
