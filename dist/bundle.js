@@ -93,6 +93,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
 /* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _avionics_coffee__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(6);
+/* harmony import */ var _websocket_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
+/* harmony import */ var _websocket_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_websocket_js__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -977,6 +980,32 @@ printHeading = function() {
 };
 
 
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+var websocket = new WebSocket('ws://'+location.hostname+'/');
+
+websocket.onopen = function(evt) {
+  console.log('WebSocket connection opened');
+}
+
+websocket.onmessage = function(evt) {
+  console.log(evt.data);
+  const data = JSON.parse(evt.data);
+  Avionics.roll = data.roll;
+  Avionics.pitch = data.pitch;
+}
+
+websocket.onclose = function(evt) {
+  console.log('Websocket connection closed');
+}
+
+websocket.onerror = function(evt) {
+  console.log('Websocket error: ' + evt);
+}
 
 
 /***/ })
