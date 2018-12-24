@@ -81,26 +81,11 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _avionics_index_coffee__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _websocket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-/* harmony import */ var _websocket_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_websocket_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
-/* harmony import */ var _addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
-
-
-/***/ }),
+/* 0 */,
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -946,76 +931,176 @@ printHeading = function() {
 
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports) {
+/* 9 */,
+/* 10 */,
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var websocket = new WebSocket('ws://'+location.hostname+'/');
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _avionics_index_coffee__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _data_coffee__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
+/* harmony import */ var _data_coffee__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_data_coffee__WEBPACK_IMPORTED_MODULE_1__);
 
-websocket.onopen = function(evt) {
-  console.log('WebSocket connection opened');
-}
 
-websocket.onmessage = function(evt) {
-  console.log(evt.data);
-  var data = JSON.parse(evt.data);
-  Avionics.roll = data.roll;
-  Avionics.pitch = data.pitch;
-  Avionics.currentHeading = data.heading;
-}
-
-websocket.onclose = function(evt) {
-  console.log('Websocket connection closed');
-}
-
-websocket.onerror = function(evt) {
-  console.log('Websocket error: ' + evt);
-}
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports) {
 
-document.addEventListener('keydown', (e) => {
-  var new_pitch, new_roll;
-  switch (e.keyCode) {
-    case 37:
-      new_roll = Avionics.roll - 2;
-      if (new_roll < -180) {
-        return Avionics.roll = new_roll + 360;
-      } else {
-        return Avionics.roll -= 2;
-      }
-      break;
-    case 39:
-      new_roll = Avionics.roll + 2;
-      if (new_roll > 180) {
-        return Avionics.roll = new_roll - 360;
-      } else {
-        return Avionics.roll += 2;
-      }
-      break;
-    case 38:
-      new_pitch = Avionics.pitch + 1;
-      if (new_pitch > 180) {
-        return Avionics.pitch = new_pitch - 360;
-      } else if (new_pitch < -180) {
-        return Avionics.pitch = new_pitch + 360;
-      } else {
-        return Avionics.pitch = new_pitch;
-      }
-      break;
-    case 40:
-      new_pitch = Avionics.pitch - 1;
-      if (new_pitch < -180) {
-        return Avionics.pitch = new_pitch + 360;
-      } else if (new_pitch > 180) {
-        return Avionics.pitch = new_pitch - 360;
-      } else {
-        return Avionics.pitch = new_pitch;
-      }
+var DATA_TABLE, createData, current_tick, interpolation;
+
+DATA_TABLE = [
+  {
+    ts: 0,
+    as: 0,
+    gs: 0,
+    p: 5,
+    r: 0,
+    h: 35,
+    sh: 35,
+    a: 0,
+    sa: 0,
+    abp: 100.0,
+    vsi: 0.0
+  },
+  {
+    ts: 10,
+    as: 70,
+    gs: 70,
+    p: 2,
+    r: 0,
+    h: 35,
+    sh: 35,
+    a: 0,
+    sa: 0,
+    abp: 100.0,
+    vsi: 0.0
+  },
+  {
+    ts: 13,
+    as: 90,
+    gs: 85,
+    p: 10,
+    r: 0,
+    h: 35,
+    sh: 35,
+    a: 5,
+    sa: 1000,
+    abp: 100.0,
+    vsi: 1.5
+  },
+  {
+    ts: 14,
+    as: 91,
+    gs: 86,
+    p: 10,
+    r: 5,
+    h: 35,
+    sh: 35,
+    a: 6,
+    sa: 1000,
+    abp: 100.0,
+    vsi: 1.5
+  },
+  {
+    ts: 60,
+    as: 110,
+    gs: 100,
+    p: 10,
+    r: 5,
+    h: 300,
+    sh: 300,
+    a: 146,
+    sa: 1000,
+    abp: 100.0,
+    vsi: 3.0
+  },
+  {
+    ts: 120,
+    as: 120,
+    gs: 110,
+    p: 10,
+    r: 0,
+    h: 300,
+    sh: 300,
+    a: 1000,
+    sa: 1000,
+    abp: 100.0,
+    vsi: 3.0
+  },
+  {
+    ts: 121,
+    as: 120,
+    gs: 110,
+    p: 0,
+    r: 0,
+    h: 300,
+    sh: 300,
+    a: 1000,
+    sa: 1000,
+    abp: 100.0,
+    vsi: 0.0
+  },
+  {
+    ts: 180,
+    as: 0,
+    gs: 0,
+    p: 0,
+    r: 0,
+    h: 300,
+    sh: 300,
+    a: 0,
+    sa: 0,
+    abp: 100.0,
+    vsi: -3.0
   }
-});
+];
+
+current_tick = function() {
+  return Date.now() % 180000 / 1000;
+};
+
+interpolation = function(current_ts, min, max, attribute) {
+  return min[attribute] + ((max[attribute] - min[attribute]) / (max.ts - min.ts)) * (current_ts - min.ts);
+};
+
+createData = function() {
+  var ct, max, min;
+  ct = current_tick();
+  min = DATA_TABLE.filter((i) => {
+    return i.ts <= ct;
+  }).sort((a, b) => {
+    return b.ts - a.ts;
+  })[0];
+  max = DATA_TABLE.filter((i) => {
+    return i.ts >= ct;
+  }).sort((a, b) => {
+    return a.ts - b.ts;
+  })[0];
+  return {
+    pitch: interpolation(ct, min, max, 'p'),
+    roll: interpolation(ct, min, max, 'r'),
+    airspeed: interpolation(ct, min, max, 'as'),
+    groudspeed: interpolation(ct, min, max, 'gs'),
+    heading: interpolation(ct, min, max, 'h'),
+    selected_heading: interpolation(ct, min, max, 'sh'),
+    altitude: interpolation(ct, min, max, 'a'),
+    selected_altitude: interpolation(ct, min, max, 'sa'),
+    altimeter_barometric_parameter: interpolation(ct, min, max, 'abp'),
+    vertical_speed: interpolation(ct, min, max, 'vsi'),
+    ts: ct
+  };
+};
+
+setInterval(function() {
+  var data;
+  data = createData();
+  Avionics.roll = Math.round(data.roll);
+  Avionics.pitch = Math.round(data.pitch);
+  return Avionics.currentHeading = Math.round(data.heading);
+}, 50);
 
 
 /***/ })

@@ -1,3 +1,4 @@
+import './styles.css'
 import { printPitch, printHeading } from './prints.coffee'
 
 global.Avionics =
@@ -72,37 +73,6 @@ Object.defineProperty Avionics, 'groundSpeed',
 Object.defineProperty Avionics, 'selectedAltitude',
   set: (value)->
     selected_altitude_value.textContent = value
-
-document.onkeydown = (e) =>
-  switch e.keyCode
-    when 37
-      new_roll = Avionics.roll - 2
-      if new_roll < -180
-        Avionics.roll = new_roll + 360
-      else
-        Avionics.roll -= 2
-    when 39
-      new_roll = Avionics.roll + 2
-      if new_roll > 180
-        Avionics.roll = new_roll - 360
-      else
-        Avionics.roll += 2
-    when 38
-      new_pitch = Avionics.pitch + 1
-      if new_pitch > 180
-        Avionics.pitch = new_pitch-360
-      else if new_pitch < -180
-        Avionics.pitch = new_pitch+360
-      else
-        Avionics.pitch = new_pitch
-    when 40
-      new_pitch = Avionics.pitch - 1
-      if new_pitch < -180
-        Avionics.pitch = new_pitch+360
-      else if new_pitch > 180
-        Avionics.pitch = new_pitch-360
-      else
-        Avionics.pitch = new_pitch
 
 do printPitch
 do printHeading

@@ -2,10 +2,12 @@ path = require('path')
 
 module.exports =
   mode: 'none'
-  entry: './src/index.js'
+  entry:
+    bundle: './src/base/index.js'
+    demo: './src/demo/index.js'
   output:
     path: path.resolve(__dirname, 'dist')
-    filename: 'bundle.js'
+    filename: '[name].js',
   module:
     rules: [{
       test: /\.css$/
