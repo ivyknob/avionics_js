@@ -206,7 +206,7 @@ g = (function() {
 
 try {
 	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1, eval)("this");
+	g = g || new Function("return this")();
 } catch (e) {
 	// This works if the window reference is available
 	if (typeof window === "object") g = window;
@@ -1057,10 +1057,10 @@ DATA_TABLE = [
     vsi: 0.0
   },
   {
-    ts: 180,
-    as: 0,
-    gs: 0,
-    p: 0,
+    ts: 170,
+    as: 60,
+    gs: 60,
+    p: -10,
     r: 0,
     h: 300,
     sh: 300,
@@ -1068,6 +1068,32 @@ DATA_TABLE = [
     sa: 0,
     abp: 100.0,
     vsi: -3.0
+  },
+  {
+    ts: 171,
+    as: 50,
+    gs: 50,
+    p: 2,
+    r: 0,
+    h: 300,
+    sh: 300,
+    a: 0,
+    sa: 0,
+    abp: 100.0,
+    vsi: 0.0
+  },
+  {
+    ts: 180,
+    as: 0,
+    gs: 0,
+    p: 5,
+    r: 0,
+    h: 300,
+    sh: 300,
+    a: 0,
+    sa: 0,
+    abp: 100.0,
+    vsi: 0.0
   }
 ];
 
