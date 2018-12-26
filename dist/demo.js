@@ -996,7 +996,7 @@ DATA_TABLE = [
     as: 91,
     gs: 86,
     p: 10,
-    r: 5,
+    r: -5,
     h: 35,
     sh: 35,
     a: 6,
@@ -1009,7 +1009,7 @@ DATA_TABLE = [
     as: 110,
     gs: 100,
     p: 10,
-    r: 5,
+    r: -5,
     h: 300,
     sh: 300,
     a: 146,
@@ -1102,8 +1102,8 @@ setInterval(function() {
   Avionics.roll = Math.round(data.roll);
   Avionics.pitch = Math.round(data.pitch);
   Avionics.currentHeading = Math.round(data.heading);
-  Avionics.groundspeed = Math.round(data.groundspeed);
-  return Avionics.selected_altitude = Math.round(data.selected_altitude);
+  Avionics.groundSpeed = Math.round(data.groundspeed);
+  return Avionics.selectedAltitude = Math.round(data.selected_altitude);
 }, 50);
 
 
