@@ -920,9 +920,9 @@ printHeading = function() {
   text.style.fontWeight = 'bold';
   text.setAttribute('text-anchor', 'middle');
   text.setAttribute('y', -10);
-  i = -180;
+  i = -200;
   results = [];
-  while (i <= 180) {
+  while (i <= 200) {
     if (i % 10 === 0) {
       clone = large_marker.cloneNode();
       cloneText = text.cloneNode();
