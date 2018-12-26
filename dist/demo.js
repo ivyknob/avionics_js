@@ -1083,7 +1083,7 @@ createData = function() {
     pitch: interpolation(ct, min, max, 'p'),
     roll: interpolation(ct, min, max, 'r'),
     airspeed: interpolation(ct, min, max, 'as'),
-    groudspeed: interpolation(ct, min, max, 'gs'),
+    groundspeed: interpolation(ct, min, max, 'gs'),
     heading: interpolation(ct, min, max, 'h'),
     selected_heading: interpolation(ct, min, max, 'sh'),
     altitude: interpolation(ct, min, max, 'a'),
@@ -1097,9 +1097,13 @@ createData = function() {
 setInterval(function() {
   var data;
   data = createData();
+  Avionics.altitude = Math.round(data.altitude);
+  Avionics.airspeed = Math.round(data.airspeed);
   Avionics.roll = Math.round(data.roll);
   Avionics.pitch = Math.round(data.pitch);
-  return Avionics.currentHeading = Math.round(data.heading);
+  Avionics.currentHeading = Math.round(data.heading);
+  Avionics.groundspeed = Math.round(data.groundspeed);
+  return Avionics.selected_altitude = Math.round(data.selected_altitude);
 }, 50);
 
 
