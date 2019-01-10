@@ -19,5 +19,4 @@ module.exports =
   devServer:
     contentBase: path.join(__dirname, 'dist')
   # закоментировал, иначе не работает coffeescript
-  # watchOptions:
-  # 	ignored: /node_modules/
+  watchOptions: { ignored: /node_modules/ }
