@@ -91,12 +91,10 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _avionics_index_coffee__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _websocket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
-/* harmony import */ var _websocket_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_websocket_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
-/* harmony import */ var _addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
+/* harmony import */ var _addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_1__);
 
-
+// import './websocket.js'
 
 
 
@@ -952,33 +950,6 @@ printHeading = function() {
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
-
-var websocket = new WebSocket('ws://'+location.hostname+'/');
-
-websocket.onopen = function(evt) {
-  console.log('WebSocket connection opened');
-}
-
-websocket.onmessage = function(evt) {
-  console.log(evt.data);
-  var data = JSON.parse(evt.data);
-  Avionics.roll = data.roll;
-  Avionics.pitch = data.pitch;
-  Avionics.currentHeading = data.heading;
-}
-
-websocket.onclose = function(evt) {
-  console.log('Websocket connection closed');
-}
-
-websocket.onerror = function(evt) {
-  console.log('Websocket error: ' + evt);
-}
-
-
-/***/ }),
-/* 10 */
 /***/ (function(module, exports) {
 
 document.addEventListener('keydown', (e) => {
