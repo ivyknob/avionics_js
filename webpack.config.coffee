@@ -1,7 +1,7 @@
 path = require('path')
 
 module.exports =
-  mode: 'none'
+  mode: 'development'
   entry:
     bundle: './src/base/index.js'
     demo: './src/demo/index.js'
