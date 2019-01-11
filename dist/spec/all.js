@@ -9,7 +9,7 @@ describe("Avionics specs", function() {
       const div = document.createElement("div");
       div.id = 'app';
 
-      document.body.append(div);
+      document.body.appendChild(div);
       return new Avionics(document.querySelector('#app'));
     }
 
