@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,105 +91,114 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
-/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _prints_coffee__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony import */ var _template_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3);
+/* harmony import */ var _template_html__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_template_html__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(4);
+/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_styles_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _prints_coffee__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9);
 
 
 
 
-global.Avionics = {
-  _rollValue: 0,
-  _pitchValue: 0,
-  _airspeed: 0,
-  _altitube: 0,
-  _currentHeading: 360,
-  airspeedElem: airspeed_value,
-  altitudeElem: altitude_value,
-  rotor: rotor,
-  horizont: horizont,
-  pitchElem: pitch,
-  roll_triangle: roll_triangle,
-  horizontTransform: function() {
+class Avionics {
+  constructor(elem) {
+    this.elem = elem;
+    elem.innerHTML = _template_html__WEBPACK_IMPORTED_MODULE_0___default.a;
+
+    this.airspeedElem = elem.querySelector("#airspeed_value");
+    this.altitudeElem = elem.querySelector("#altitude_value");
+    this.rotor = elem.querySelector("#rotor");
+    this.horizont = elem.querySelector("#horizont");
+    this.pitchElem = elem.querySelector("#pitch");
+    this.roll_triangle = elem.querySelector("#roll_triangle");
+    this.heading_scale = elem.querySelector("#heading_scale");
+    this.heading_current_value = elem.querySelector("#heading_current_value");
+
+    Object(_prints_coffee__WEBPACK_IMPORTED_MODULE_2__["printPitch"])(this.pitchElem);
+    Object(_prints_coffee__WEBPACK_IMPORTED_MODULE_2__["printHeading"])(elem.querySelector("#heading_scale"));
+
+    this._rollValue = 0;
+    this._pitchValue = 0;
+    this._airspeed = 0;
+    this._altitube = 0;
+    this._currentHeading = 360;
+  }
+
+  horizontTransform() {
     if (this.pitch > 90) {
-      return this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(720 - this.pitch * 4)})`);
-    } else if (this.pitch < -90) {
-      return this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(-720 - this.pitch * 4)})`);
-    } else {
-      return this.horizont.setAttribute("transform", `rotate(${this.roll}) translate(0 ${parseInt(this.pitch * 4)})`);
+      this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(720 - this.pitch*4)})`)
     }
-  },
-  _pad: function(number, n) {
-    var arr;
-    arr = number.toString().split("");
+    else if (this.pitch < -90) {
+      this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(-720 - this.pitch*4)})`)
+    }
+    else {
+      this.horizont.setAttribute("transform", `rotate(${this.roll}) translate(0 ${parseInt(this.pitch*4)})`)
+    }
+  }
+
+  _pad(number, n) {
+    const arr = number.toString().split("");
     return (new Array(n - arr.length)).fill('0').concat(arr).join("");
   }
-};
 
-Object.defineProperty(Avionics, 'airspeed', {
-  set: function(value) {
+  set airspeed(value) {
     this._airspeed = value;
-    return this.airspeedElem.textContent = this._pad(value, 3);
+    this.airspeedElem.textContent = this._pad(value, 3);
   }
-});
 
-Object.defineProperty(Avionics, 'altitude', {
-  set: function(value) {
+  set altitude(value) {
     this._altitude = value;
-    return this.altitudeElem.textContent = this._pad(value, 5);
+    this.altitudeElem.textContent = this._pad(value, 5);
   }
-});
 
-Object.defineProperty(Avionics, 'roll', {
-  set: function(value) {
+  set roll(value) {
     this._rollValue = parseInt(value);
     this.horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
-    this.pitchElem.setAttribute("transform", `translate(0 ${this._pitchValue * 8})`);
-    return this.roll_triangle.setAttribute("transform", `rotate(${this._rollValue})`);
-  },
-  get: function() {
+    this.pitchElem.setAttribute("transform", `translate(0 ${this._pitchValue*8})`);
+    this.roll_triangle.setAttribute("transform", `rotate(${this._rollValue})`);
+  }
+
+  get roll() {
     return this._rollValue;
   }
-});
 
-Object.defineProperty(Avionics, 'pitch', {
-  set: function(value) {
+  set pitch(value) {
     this._pitchValue = parseInt(value);
     this.horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
-    return this.pitchElem.setAttribute("transform", `translate(0 ${this._pitchValue * 8})`);
-  },
-  get: function() {
+    this.pitchElem.setAttribute('transform', `translate(0 ${this._pitchValue*8})`);
+  }
+
+  get pitch() {
     return this._pitchValue;
   }
-});
 
-Object.defineProperty(Avionics, 'currentHeading', {
-  set: function(value) {
-    var delta;
-    this._currentHeading = value === 0 ? 360 : value;
-    heading_current_value.textContent = this._pad(this._currentHeading, 3);
-    delta = this._currentHeading > 180 ? (360 - this._currentHeading) * 10 : -this._currentHeading * 10;
-    return heading_scale.setAttribute("transform", `translate(${delta},22.5)`);
+  set currentHeading(value) {
+    this._currentHeading = (value == 0) ? 360 : value;
+    this.heading_current_value.textContent = this._pad(this._currentHeading, 3)
+
+    let delta;
+    if (this._currentHeading > 180) {
+      delta = (360 - this._currentHeading)*10
+    }
+    else {
+      delta = -this._currentHeading*10
+    }
+    this.heading_scale.setAttribute("transform", `translate(${delta},22.5)`)
   }
-});
 
-Object.defineProperty(Avionics, 'groundSpeed', {
-  set: function(value) {
-    return ground_speed_value.textContent = value;
+  set groundSpeed (value) {
+    ground_speed_value.textContent = value;
   }
-});
 
-Object.defineProperty(Avionics, 'selectedAltitude', {
-  set: function(value) {
-    return selected_altitude_value.textContent = value;
+  set selectedAltitude (value) {
+    selected_altitude_value.textContent = value;
   }
-});
 
-Object(_prints_coffee__WEBPACK_IMPORTED_MODULE_1__["printPitch"])();
+}
 
-Object(_prints_coffee__WEBPACK_IMPORTED_MODULE_1__["printHeading"])();
+global.Avionics = Avionics;
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(2)))
 
@@ -221,10 +230,16 @@ module.exports = g;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" width=\"500\" height=\"500\" viewBox=\"-250 -250 500 500\">\n  <defs>\n    <clipPath id=\"pitchClip\">\n      <path d=\"M-100 400 -100 -100 C -50 -160, 50 -160, 100 -100 L 100 400z\" transform=\"translate(0, -40)\" />\n    </clipPath>\n    <clipPath id=\"headingClip\">\n      <rect x=\"-150\" y=\"-15\" width=\"266\" height=\"38\" fill=\"black\" />\n    </clipPath>\n  </defs>\n  <g id='horizont'>\n    <defs>\n      <linearGradient id=\"backHorizon\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"100%\">\n        <stop offset=\"0.5\" stop-color=\"#558EBB\" />\n        <stop offset=\"0.5\" stop-color=\"#503723\" />\n      </linearGradient>\n    </defs>\n    <rect x=\"-1000\" y=\"-1000\" width=\"2000\" height=\"2000\" fill=\"url(#backHorizon)\" />\n    <line x1=\"-1000\" y1=\"0\" x2=\"1000\" y2=\"0\" stroke=\"white\" stroke-width=\"2\" />\n  </g>\n\n  <g id=\"rotor\" clip-path=\"url(#pitchClip)\">\n    <g id='pitch'>\n      <line id=\"small-pitch\" x1=\"-14\" y1=\"0\" x2=\"14\" y2=\"0\" stroke=\"white\" stroke-width=\"2\" />\n      <line id=\"medium-pitch\" x1=\"-29\" y1=\"0\" x2=\"29\" y2=\"0\" stroke=\"white\" stroke-width=\"2\" />\n      <line id=\"large-pitch\" x1=\"-41\" y1=\"0\" x2=\"41\" y2=\"0\" stroke=\"white\" stroke-width=\"3\" />\n    </g>\n  </g>\n\n  <g transform=\"translate(0,-235)\" clip-path=\"url(#headingClip)\">\n    <defs>\n      <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-2\" stroke=\"#fff\" stroke-width=\"1.5\" id=\"heading_scale_marker\" />\n      <line x1=\"0\" y1=\"0\" x2=\"0\" y2=\"-5\" stroke=\"#fff\" stroke-width=\"1.5\" id=\"heading_scale_large_marker\" />\n    </defs>\n    <g id=\"heading_scale\" transform=\"translate(0,5)\"></g>\n    <g transform=\"translate(0,17)\">\n      <polyline points=\"0,0 10,-10 20,-10 20,-30 -20,-30 -20,-10, -10,-10 0,0\" fill=\"#000\" stroke=\"#fff\" stroke-width=\"1\" />\n      <text fill=\"#fff\" style=\"font-size:18px;font-weight:bold;\" text-anchor='middle' dy=\"-14\" id=\"heading_current_value\">360</text>\n    </g>\n  </g>\n\n  <defs>\n    <g id=\"triangles\">\n      <line x1=\"-129\" y1=\"0\" x2=\"-88\" y2=\"0\" stroke=\"yellow\" stroke-width=\"2\"/>\n      <polyline points=\"0,0 -79,42 -54,42 0,0\" fill=\"yellow\" stroke=\"black\" stroke-width=\"1\"/>\n      <polyline points=\"0,0 -54,42 -33,42 0,0\" fill=\"none\" stroke=\"black\" stroke-width=\"1\"/>\n    </g>\n\n    <g id=\"altitude\">\n      <polyline points=\"0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10 0,0\" fill=\"black\" stroke=\"white\" stroke-width=\"1\" />\n      <text dx=\"16\" dy=\"10\" fill=\"white\" class='altitude-value' id='altitude_value'>95336</text>\n    </g>\n\n    <g id=\"airspeed\">\n      <polyline points=\"0,-24 55,-24, 55,-48, 80,-48 80,-10 90,0 80,10 80,48, 55,48, 55,24 0,24 0,-24\" fill=\"black\" stroke=\"white\" stroke-width=\"1\" />\n      <text dx=\"6\" dy=\"13\" fill=\"white\" class=\"airspeed-value\" id=\"airspeed_value\">999</text>\n    </g>\n  </defs>\n\n  <g transform=\"translate(-250, -250)\">\n    <rect id=\"airspeed_background\" x=\"0\" y=\"0\" width=\"100\" height=\"500\" fill=\"black\" stroke=\"white\" stroke-width=\"1\" opacity=\"0.1\" />\n    <rect id=\"heading_background\" x=\"100\" y=\"0\" width=\"266\" height=\"38\" fill=\"black\" stroke=\"white\" stroke-width=\"2\" opacity=\"0.1\" />\n    <rect id=\"altitude_background\" x=\"366\" y=\"32\" width=\"134\" height=\"468\" fill=\"black\" stroke=\"white\" stroke-width=\"1\" opacity=\"0.1\" />\n    <rect id=\"barometric_setting\" x=\"366\" y=\"468\" width=\"132\" height=\"30\" fill=\"black\" stroke=\"blue\" stroke-width=\"2\" opacity=\"0.1\" />\n\n    <use x=\"250\" y=\"250\" xlink:href=\"#triangles\"/>\n    <use x=\"250\" y=\"250\" xlink:href=\"#triangles\" transform=\"scale(-1,1) translate(-500,0)\"/>\n    <g transform='translate(250, 250)'>\n      <defs>\n        <clipPath id=\"cut-off-bottom\">\n          <rect x=\"-200\" y=\"-250\" width=\"400\" height=\"150\" />\n        </clipPath>\n      </defs>\n      <circle cx=\"0\" cy=\"0\" r=\"200\"/ fill=\"none\" stroke=\"white\" clip-path=\"url(#cut-off-bottom)\" />\n      <line x1=\"0\" y1=\"-200\" x2=\"0\" y2=\"-190\" stroke=\"white\" stroke-width=\"1.5\" id=\"degree\" />\n      <use xlink:href=\"#degree\" transform=\"rotate(-60)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(-50)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(-40)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(-30)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(-20)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(-10)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(10)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(20)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(30)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(40)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(50)\"/>\n      <use xlink:href=\"#degree\" transform=\"rotate(60)\"/>\n      <polygon points=\"0,-200 -7.5,-215 7.5,-215\" fill=\"white\" />\n      <polygon points=\"0,-200 -7.5,-185 7.5,-185\" fill=\"white\" id=\"roll_triangle\" />\n    </g>\n    <use x=\"380\" y=\"250\" xlink:href=\"#altitude\"/>\n    <use x=\"12\" y=\"250\" xlink:href=\"#airspeed\"/>\n  </g>\n  <g transform=\"translate(116,-250)\">\n    <rect id=\"selected_altitude\" x=\"0\" y=\"0\" width=\"134\" height=\"32\" fill=\"black\" stroke=\"white\" stroke-width=\"1\" />\n    <text dx='129' dy='26' id='selected_altitude_value'>0</text>\n  </g>\n  <g transform=\"translate(-250,218)\">\n    <rect id=\"ground_speed\" x=\"0\" y=\"0\" width=\"100\" height=\"32\" fill=\"black\" stroke=\"white\" stroke-width=\"1\" />\n    <text dx='95' dy='26' id='ground_speed_value'>0</text>\n  </g>\n</svg>\n";
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(4);
+var content = __webpack_require__(5);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -238,24 +253,24 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(7)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
 if(false) {}
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // Module
 exports.push([module.i, "html, body, svg {\n  width: 100%; height: 100%;\n}\nsvg {\n  display: block;\n}\nbody {\n  margin: 0;\n}\n.airspeed-value {\n  font-size: 40px;\n  letter-spacing: 5px;\n}\n.altitude-value {\n  font-size:30px;\n  letter-spacing: 3px;\n}\n\n#ground_speed_value {\n  font-size: 30px;\n  font-weight: bold;\n  fill: #c748a2;\n  text-anchor: end;\n}\n\n#selected_altitude_value {\n  font-size: 30px;\n  font-weight: bold;\n  fill: #47cfe0;\n  text-anchor: end;\n}\n", ""]);
 
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -346,7 +361,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -415,7 +430,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(7);
+var	fixUrls = __webpack_require__(8);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -750,7 +765,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 
@@ -845,7 +860,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -854,7 +869,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "printHeading", function() { return printHeading; });
 var printHeading, printPitch;
 
-printPitch = function() {
+printPitch = function(elem) {
   var i, large, medium, results, small, textLeft, textRight, texts, use;
   large = document.createElementNS("http://www.w3.org/2000/svg", 'use');
   large.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#large-pitch');
@@ -884,7 +899,7 @@ printPitch = function() {
         value = Math.abs(i);
         text.textContent = value > 180 ? 360 - value : value;
         text.setAttribute('y', -i * 8);
-        pitch.appendChild(text);
+        elem.appendChild(text);
       });
     } else if (i % 5 === 0) {
       use = medium.cloneNode();
@@ -892,13 +907,13 @@ printPitch = function() {
       use = small.cloneNode();
     }
     use.setAttribute('y', i * 8);
-    pitch.appendChild(use);
+    elem.appendChild(use);
     results.push(i += 2.5);
   }
   return results;
 };
 
-printHeading = function() {
+printHeading = function(elem) {
   var clone, cloneText, i, large_marker, marker, results, text;
   marker = document.createElementNS("http://www.w3.org/2000/svg", 'use');
   marker.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#heading_scale_marker');
@@ -918,7 +933,7 @@ printHeading = function() {
       cloneText = text.cloneNode();
       cloneText.setAttribute('x', i * 10);
       cloneText.textContent = i <= 0 ? 360 + i : i;
-      heading_scale.appendChild(cloneText);
+      elem.appendChild(cloneText);
     } else if (i % 5 === 0) {
       clone = large_marker.cloneNode();
       cloneText = text.cloneNode();
@@ -926,7 +941,7 @@ printHeading = function() {
       clone = marker.cloneNode();
     }
     clone.setAttribute('x', i * 10);
-    heading_scale.appendChild(clone);
+    elem.appendChild(clone);
     results.push(i += 1);
   }
   return results;
@@ -936,21 +951,21 @@ printHeading = function() {
 
 
 /***/ }),
-/* 9 */,
-/* 10 */
+/* 10 */,
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _avionics_index_coffee__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _data_coffee__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
+/* harmony import */ var _avionics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _data_coffee__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(12);
 /* harmony import */ var _data_coffee__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_data_coffee__WEBPACK_IMPORTED_MODULE_1__);
 
 
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 var DATA_TABLE, createData, current_tick, interpolation;
@@ -1140,13 +1155,13 @@ createData = function() {
 setInterval(function() {
   var data;
   data = createData();
-  Avionics.altitude = Math.round(data.altitude);
-  Avionics.airspeed = Math.round(data.airspeed);
-  Avionics.roll = Math.round(data.roll);
-  Avionics.pitch = Math.round(data.pitch);
-  Avionics.currentHeading = Math.round(data.heading);
-  Avionics.groundSpeed = Math.round(data.groundspeed);
-  return Avionics.selectedAltitude = Math.round(data.selected_altitude);
+  avionics.altitude = Math.round(data.altitude);
+  avionics.airspeed = Math.round(data.airspeed);
+  avionics.roll = Math.round(data.roll);
+  avionics.pitch = Math.round(data.pitch);
+  avionics.currentHeading = Math.round(data.heading);
+  avionics.groundSpeed = Math.round(data.groundspeed);
+  return avionics.selectedAltitude = Math.round(data.selected_altitude);
 }, 50);
 
 

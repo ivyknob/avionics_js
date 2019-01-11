@@ -1,2 +1,2 @@
-import './../avionics/index.coffee'
+import './../avionics'
 import './data.coffee'

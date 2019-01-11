@@ -81,23 +81,11 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _avionics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _websocket_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
-/* harmony import */ var _websocket_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_websocket_js__WEBPACK_IMPORTED_MODULE_1__);
-
-
-
-
-/***/ }),
+/* 0 */,
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -963,30 +951,65 @@ printHeading = function(elem) {
 
 
 /***/ }),
-/* 10 */
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _avionics__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+/* harmony import */ var _addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(14);
+/* harmony import */ var _addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_addKeyEvents_coffee__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports) {
 
-var websocket = new WebSocket('ws://'+location.hostname+'/');
-
-websocket.onopen = function(evt) {
-  console.log('WebSocket connection opened');
-}
-
-websocket.onmessage = function(evt) {
-  console.log(evt.data);
-  var data = JSON.parse(evt.data);
-  avionics.roll = data.roll;
-  avionics.pitch = data.pitch;
-  avionics.currentHeading = data.heading;
-}
-
-websocket.onclose = function(evt) {
-  console.log('Websocket connection closed');
-}
-
-websocket.onerror = function(evt) {
-  console.log('Websocket error: ' + evt);
-}
+document.addEventListener('keydown', (e) => {
+  var new_pitch, new_roll;
+  switch (e.keyCode) {
+    case 37:
+      new_roll = Avionics.roll - 2;
+      if (new_roll < -180) {
+        return avionics.roll = new_roll + 360;
+      } else {
+        return avionics.roll -= 2;
+      }
+      break;
+    case 39:
+      new_roll = avionics.roll + 2;
+      if (new_roll > 180) {
+        return avionics.roll = new_roll - 360;
+      } else {
+        return avionics.roll += 2;
+      }
+      break;
+    case 38:
+      new_pitch = avionics.pitch + 1;
+      if (new_pitch > 180) {
+        return avionics.pitch = new_pitch - 360;
+      } else if (new_pitch < -180) {
+        return avionics.pitch = new_pitch + 360;
+      } else {
+        return avionics.pitch = new_pitch;
+      }
+      break;
+    case 40:
+      new_pitch = avionics.pitch - 1;
+      if (new_pitch < -180) {
+        return avionics.pitch = new_pitch + 360;
+      } else if (new_pitch > 180) {
+        return avionics.pitch = new_pitch - 360;
+      } else {
+        return avionics.pitch = new_pitch;
+      }
+  }
+});
 
 
 /***/ })

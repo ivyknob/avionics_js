@@ -1,3 +1,2 @@
-import './../avionics/index.coffee'
-// import './websocket.js'
-import './addKeyEvents.coffee'
+import './../avionics'
+import './websocket.js'

@@ -5,6 +5,7 @@ module.exports =
   entry:
     bundle: './src/base/index.js'
     demo: './src/demo/index.js'
+    demoKeys: './src/demoKeys/index.js'
   output:
     path: path.resolve(__dirname, 'dist')
     filename: '[name].js',
@@ -15,7 +16,12 @@ module.exports =
     },{
       test: /\.coffee$/
       use: ['coffee-loader']
-    }]
+    },{
+      test: /\.html$/
+      use: ['html-loader']
+      }]
+  resolve:
+    extensions: ['.js', '.coffee']
   devServer:
     contentBase: path.join(__dirname, 'dist')
   # закоментировал, иначе не работает coffeescript

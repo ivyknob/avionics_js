@@ -7,9 +7,9 @@ websocket.onopen = function(evt) {
 websocket.onmessage = function(evt) {
   console.log(evt.data);
   var data = JSON.parse(evt.data);
-  Avionics.roll = data.roll;
-  Avionics.pitch = data.pitch;
-  Avionics.currentHeading = data.heading;
+  avionics.roll = data.roll;
+  avionics.pitch = data.pitch;
+  avionics.currentHeading = data.heading;
 }
 
 websocket.onclose = function(evt) {

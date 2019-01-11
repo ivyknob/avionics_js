@@ -1,4 +1,4 @@
-printPitch = ->
+printPitch = (elem)->
   large = document.createElementNS("http://www.w3.org/2000/svg", 'use')
   large.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#large-pitch')
   medium = document.createElementNS("http://www.w3.org/2000/svg", 'use')
@@ -29,17 +29,17 @@ printPitch = ->
         value = Math.abs(i)
         text.textContent = if value > 180 then 360 - value else value
         text.setAttribute 'y', -i * 8
-        pitch.appendChild text
+        elem.appendChild text
         return
     else if i % 5 == 0
       use = medium.cloneNode()
     else if i % 2.5 == 0
       use = small.cloneNode()
     use.setAttribute 'y', i * 8
-    pitch.appendChild use
+    elem.appendChild use
     i += 2.5
 
-printHeading = ->
+printHeading = (elem)->
   marker = document.createElementNS("http://www.w3.org/2000/svg", 'use')
   marker.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#heading_scale_marker')
 
@@ -60,14 +60,14 @@ printHeading = ->
       cloneText = text.cloneNode()
       cloneText.setAttribute 'x', i*10
       cloneText.textContent = if i <= 0 then 360 + i else i
-      heading_scale.appendChild cloneText
+      elem.appendChild cloneText
     else if i%5 == 0
       clone = large_marker.cloneNode()
       cloneText = text.cloneNode()
     else
       clone = marker.cloneNode()
     clone.setAttribute 'x', i*10
-    heading_scale.appendChild clone
+    elem.appendChild clone
     i += 1
 
 export { printPitch, printHeading }
