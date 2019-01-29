@@ -28,18 +28,18 @@ class Avionics {
 
   horizontTransform() {
     if (this.pitch > 90) {
-      this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(720 - this.pitch*4)})`)
+      this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseFloat(720 - this.pitch*4)})`)
     }
     else if (this.pitch < -90) {
-      this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseInt(-720 - this.pitch*4)})`)
+      this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseFloat(-720 - this.pitch*4)})`)
     }
     else {
-      this.horizont.setAttribute("transform", `rotate(${this.roll}) translate(0 ${parseInt(this.pitch*4)})`)
+      this.horizont.setAttribute("transform", `rotate(${this.roll}) translate(0 ${parseFloat(this.pitch*4)})`)
     }
   }
 
   _pad(number, n) {
-    const arr = number.toString().split("");
+    const arr = Math.round(number).toString().split("");
     return (new Array(n - arr.length)).fill('0').concat(arr).join("");
   }
 
@@ -54,7 +54,7 @@ class Avionics {
   }
 
   set roll(value) {
-    this._rollValue = parseInt(value);
+    this._rollValue = parseFloat(value);
     this.horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
     this.pitchElem.setAttribute("transform", `translate(0 ${this._pitchValue*8})`);
@@ -66,7 +66,7 @@ class Avionics {
   }
 
   set pitch(value) {
-    this._pitchValue = parseInt(value);
+    this._pitchValue = parseFloat(value);
     this.horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
     this.pitchElem.setAttribute('transform', `translate(0 ${this._pitchValue*8})`);
@@ -91,11 +91,11 @@ class Avionics {
   }
 
   set groundSpeed (value) {
-    ground_speed_value.textContent = value;
+    ground_speed_value.textContent = Math.round(value);
   }
 
   set selectedAltitude (value) {
-    selected_altitude_value.textContent = value;
+    selected_altitude_value.textContent = Math.round(value);
   }
 
 }

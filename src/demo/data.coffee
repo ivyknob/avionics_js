@@ -38,11 +38,11 @@ createData = ->
 
 setInterval ->
   data = createData()
-  avionics.altitude = Math.round(data.altitude)
-  avionics.airspeed = Math.round(data.airspeed)
-  avionics.roll = Math.round(data.roll)
-  avionics.pitch = Math.round(data.pitch)
-  avionics.currentHeading = Math.round(data.heading)
-  avionics.groundSpeed = Math.round(data.groundspeed)
-  avionics.selectedAltitude = Math.round(data.selected_altitude)
+  avionics.altitude = data.altitude
+  avionics.airspeed = data.airspeed
+  avionics.roll = data.roll
+  avionics.pitch = data.pitch
+  avionics.currentHeading = data.heading
+  avionics.groundSpeed = data.groundspeed
+  avionics.selectedAltitude = data.selected_altitude
 , 50
