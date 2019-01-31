@@ -1,0 +1,10 @@
+dist: xenial
+language: node_js
+node_js:
+  - 10.15.0
+
+before_script:
+  - yarn
+
+script:
+  - yarn build
