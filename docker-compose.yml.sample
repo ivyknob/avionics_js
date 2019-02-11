@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  webpack:
+    # Set up your port here and go to http://localhost:<your port>
+    ports:
+      - 8880:8080
+    build: ./docker/webpack
+    volumes:
+      - ./:/usr/src/app
+    networks:
+      avionics:
+
+networks:
+    avionics:

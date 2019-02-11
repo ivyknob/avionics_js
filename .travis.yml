@@ -6,5 +6,28 @@ node_js:
 before_script:
   - yarn
 
-script:
-  - yarn build
+stages:
+  - build
+  - check
+  - test
+
+jobs:
+  include:
+    - stage: build
+      name: "Make sure the build is successful"
+      script:
+        - yarn build
+
+    - stage: check
+      name: "Auditing package dependencies for security vulnerabilities"
+      script: yarn audit
+
+    - script: npx eslint ./src
+      name: "Run linter"
+
+    - stage: test
+      name: "Karma runner"
+      script: yarn specs:ci
+
+
+
