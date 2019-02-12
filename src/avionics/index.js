@@ -15,6 +15,8 @@ class Avionics {
     this.roll_triangle = elem.querySelector("#roll_triangle");
     this.heading_scale = elem.querySelector("#heading_scale");
     this.heading_current_value = elem.querySelector("#heading_current_value");
+    this.ground_speed_value = elem.querySelector("#ground_speed_value");
+    this.selected_altitude_value = elem.querySelector("#selected_altitude_value");
 
     printPitch(this.pitchElem);
     printHeading(elem.querySelector("#heading_scale"));
@@ -91,11 +93,11 @@ class Avionics {
   }
 
   set groundSpeed (value) {
-    ground_speed_value.textContent = Math.round(value);
+    this.ground_speed_value.textContent = Math.round(value);
   }
 
   set selectedAltitude (value) {
-    selected_altitude_value.textContent = Math.round(value);
+    this.selected_altitude_value.textContent = Math.round(value);
   }
 
 }
