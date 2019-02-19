@@ -7,8 +7,8 @@
     "start:docker": "webpack-dev-server --host 0.0.0.0",
     "start:dev": "webpack-dev-server",
     "build": "webpack --config webpack.production.config.coffee",
-    "specs:ci": "karma start karma-ci.conf.js --single-run",
-    "specs:local": "karma start my.conf.js"
+    "test": "karma start karma.conf.js --single-run",
+    "test:local": "karma start my.conf.js"
   },
   "repository": {
     "type": "git",

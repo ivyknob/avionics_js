@@ -24,12 +24,12 @@ jobs:
       script:
         - yarn build
 
-#    - stage: check
+    - stage: check
 #      name: "Auditing package dependencies for security vulnerabilities"
 #      script: yarn audit
 
-#    - script: npx eslint ./src
-#      name: "Run linter"
+    - script: npx eslint ./src/avionics/index.js
+      name: "Run linter"
 
     - stage: test
       name: "Karma runner"

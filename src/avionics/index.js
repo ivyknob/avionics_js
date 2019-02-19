@@ -102,4 +102,7 @@ class Avionics {
 
 }
 
+/* global global */
+/* eslint no-undef: "error" */
+
 global.Avionics = Avionics;
