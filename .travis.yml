@@ -1,6 +1,7 @@
 dist: xenial
 language: node_js
 node_js:
+  - 8
   - 10
 
 addons:
@@ -33,7 +34,7 @@ jobs:
 
     - stage: test
       name: "Karma runner"
-      script: yarn specs:ci
+      script: yarn test
 
 
 
