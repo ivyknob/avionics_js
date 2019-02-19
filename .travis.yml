@@ -26,8 +26,8 @@ jobs:
         - yarn build
 
     - stage: check
-#      name: "Auditing package dependencies for security vulnerabilities"
-#      script: yarn audit
+      name: "Auditing package dependencies for security vulnerabilities"
+      script: skip #yarn audit
 
     - script: npx eslint ./src/avionics/index.js
       name: "Run linter (ESLint)"
