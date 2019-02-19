@@ -26,11 +26,11 @@ jobs:
         - yarn build
 
     - stage: check
-#      name: "Auditing package dependencies for security vulnerabilities"
-#      script: yarn audit
-
-    - script: npx eslint ./src/avionics/index.js
       name: "Run linter"
+      script: npx eslint ./src/avionics/index.js
+      #      name: "Auditing package dependencies for security vulnerabilities"
+      #      script: yarn audit
+
 
     - stage: test
       name: "Karma runner"
