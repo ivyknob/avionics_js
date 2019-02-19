@@ -1,14 +1,20 @@
 dist: xenial
 language: node_js
 node_js:
-  - 10.15.0
+  - 10
+
+addons:
+  firefox: "latest"
+  chrome: "stable"
 
 before_script:
+  - "Xvfb :99 & export DISPLAY=:99"
+  - sleep 3
   - yarn
 
 stages:
   - build
-  - check
+#  - check
   - test
 
 jobs:
@@ -18,12 +24,12 @@ jobs:
       script:
         - yarn build
 
-    - stage: check
-      name: "Auditing package dependencies for security vulnerabilities"
-      script: yarn audit
+#    - stage: check
+#      name: "Auditing package dependencies for security vulnerabilities"
+#      script: yarn audit
 
-    - script: npx eslint ./src
-      name: "Run linter"
+#    - script: npx eslint ./src
+#      name: "Run linter"
 
     - stage: test
       name: "Karma runner"
