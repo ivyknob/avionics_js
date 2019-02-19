@@ -32,9 +32,6 @@ jobs:
       #      script: yarn audit
 
 
-    - stage: test
-      name: "Karma runner"
-      script: yarn test
 
 
 
