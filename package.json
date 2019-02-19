@@ -8,7 +8,7 @@
     "start:dev": "webpack-dev-server",
     "build": "webpack --config webpack.production.config.coffee",
     "test": "karma start karma.conf.js --single-run",
-    "test:local": "karma start my.conf.js"
+    "test:local": "karma start karma.conf.js --browsers Chrome,ChromeHeadless"
   },
   "repository": {
     "type": "git",
