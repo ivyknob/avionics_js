@@ -25,7 +25,7 @@ jobs:
         - yarn build
 
     - stage: check
-      name: "[SKIPPED tmp] Auditing package dependencies for security vulnerabilities"
+      name: "Auditing package dependencies for security vulnerabilities"
       script: yarn audit
 
     - script: npx eslint ./src/avionics/index.js
