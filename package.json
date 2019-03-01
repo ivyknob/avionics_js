@@ -4,9 +4,11 @@
   "description": "js all in one avionics module",
   "main": "index.js",
   "scripts": {
+    "start:docker": "webpack-dev-server --host 0.0.0.0",
     "start:dev": "webpack-dev-server",
     "build": "webpack --config webpack.production.config.coffee",
-    "specs": "karma start my.conf.js"
+    "test": "karma start karma.conf.js --single-run",
+    "test:local": "karma start karma.conf.js --browsers Chrome,ChromeHeadless"
   },
   "repository": {
     "type": "git",
@@ -27,10 +29,13 @@
     "coffeescript": "^2.3.2",
     "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.0",
+    "eslint": "^5.13.0",
+    "eslint-plugin-coffeescript": "^1.0.0",
     "html-loader": "^0.5.5",
     "jasmine-core": "^3.3.0",
-    "karma": "^3.1.4",
+    "karma": "^4.0.1",
     "karma-chrome-launcher": "^2.2.0",
+    "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "^2.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
     "style-loader": "^0.23.1",

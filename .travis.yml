@@ -1,0 +1,47 @@
+dist: xenial
+language: node_js
+node_js:
+  - 10
+
+addons:
+  firefox: "latest"
+  chrome: "stable"
+
+before_script:
+  - "Xvfb :99 & export DISPLAY=:99"
+  - sleep 5
+  - yarn
+
+stages:
+  - build
+  - check
+  - test
+
+jobs:
+  include:
+    - stage: build
+      name: "Make sure the build is successful"
+      script:
+        - yarn build
+
+    - stage: check
+      name: "Auditing package dependencies for security vulnerabilities"
+      script: yarn audit
+
+    - stage: test
+      name: "Run linter (ESLint)"
+      script: npx eslint ./src/avionics/index.js
+
+    - script: yarn test
+      name: "Run karma"
+
+
+
+
+
+
+
+
+
+
+
