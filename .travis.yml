@@ -28,8 +28,10 @@ jobs:
       name: "Auditing package dependencies for security vulnerabilities"
       script: yarn audit
 
-    - script: npx eslint ./src/avionics/index.js
+    - stage: test
       name: "Run linter (ESLint)"
+      script: npx eslint ./src/avionics/index.js
+
 
 
 
