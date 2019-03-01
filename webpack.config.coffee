@@ -3,6 +3,7 @@ path = require('path')
 module.exports =
   mode: 'development'
   entry:
+    avionics: './src/avionics/index.js'
     bundle: './src/base/index.js'
     demo: './src/demo/index.js'
     demoKeys: './src/demoKeys/index.js'
