@@ -6,6 +6,6 @@ module.exports = merge(common, {
   mode: 'production',
   plugins: [
     new CompressionPlugin
-      test: /bundle\.js$/
+      test: /avionics\.js$/
   ]
 })
