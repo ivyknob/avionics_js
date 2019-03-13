@@ -4,8 +4,8 @@ module.exports =
   mode: 'development'
   entry:
     avionics: './src/avionics/index.js'
-    demo: './src/demo/index.js'
-    demoKeys: './src/demoKeys/index.js'
+    demo: './src/demo.coffee'
+    demoKeys: './src/demoKeys.coffee'
   output:
     path: path.resolve(__dirname, 'dist')
     filename: '[name].js',

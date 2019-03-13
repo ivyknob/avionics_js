@@ -1,6 +1,7 @@
 import template from './template.html'
 import './styles.css'
-import { printPitch, printHeading } from './prints.coffee'
+import printPitch from './printPitch.js'
+import printHeading from './printHeading.js'
 
 class Avionics {
   constructor(elem) {
