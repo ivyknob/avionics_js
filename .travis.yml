@@ -30,18 +30,7 @@ jobs:
 
     - stage: test
       name: "Run linter (ESLint)"
-      script: npx eslint ./src/avionics/index.js
+      script: npx eslint ./src/avionics/
 
     - script: yarn test
       name: "Run karma"
-
-
-
-
-
-
-
-
-
-
-
