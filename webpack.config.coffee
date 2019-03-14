@@ -18,7 +18,12 @@ module.exports =
       use: ['coffee-loader']
     },{
       test: /\.html$/
-      use: ['html-loader']
+      use: [{
+        loader: 'html-loader',
+        options: {
+          minimize: true          
+        }
+      }]
     },{
       test: /\.js$/
       exclude: /node_modules/
