@@ -19,10 +19,12 @@ export default function printHeading (elem) {
       cloneText.setAttribute('x', i * 10);
       cloneText.textContent = i <= 0 ? 360 + i : i;
       elem.appendChild(cloneText);
-    } else if (i % 5 === 0) {
+    }
+    else if (i % 5 === 0) {
       clone = large_marker.cloneNode();
       cloneText = text.cloneNode();
-    } else {
+    }
+    else {
       clone = marker.cloneNode();
     }
     clone.setAttribute('x', i * 10);
@@ -30,4 +32,4 @@ export default function printHeading (elem) {
     results.push(i += 1);
   }
   return results;
-};
+}
