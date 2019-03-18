@@ -27,7 +27,6 @@
     "coffee-loader": "^0.9.0",
     "coffee-script": "^1.12.7",
     "coffeescript": "^2.3.2",
-    "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.0",
     "eslint": "^5.13.0",
     "eslint-plugin-coffeescript": "^1.0.0",
