@@ -1,5 +1,5 @@
 {
-  "name": "avionics_js",
+  "name": "@ivyknob/avionics_js",
   "version": "0.0.1",
   "description": "js all in one avionics module",
   "main": "index.js",
