@@ -1,6 +1,6 @@
 {
   "name": "avionics_js",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "js all in one avionics module",
   "main": "index.js",
   "scripts": {
@@ -14,8 +14,8 @@
     "type": "git",
     "url": "git+https://github.com/ivyknob/avionics_js.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Ivy Knob",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ivyknob/avionics_js/issues"
   },
