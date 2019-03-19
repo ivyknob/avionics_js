@@ -19,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/ivyknob/avionics_js/issues"
   },
-  "private": true,
   "homepage": "https://github.com/ivyknob/avionics_js#readme",
   "devDependencies": {
     "@babel/core": "^7.2.2",
