@@ -55,3 +55,8 @@ body {
   stroke-width: 1;
   opacity: 0.1;
 }
+
+#selected_altitude_bug_value {
+  dominant-baseline: central;
+  font-size: 20px;
+}
