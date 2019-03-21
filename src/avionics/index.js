@@ -2,6 +2,7 @@ import template from './template.html'
 import './styles.css'
 import printPitch from './printPitch.js'
 import printHeading from './printHeading.js'
+import printVerticalSpeed from './printVerticalSpeed.js'
 
 class Avionics {
   constructor(elem) {
@@ -19,9 +20,11 @@ class Avionics {
     this.ground_speed_value = elem.querySelector("#ground_speed_value");
     this.selected_altitude_value = elem.querySelector("#selected_altitude_value");
     this.barometric_setting_value = elem.querySelector("#barometric_setting_value");
+    this.vertical_speed_scale = elem.querySelector("#vertical_speed_scale");
 
     printPitch(this.pitchElem);
     printHeading(this.heading_scale);
+    printVerticalSpeed(this.vertical_speed_scale);
 
     this._rollValue = 0;
     this._pitchValue = 0;

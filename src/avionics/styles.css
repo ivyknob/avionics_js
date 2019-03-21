@@ -30,3 +30,11 @@ body {
   fill: #47cfe0;
   text-anchor: end;
 }
+
+.vertical-speed__scale-value {
+  fill: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-anchor: end;
+  dominant-baseline: central;
+}
