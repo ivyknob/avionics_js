@@ -21,6 +21,7 @@ body {
   font-weight: bold;
   fill: #c748a2;
   text-anchor: end;
+  dominant-baseline: central;
 }
 
 #selected_altitude_value,
@@ -29,6 +30,7 @@ body {
   font-weight: bold;
   fill: #47cfe0;
   text-anchor: end;
+  dominant-baseline: central;
 }
 
 .vertical-speed__scale-value {
@@ -37,4 +39,12 @@ body {
   font-weight: bold;
   text-anchor: end;
   dominant-baseline: central;
+}
+
+#heading_current_value {
+  dominant-baseline: central;
+  text-anchor: middle;
+  font-size: 18px;
+  font-weight: bold;
+  fill: #fff;
 }
