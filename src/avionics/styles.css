@@ -23,7 +23,8 @@ body {
   text-anchor: end;
 }
 
-#selected_altitude_value {
+#selected_altitude_value,
+#barometric_setting_value {
   font-size: 30px;
   font-weight: bold;
   fill: #47cfe0;

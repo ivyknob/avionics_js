@@ -62,8 +62,6 @@
     <rect id="airspeed_background" x="0" y="0" width="100" height="500" fill="black" stroke="white" stroke-width="1" opacity="0.1" />
     <rect id="heading_background" x="100" y="0" width="266" height="38" fill="black" stroke="white" stroke-width="2" opacity="0.1" />
     <rect id="altitude_background" x="366" y="32" width="134" height="468" fill="black" stroke="white" stroke-width="1" opacity="0.1" />
-    <rect id="barometric_setting" x="366" y="468" width="132" height="30" fill="black" stroke="blue" stroke-width="2" opacity="0.1" />
-
     <use x="250" y="250" xlink:href="#triangles"/>
     <use x="250" y="250" xlink:href="#triangles" transform="scale(-1,1) translate(-500,0)"/>
     <g transform='translate(250, 250)'>
@@ -99,5 +97,9 @@
   <g transform="translate(-250,218)">
     <rect id="ground_speed" x="0" y="0" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
     <text dx='95' dy='26' id='ground_speed_value'>0</text>
+  </g>
+  <g transform="translate(116, 218)">
+    <rect id="barometric_setting" x="0" y="0" width="134" height="32" fill="black" stroke="#909090" stroke-width="1" opacity="1" />
+    <text dx="129" dy="26" id="barometric_setting_value">1013.05</text>
   </g>
 </svg>
