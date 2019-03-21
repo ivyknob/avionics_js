@@ -48,3 +48,10 @@ body {
   font-weight: bold;
   fill: #fff;
 }
+
+.background-rect {
+  fill: black;
+  stroke: #fff;
+  stroke-width: 1;
+  opacity: 0.1;
+}
