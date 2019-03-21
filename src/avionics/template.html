@@ -18,13 +18,6 @@
     <line x1="-1000" y1="0" x2="1000" y2="0" stroke="white" stroke-width="2" />
   </g>
 
-  <g id="vertical_speed_scale" transform="translate(250,0)">
-    <defs>
-      <line x1="0" y1="0" x2="-6" y2="0" stroke="#fff" stroke-width="1.5" id="vertical_speed_scale_marker" />
-    </defs>
-    <line x1="0" y1="0" x2="-10" y2="0" stroke="#fff" stroke-width="1.5" id="vertical_speed_scale_large_marker" />
-  </g>
-
   <g id="rotor" clip-path="url(#pitchClip)">
     <g id='pitch'>
       <defs>
@@ -49,7 +42,6 @@
 
   <rect class='background-rect' x="-250" y="-250" width="100" height="500" />
   <rect class='background-rect' x="-150" y="-250" width="266" height="38" stroke-width="2" />
-  <rect class='background-rect' x="116" y="-218" width="134" height="468" />
 
   <g>
     <defs>
@@ -75,17 +67,9 @@
     <polygon points="0,-200 -7.5,-185 7.5,-185" fill="white" id="roll_triangle" />
   </g>
 
-  <g transform="translate(116,-250)">
-    <rect id="selected_altitude" x="0" y="0" width="134" height="32" fill="black" stroke="white" stroke-width="1" />
-    <text dx='129' dy='16' id='selected_altitude_value'>0</text>
-  </g>
   <g transform="translate(-250,218)">
     <rect id="ground_speed" x="0" y="0" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
     <text dx='95' dy='16' id='ground_speed_value'>0</text>
-  </g>
-  <g transform="translate(116, 218)">
-    <rect id="barometric_setting" x="0" y="0" width="134" height="32" fill="black" stroke="#909090" stroke-width="1" opacity="1" />
-    <text dx="129" dy="16" id="barometric_setting_value">1013.05</text>
   </g>
 
   <g transform='translate(-238, 0)'>
@@ -93,14 +77,39 @@
     <text dx="6" dy="13" fill="white" class="airspeed-value" id="airspeed_value">999</text>
   </g>
 
-  <g transform="translate(130, 50)" fill="#47cfe0">
-    <polyline points="-1,0 9,-10 9,-21 -14,-21 -14,21 9,21 9,10, -1,0" fill="#47cfe0" stroke="#000" stroke-width="1.5" />
-    <text dx="16" id='selected_altitude_bug_value'><tspan font-size='1.2em' font-weight="bold">2</tspan>500</text>
-  </g>
+  <g transform="translate(116,0)">
+    <rect class='background-rect' x="0" y="-250" width="134" height="500" />
 
-  <g transform="translate(130, 0)">
-    <polyline points="0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10 0,0" fill="black" stroke="white" stroke-width="1" />
-    <text dx="16" dy="10" fill="white" class='altitude-value' id='altitude_value'>95336</text>
+    <g transform="translate(134,0)">
+      <line id='vertical_speed_line_indicator' x1='-4' y1='0' x2='-4' y2='0' stroke-width="3" stroke='#c748a2' />
+      <g id="vertical_speed_scale">
+        <defs>
+          <line x1="0" y1="0" x2="-4" y2="0" stroke="#fff" stroke-width="1.5" id="vertical_speed_scale_marker" />
+        </defs>
+        <line x1="0" y1="0" x2="-9" y2="0" stroke="#fff" stroke-width="1.5" id="vertical_speed_scale_large_marker" />
+      </g>
+      <polyline id='vertical_speed_indicator' transform="translate(0, 0)" points="0,0 -6,-6 -6,6, 0,0" fill='#fff' stroke='#000' />
+    </g>
+
+    <g transform="translate(14, 50)" fill="#47cfe0">
+      <polyline points="-1,0 9,-10 9,-21 -14,-21 -14,21 9,21 9,10, -1,0" fill="#47cfe0" stroke="#000" stroke-width="1.5" />
+      <text dx="16" id='selected_altitude_bug_value'><tspan font-size='1.2em' font-weight="bold">2</tspan>500</text>
+    </g>
+
+    <g transform="translate(0,-250)">
+      <rect id="selected_altitude" x="0" y="0" width="134" height="32" fill="black" stroke="white" stroke-width="1" />
+      <text dx='129' dy='16' id='selected_altitude_value'>0</text>
+    </g>
+
+    <g transform="translate(16, 0)">
+      <polyline points="0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10 0,0" fill="black" stroke="white" stroke-width="1" />
+      <text dx="16" dy="10" fill="white" class='altitude-value' id='altitude_value'>95336</text>
+    </g>
+
+    <g transform="translate(0, 218)">
+      <rect id="barometric_setting" x="0" y="0" width="134" height="32" fill="black" stroke="#909090" stroke-width="1" opacity="1" />
+      <text dx="129" dy="16" id="barometric_setting_value">1013.05</text>
+    </g>
   </g>
 
   <g id="triangles">

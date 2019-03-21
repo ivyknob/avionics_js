@@ -21,6 +21,8 @@ class Avionics {
     this.selected_altitude_value = elem.querySelector("#selected_altitude_value");
     this.barometric_setting_value = elem.querySelector("#barometric_setting_value");
     this.vertical_speed_scale = elem.querySelector("#vertical_speed_scale");
+    this.vertical_speed_indicator = elem.querySelector('#vertical_speed_indicator');
+    this.vertical_speed_line_indicator = elem.querySelector('#vertical_speed_line_indicator');
 
     printPitch(this.pitchElem);
     printHeading(this.heading_scale);
@@ -31,6 +33,7 @@ class Avionics {
     this._airspeed = 0;
     this._altitube = 0;
     this._currentHeading = 360;
+    this._verticalSpeed = 0;
   }
 
   horizontTransform() {
@@ -81,6 +84,12 @@ class Avionics {
 
   get pitch() {
     return this._pitchValue;
+  }
+
+  set verticalSpeed(value) {
+    this._verticalSpeed = value;
+    this.vertical_speed_indicator.setAttribute("transform", `translate(0, ${-this._verticalSpeed})`);
+    this.vertical_speed_line_indicator.setAttribute('y2', -this._verticalSpeed);
   }
 
   set currentHeading(value) {
