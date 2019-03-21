@@ -1,11 +1,10 @@
+import createElem from './createElem.js'
+
 export default function printPitch (elem) {
   var appendFn, i, large, medium, results, small, textLeft, textRight, texts, use;
-  large = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  large.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#large-pitch');
-  medium = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  medium.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#medium-pitch');
-  small = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  small.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#small-pitch');
+  large = createElem('large-pitch');
+  medium = createElem('medium-pitch');
+  small = createElem('small-pitch');
   textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
   textLeft.style.fill = 'white';
   textLeft.style.fontWeight = 'bold';

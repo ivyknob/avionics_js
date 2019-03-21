@@ -1,9 +1,9 @@
+import createElem from './createElem.js'
+
 export default function printHeading (elem) {
   var clone, cloneText, i, large_marker, marker, results, text;
-  marker = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  marker.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#heading_scale_marker');
-  large_marker = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  large_marker.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#heading_scale_large_marker');
+  marker = createElem('heading_scale_marker');
+  large_marker = createElem('heading_scale_large_marker');
   text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
   text.style.fill = '#fff';
   text.style.fontSize = '16px';
