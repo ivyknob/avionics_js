@@ -21,7 +21,7 @@ class Avionics {
     this.barometric_setting_value = elem.querySelector("#barometric_setting_value");
 
     printPitch(this.pitchElem);
-    printHeading(elem.querySelector("#heading_scale"));
+    printHeading(this.heading_scale);
 
     this._rollValue = 0;
     this._pitchValue = 0;
