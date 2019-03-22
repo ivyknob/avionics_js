@@ -33,6 +33,14 @@ body {
   dominant-baseline: central;
 }
 
+.speed__scale-value {
+  fill: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-anchor: end;
+  dominant-baseline: central;
+}
+
 .vertical-speed__scale-value {
   fill: #fff;
   font-size: 16px;

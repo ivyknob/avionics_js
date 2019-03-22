@@ -2,6 +2,7 @@ import template from './template.html'
 import './styles.css'
 import printPitch from './printPitch.js'
 import printHeading from './printHeading.js'
+import printSpeed from './printSpeed.js'
 import printVerticalSpeed from './printVerticalSpeed.js'
 
 class Avionics {
@@ -20,12 +21,14 @@ class Avionics {
     this.ground_speed_value = elem.querySelector("#ground_speed_value");
     this.selected_altitude_value = elem.querySelector("#selected_altitude_value");
     this.barometric_setting_value = elem.querySelector("#barometric_setting_value");
+    this.speed_scale = elem.querySelector("#speed_scale");
     this.vertical_speed_scale = elem.querySelector("#vertical_speed_scale");
     this.vertical_speed_indicator = elem.querySelector('#vertical_speed_indicator');
     this.vertical_speed_line_indicator = elem.querySelector('#vertical_speed_line_indicator');
 
     printPitch(this.pitchElem);
     printHeading(this.heading_scale);
+    printSpeed(this.speed_scale, {min: 100, max: 150});
     printVerticalSpeed(this.vertical_speed_scale);
 
     this._rollValue = 0;
@@ -56,6 +59,7 @@ class Avionics {
   set airspeed(value) {
     this._airspeed = value;
     this.airspeedElem.textContent = this._pad(value, 3);
+    this.speed_scale.setAttribute("transform", `translate(100, ${value*8})`);
   }
 
   set altitude(value) {
