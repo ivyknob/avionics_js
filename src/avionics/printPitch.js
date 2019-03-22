@@ -1,10 +1,7 @@
 import createElem from './createElem.js'
 
 const textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-textLeft.style.fill = 'white';
-textLeft.style.fontWeight = 'bold';
-textLeft.setAttribute('dy', 5);
-
+textLeft.classList.add('pitch-scale-value');
 const textRight = textLeft.cloneNode();
 
 textLeft.setAttribute('text-anchor', 'end');
