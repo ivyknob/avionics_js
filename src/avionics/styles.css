@@ -10,9 +10,13 @@ svg.avionics {
 }
 .airspeed-value {
   font-size: 40px;
+  dominant-baseline: central;
+  fill: #fff;
 }
 .altitude-value {
   font-size:30px;
+  dominant-baseline: central;
+  fill: #fff;
 }
 
 #ground_speed_value {
@@ -72,4 +76,10 @@ svg.avionics {
   fill: #fff;
   font-weight: bold;
   dominant-baseline: central;
+}
+
+.roll {
+  fill: black;
+  stroke: white;
+  stroke-width: 1;
 }
