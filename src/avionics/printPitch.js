@@ -1,20 +1,22 @@
 import createElem from './createElem.js'
 
+const textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+textLeft.style.fill = 'white';
+textLeft.style.fontWeight = 'bold';
+textLeft.setAttribute('dy', 5);
+
+const textRight = textLeft.cloneNode();
+
+textLeft.setAttribute('text-anchor', 'end');
+textLeft.setAttribute('x', -45);
+textRight.setAttribute('x', 45);
+
 export default function printPitch (elem) {
-  var appendFn, i, large, medium, results, small, textLeft, textRight, texts, use;
-  large = createElem('large-pitch');
-  medium = createElem('medium-pitch');
-  small = createElem('small-pitch');
-  textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-  textLeft.style.fill = 'white';
-  textLeft.style.fontWeight = 'bold';
-  textLeft.setAttribute('dy', 5);
-  textRight = textLeft.cloneNode();
-  textLeft.setAttribute('text-anchor', 'end');
-  textLeft.setAttribute('x', -45);
-  textRight.setAttribute('x', 45);
+  var appendFn, i;
+  const large = createElem('large-pitch');
+  const medium = createElem('medium-pitch');
+  const small = createElem('small-pitch');
   i = -220;
-  results = [];
   appendFn = function(text) {
     var value = Math.abs(i);
     text.textContent = value > 180 ? 360 - value : value;
@@ -22,6 +24,7 @@ export default function printPitch (elem) {
     elem.appendChild(text);
   };
   while (i <= 220) {
+    let texts, use;
     if (i === 0) {
       use = document.querySelector('#large-pitch').cloneNode();
       use.setAttribute('x1', -60);
@@ -43,7 +46,6 @@ export default function printPitch (elem) {
     }
     use.setAttribute('y', i * 8);
     elem.appendChild(use);
-    results.push(i += 2.5);
+    i += 2.5;
   }
-  return results;
 }
