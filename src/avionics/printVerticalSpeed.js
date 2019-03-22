@@ -10,14 +10,14 @@ export default function printVerticalSpeed (elem) {
   const large_marker = createElem('vertical_speed_scale_large_marker');
 
   while (i <= 15) {
-    let clone, cloneText;
+    let clone;
 
     if (i !== 0) {
       if (i % 5 === 0) {
         clone = large_marker.cloneNode();
         const textValue = Math.abs(i);
         if (textValue <= 10) {
-          cloneText = text.cloneNode();
+          const cloneText = text.cloneNode();
           cloneText.textContent = textValue;
           cloneText.setAttribute('y', i * 15);
           elem.appendChild(cloneText);
