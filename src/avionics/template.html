@@ -1,10 +1,7 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="-250 -250 500 500">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="650" height="500" viewBox="-325 -250 650 500">
   <defs>
     <clipPath id="pitchClip">
       <path d="M-100 400 -100 -100 C -50 -160, 50 -160, 100 -100 L 100 400z" transform="translate(0, -40)" />
-    </clipPath>
-    <clipPath id="headingClip">
-      <rect x="-150" y="-15" width="266" height="38" fill="black" />
     </clipPath>
   </defs>
   <g id='horizont'>
@@ -27,20 +24,6 @@
       </defs>
     </g>
   </g>
-
-  <g transform="translate(0,-235)" clip-path="url(#headingClip)">
-    <defs>
-      <line x1="0" y1="0" x2="0" y2="-2" stroke="#fff" stroke-width="1.5" id="heading_scale_marker" />
-      <line x1="0" y1="0" x2="0" y2="-5" stroke="#fff" stroke-width="1.5" id="heading_scale_large_marker" />
-    </defs>
-    <g id="heading_scale" transform="translate(0,22.5)"></g>
-    <g transform="translate(0,17)">
-      <polyline points="0,0 10,-10 20,-10 20,-30 -20,-30 -20,-10, -10,-10 0,0" fill="#000" stroke="#fff" stroke-width="1" />
-      <text dy="-20" id="heading_current_value">360</text>
-    </g>
-  </g>
-
-  <rect class='background-rect' x="-150" y="-250" width="266" height="38" stroke-width="2" />
 
   <g>
     <defs>
@@ -66,15 +49,42 @@
     <polygon points="0,-200 -7.5,-185 7.5,-185" fill="white" id="roll_triangle" />
   </g>
 
-  <g transform="translate(-250, 0)">
-    <rect class='background-rect' y="-250" width="100" height="500" />
-    <g transform="translate(100,0)" id="speed_scale">
+  <g transform="translate(0,-235)">
+    <defs>
+      <clipPath id="headingClip">
+        <rect x="-225" y="-15" width="416" height="38" fill="black" />
+      </clipPath>
+    </defs>
+    <rect class='background-rect' x="-225" y="-15" width="416" height="38" stroke-width="2" />
+    <g clip-path="url(#headingClip)">
       <defs>
-        <line x1="0" y1="0" x2="-8" y2="0" stroke="#fff" stroke-width="1.5" id="speed_scale_marker" />
+        <line x1="0" y1="0" x2="0" y2="-2" stroke="#fff" stroke-width="1.5" id="heading_scale_marker" />
+        <line x1="0" y1="0" x2="0" y2="-5" stroke="#fff" stroke-width="1.5" id="heading_scale_large_marker" />
       </defs>
-      <line x1="-4" x2="-4" y1="0" y2="0" stroke="red" stroke-width="8" id="speed_red_line" />
-      <line x1="-4" x2="-4" y1="0" y2="0" stroke="green" stroke-width="8" id="speed_green_line" />
-      <line x1="0" y1="0" x2="-10" y2="0" stroke="#fff" stroke-width="1.5" id="speed_scale_large_marker" />
+      <g id="heading_scale" transform="translate(0,22.5)"></g>
+      <g transform="translate(0,17)">
+        <polyline points="0,0 10,-10 20,-10 20,-30 -20,-30 -20,-10, -10,-10 0,0" fill="#000" stroke="#fff" stroke-width="1" />
+        <text dy="-20" id="heading_current_value">360</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(-325, 0)">
+    <defs>
+      <clipPath id="speedClip">
+        <rect x="0" y="-250" width="100" height="500" fill="black" />
+      </clipPath>
+    </defs>
+    <rect class='background-rect' y="-250" width="100" height="500" />
+    <g clip-path="url(#speedClip)">
+      <g transform="translate(100,0)" id="speed_scale">
+        <defs>
+          <line x1="0" y1="0" x2="-8" y2="0" stroke="#fff" stroke-width="1.5" id="speed_scale_marker" />
+        </defs>
+        <line x1="-4" x2="-4" y1="0" y2="0" stroke="red" stroke-width="8" id="speed_red_line" />
+        <line x1="-4" x2="-4" y1="0" y2="0" stroke="green" stroke-width="8" id="speed_green_line" />
+        <line x1="0" y1="0" x2="-10" y2="0" stroke="#fff" stroke-width="1.5" id="speed_scale_large_marker" />
+      </g>
     </g>
     <g transform="translate(0,218)">
       <rect id="ground_speed" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
@@ -86,7 +96,7 @@
     </g>
   </g>
 
-  <g transform="translate(116,0)">
+  <g transform="translate(191,0)">
     <rect class='background-rect' x="0" y="-250" width="134" height="500" />
 
     <g transform="translate(134,0)">
@@ -122,9 +132,9 @@
   </g>
 
   <g id="triangles">
-    <line x1="-129" y1="0" x2="-88" y2="0" stroke="yellow" stroke-width="2"/>
-    <polyline points="0,0 -79,42 -54,42 0,0" fill="yellow" stroke="black" stroke-width="1"/>
-    <polyline points="0,0 -54,42 -33,42 0,0" fill="none" stroke="black" stroke-width="1"/>
+    <path d="M163 0 h41" stroke="yellow" stroke-width="2" />
+    <polyline points="0,0 79,42 54,42 0,0" fill="yellow" stroke="black" stroke-width="1"/>
+    <polyline points="0,0 54,42 33,42 0,0" fill="none" stroke="black" stroke-width="1"/>
   </g>
   <use xlink:href="#triangles" transform="scale(-1,1)"/>
 </svg>
