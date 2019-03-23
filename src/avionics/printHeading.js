@@ -9,8 +9,8 @@ text.setAttribute('y', -10);
 
 export default function printHeading (elem) {
   let i;
-  const marker = createElem('heading_scale_marker');
-  const large_marker = createElem('heading_scale_large_marker');
+  const large_marker = createElem('heading_scale_large_marker'),
+    marker = createElem('heading_scale_marker');
   i = -200;
   while (i <= 200) {
     let clone;

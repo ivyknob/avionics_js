@@ -1,8 +1,8 @@
 import createElem from './createElem.js'
 
-const textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
+const textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text'),
+  textRight = textLeft.cloneNode();
 textLeft.classList.add('pitch-scale-value');
-const textRight = textLeft.cloneNode();
 
 textLeft.setAttribute('text-anchor', 'end');
 textLeft.setAttribute('x', -45);
@@ -10,9 +10,9 @@ textRight.setAttribute('x', 45);
 
 export default function printPitch (elem) {
   var appendFn, i;
-  const large = createElem('large-pitch');
-  const medium = createElem('medium-pitch');
-  const small = createElem('small-pitch');
+  const large = createElem('large-pitch'),
+   medium = createElem('medium-pitch'),
+   small = createElem('small-pitch');
   i = -220;
   appendFn = function(text) {
     var value = Math.abs(i);
