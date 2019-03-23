@@ -19,7 +19,6 @@ jobs:
       script: yarn audit
 
     - stage: test
-      before_script:
       name: Run linter (ESLint)
       script: yarn lint
 
