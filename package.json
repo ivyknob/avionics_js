@@ -1,6 +1,6 @@
 {
   "name": "@ivyknob/avionics_js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "js all in one avionics module",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,11 @@
     "start:dev": "webpack-dev-server",
     "build": "webpack --config webpack.production.config.coffee",
     "test": "karma start karma.conf.js --single-run",
+    "lint": "npx eslint ./src/avionics/",
     "test:local": "karma start karma.conf.js --browsers Chrome,ChromeHeadless"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
