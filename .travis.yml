@@ -8,8 +8,6 @@ addons:
   chrome: "stable"
 
 before_script:
-  - "Xvfb :99 & export DISPLAY=:99"
-  - sleep 5
   - yarn
 
 stages:
@@ -29,8 +27,13 @@ jobs:
       script: yarn audit
 
     - stage: test
+      before_script:
       name: "Run linter (ESLint)"
-      script: npx eslint ./src/avionics/
+      script: yarn lint
 
-    - script: yarn test
-      name: Run karma test suite
+    - name: Run karma test suite
+      script: yarn test
+      before_script:
+        - "Xvfb :99 & export DISPLAY=:99"
+        - sleep 5
+
