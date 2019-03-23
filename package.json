@@ -1,5 +1,5 @@
 {
-  "name": "avionics_js",
+  "name": "@ivyknob/avionics_js",
   "version": "0.0.1",
   "description": "js all in one avionics module",
   "main": "index.js",
@@ -25,7 +25,6 @@
     "@babel/preset-env": "^7.2.3",
     "babel-loader": "^8.0.5",
     "coffee-loader": "^0.9.0",
-    "coffee-script": "^1.12.7",
     "coffeescript": "^2.3.2",
     "css-loader": "^2.1.0",
     "eslint": "^5.13.0",

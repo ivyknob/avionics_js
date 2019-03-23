@@ -1,10 +1,7 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="-250 -250 500 500">
+<svg class='avionics' version="1.1" xmlns="http://www.w3.org/2000/svg" width="650" height="500" viewBox="-325 -250 650 500">
   <defs>
     <clipPath id="pitchClip">
       <path d="M-100 400 -100 -100 C -50 -160, 50 -160, 100 -100 L 100 400z" transform="translate(0, -40)" />
-    </clipPath>
-    <clipPath id="headingClip">
-      <rect x="-150" y="-15" width="266" height="38" fill="black" />
     </clipPath>
   </defs>
   <g id='horizont'>
@@ -28,76 +25,117 @@
     </g>
   </g>
 
-  <g transform="translate(0,-235)" clip-path="url(#headingClip)">
+  <g>
     <defs>
-      <line x1="0" y1="0" x2="0" y2="-2" stroke="#fff" stroke-width="1.5" id="heading_scale_marker" />
-      <line x1="0" y1="0" x2="0" y2="-5" stroke="#fff" stroke-width="1.5" id="heading_scale_large_marker" />
+      <clipPath id="cut-off-bottom">
+        <rect x="-200" y="-250" width="400" height="150" />
+      </clipPath>
     </defs>
-    <g id="heading_scale" transform="translate(0,5)"></g>
-    <g transform="translate(0,17)">
-      <polyline points="0,0 10,-10 20,-10 20,-30 -20,-30 -20,-10, -10,-10 0,0" fill="#000" stroke="#fff" stroke-width="1" />
-      <text fill="#fff" style="font-size:18px;font-weight:bold;" text-anchor='middle' dy="-14" id="heading_current_value">360</text>
-    </g>
+    <circle cx="0" cy="0" r="200" fill="none" stroke="white" clip-path="url(#cut-off-bottom)" />
+    <line x1="0" y1="-200" x2="0" y2="-190" stroke="white" stroke-width="1.5" id="degree" />
+    <use xlink:href="#degree" transform="rotate(-60)"/>
+    <use xlink:href="#degree" transform="rotate(-50)"/>
+    <use xlink:href="#degree" transform="rotate(-40)"/>
+    <use xlink:href="#degree" transform="rotate(-30)"/>
+    <use xlink:href="#degree" transform="rotate(-20)"/>
+    <use xlink:href="#degree" transform="rotate(-10)"/>
+    <use xlink:href="#degree" transform="rotate(10)"/>
+    <use xlink:href="#degree" transform="rotate(20)"/>
+    <use xlink:href="#degree" transform="rotate(30)"/>
+    <use xlink:href="#degree" transform="rotate(40)"/>
+    <use xlink:href="#degree" transform="rotate(50)"/>
+    <use xlink:href="#degree" transform="rotate(60)"/>
+    <polygon points="0,-200 -7.5,-215 7.5,-215" fill="white" />
+    <polygon points="0,-200 -7.5,-185 7.5,-185" fill="white" id="roll_triangle" />
   </g>
 
-  <defs>
-    <g id="triangles">
-      <line x1="-129" y1="0" x2="-88" y2="0" stroke="yellow" stroke-width="2"/>
-      <polyline points="0,0 -79,42 -54,42 0,0" fill="yellow" stroke="black" stroke-width="1"/>
-      <polyline points="0,0 -54,42 -33,42 0,0" fill="none" stroke="black" stroke-width="1"/>
-    </g>
-
-    <g id="altitude">
-      <polyline points="0,0 10,-10 10,-21 68,-21 68,-38 110,-38 110,38 68,38 68,21 10,21 10,10 0,0" fill="black" stroke="white" stroke-width="1" />
-      <text dx="16" dy="10" fill="white" class='altitude-value' id='altitude_value'>95336</text>
-    </g>
-
-    <g id="airspeed">
-      <polyline points="0,-24 55,-24, 55,-48, 80,-48 80,-10 90,0 80,10 80,48, 55,48, 55,24 0,24 0,-24" fill="black" stroke="white" stroke-width="1" />
-      <text dx="6" dy="13" fill="white" class="airspeed-value" id="airspeed_value">999</text>
-    </g>
-  </defs>
-
-  <g transform="translate(-250, -250)">
-    <rect id="airspeed_background" x="0" y="0" width="100" height="500" fill="black" stroke="white" stroke-width="1" opacity="0.1" />
-    <rect id="heading_background" x="100" y="0" width="266" height="38" fill="black" stroke="white" stroke-width="2" opacity="0.1" />
-    <rect id="altitude_background" x="366" y="32" width="134" height="468" fill="black" stroke="white" stroke-width="1" opacity="0.1" />
-    <rect id="barometric_setting" x="366" y="468" width="132" height="30" fill="black" stroke="blue" stroke-width="2" opacity="0.1" />
-
-    <use x="250" y="250" xlink:href="#triangles"/>
-    <use x="250" y="250" xlink:href="#triangles" transform="scale(-1,1) translate(-500,0)"/>
-    <g transform='translate(250, 250)'>
+  <g transform="translate(0,-235)">
+    <defs>
+      <clipPath id="headingClip">
+        <rect x="-225" y="-15" width="416" height="38" fill="black" />
+      </clipPath>
+    </defs>
+    <rect class='background-rect' x="-225" y="-15" width="416" height="38" stroke-width="2" />
+    <g clip-path="url(#headingClip)">
       <defs>
-        <clipPath id="cut-off-bottom">
-          <rect x="-200" y="-250" width="400" height="150" />
-        </clipPath>
+        <line x1="0" y1="0" x2="0" y2="-2" stroke="#fff" stroke-width="1.5" id="heading_scale_marker" />
+        <line x1="0" y1="0" x2="0" y2="-5" stroke="#fff" stroke-width="1.5" id="heading_scale_large_marker" />
       </defs>
-      <circle cx="0" cy="0" r="200" fill="none" stroke="white" clip-path="url(#cut-off-bottom)" />
-      <line x1="0" y1="-200" x2="0" y2="-190" stroke="white" stroke-width="1.5" id="degree" />
-      <use xlink:href="#degree" transform="rotate(-60)"/>
-      <use xlink:href="#degree" transform="rotate(-50)"/>
-      <use xlink:href="#degree" transform="rotate(-40)"/>
-      <use xlink:href="#degree" transform="rotate(-30)"/>
-      <use xlink:href="#degree" transform="rotate(-20)"/>
-      <use xlink:href="#degree" transform="rotate(-10)"/>
-      <use xlink:href="#degree" transform="rotate(10)"/>
-      <use xlink:href="#degree" transform="rotate(20)"/>
-      <use xlink:href="#degree" transform="rotate(30)"/>
-      <use xlink:href="#degree" transform="rotate(40)"/>
-      <use xlink:href="#degree" transform="rotate(50)"/>
-      <use xlink:href="#degree" transform="rotate(60)"/>
-      <polygon points="0,-200 -7.5,-215 7.5,-215" fill="white" />
-      <polygon points="0,-200 -7.5,-185 7.5,-185" fill="white" id="roll_triangle" />
+      <g id="heading_scale" transform="translate(0,22.5)"></g>
+      <g transform="translate(0,17)">
+        <polyline points="0,0 10,-10 20,-10 20,-30 -20,-30 -20,-10, -10,-10 0,0" fill="#000" stroke="#fff" stroke-width="1" />
+
+        <text dy="-20" id="heading_current_value">360</text>
+      </g>
     </g>
-    <use x="380" y="250" xlink:href="#altitude"/>
-    <use x="12" y="250" xlink:href="#airspeed"/>
   </g>
-  <g transform="translate(116,-250)">
-    <rect id="selected_altitude" x="0" y="0" width="134" height="32" fill="black" stroke="white" stroke-width="1" />
-    <text dx='129' dy='26' id='selected_altitude_value'>0</text>
+
+  <g transform="translate(-325, 0)">
+    <defs>
+      <clipPath id="speedClip">
+        <rect x="0" y="-250" width="100" height="500" fill="black" />
+      </clipPath>
+    </defs>
+    <rect class='background-rect' y="-250" width="100" height="500" />
+    <g clip-path="url(#speedClip)">
+      <g transform="translate(100,0)" id="speed_scale">
+        <defs>
+          <line x1="0" y1="0" x2="-8" y2="0" stroke="#fff" stroke-width="1.5" id="speed_scale_marker" />
+        </defs>
+        <line x1="-4" x2="-4" y1="0" y2="0" stroke="red" stroke-width="8" id="speed_red_line" />
+        <line x1="-4" x2="-4" y1="0" y2="0" stroke="green" stroke-width="8" id="speed_green_line" />
+        <line x1="0" y1="0" x2="-10" y2="0" stroke="#fff" stroke-width="1.5" id="speed_scale_large_marker" />
+      </g>
+    </g>
+    <g transform="translate(0,218)">
+      <rect id="ground_speed" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
+      <text dx='95' dy='16' id='ground_speed_value'>0</text>
+    </g>
+    <g transform='translate(12, 0)'>
+      <path d="M90, 0 l-10 10 v38 h-25 v-24 h-55 v-48 h55 v-25 h25 v38 z" class='roll' />
+      <text dx="6" class="airspeed-value" id="airspeed_value">999</text>
+    </g>
   </g>
-  <g transform="translate(-250,218)">
-    <rect id="ground_speed" x="0" y="0" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
-    <text dx='95' dy='26' id='ground_speed_value'>0</text>
+
+  <g transform="translate(191,0)">
+    <rect class='background-rect' x="0" y="-250" width="134" height="500" />
+
+    <g transform="translate(134,0)">
+      <line id='vertical_speed_line_indicator' x1='-4' y1='0' x2='-4' y2='0' stroke-width="3" stroke='#c748a2' />
+      <g id="vertical_speed_scale">
+        <defs>
+          <line x1="0" y1="0" x2="-4" y2="0" stroke="#fff" stroke-width="1.5" id="vertical_speed_scale_marker" />
+        </defs>
+        <line x1="0" y1="0" x2="-9" y2="0" stroke="#fff" stroke-width="1.5" id="vertical_speed_scale_large_marker" />
+      </g>
+      <polyline id='vertical_speed_indicator' transform="translate(0, 0)" points="0,0 -6,-6 -6,6, 0,0" fill='#fff' stroke='#000' />
+    </g>
+
+    <g transform="translate(14, 50)" fill="#47cfe0">
+      <polyline points="-1,0 9,-10 9,-21 -14,-21 -14,21 9,21 9,10, -1,0" fill="#47cfe0" stroke="#000" stroke-width="1.5" />
+      <text dx="16" id='selected_altitude_bug_value'><tspan font-size='1.2em' font-weight="bold">2</tspan>500</text>
+    </g>
+
+    <g transform="translate(0,-250)">
+      <rect id="selected_altitude" x="0" y="0" width="134" height="32" fill="black" stroke="white" stroke-width="1" />
+      <text dx='129' dy='16' id='selected_altitude_value'>0</text>
+    </g>
+
+    <g transform="translate(16, 0)">
+      <path d="M0 0 l10 10 v11 h58 v17 h42 v-76 h-42 v17 h-58 v11 z" class='roll' />
+      <text dx="16" class='altitude-value' id='altitude_value'>95336</text>
+    </g>
+
+    <g transform="translate(0, 218)">
+      <rect id="barometric_setting" x="0" y="0" width="134" height="32" fill="black" stroke="#909090" stroke-width="1" opacity="1" />
+      <text dx="129" dy="16" id="barometric_setting_value">1013.05</text>
+    </g>
   </g>
+
+  <g id="triangles">
+    <path d="M163 0 h41" stroke="yellow" stroke-width="2" />
+    <polyline points="0,0 79,42 54,42 0,0" fill="yellow" stroke="black" stroke-width="1"/>
+    <polyline points="0,0 54,42 33,42 0,0" fill="none" stroke="black" stroke-width="1"/>
+  </g>
+  <use xlink:href="#triangles" transform="scale(-1,1)"/>
 </svg>

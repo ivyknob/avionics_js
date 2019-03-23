@@ -1,21 +1,19 @@
-export default function printPitch (elem) {
-  var appendFn, i, large, medium, results, small, textLeft, textRight, texts, use;
-  large = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  large.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#large-pitch');
-  medium = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  medium.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#medium-pitch');
-  small = document.createElementNS("http://www.w3.org/2000/svg", 'use');
-  small.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#small-pitch');
-  textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-  textLeft.style.fill = 'white';
-  textLeft.style.fontWeight = 'bold';
-  textLeft.setAttribute('dy', 5);
+import createElem from './createElem.js'
+
+const textLeft = document.createElementNS("http://www.w3.org/2000/svg", 'text'),
   textRight = textLeft.cloneNode();
-  textLeft.setAttribute('text-anchor', 'end');
-  textLeft.setAttribute('x', -45);
-  textRight.setAttribute('x', 45);
+textLeft.classList.add('pitch-scale-value');
+
+textLeft.setAttribute('text-anchor', 'end');
+textLeft.setAttribute('x', -45);
+textRight.setAttribute('x', 45);
+
+export default function printPitch (elem) {
+  var appendFn, i;
+  const large = createElem('large-pitch'),
+   medium = createElem('medium-pitch'),
+   small = createElem('small-pitch');
   i = -220;
-  results = [];
   appendFn = function(text) {
     var value = Math.abs(i);
     text.textContent = value > 180 ? 360 - value : value;
@@ -23,6 +21,7 @@ export default function printPitch (elem) {
     elem.appendChild(text);
   };
   while (i <= 220) {
+    let texts, use;
     if (i === 0) {
       use = document.querySelector('#large-pitch').cloneNode();
       use.setAttribute('x1', -60);
@@ -44,7 +43,6 @@ export default function printPitch (elem) {
     }
     use.setAttribute('y', i * 8);
     elem.appendChild(use);
-    results.push(i += 2.5);
+    i += 2.5;
   }
-  return results;
 }

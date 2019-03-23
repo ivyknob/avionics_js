@@ -2,6 +2,8 @@ import template from './template.html'
 import './styles.css'
 import printPitch from './printPitch.js'
 import printHeading from './printHeading.js'
+import printSpeed from './printSpeed.js'
+import printVerticalSpeed from './printVerticalSpeed.js'
 
 class Avionics {
   constructor(elem) {
@@ -18,15 +20,24 @@ class Avionics {
     this.heading_current_value = elem.querySelector("#heading_current_value");
     this.ground_speed_value = elem.querySelector("#ground_speed_value");
     this.selected_altitude_value = elem.querySelector("#selected_altitude_value");
+    this.barometric_setting_value = elem.querySelector("#barometric_setting_value");
+    this.speed_scale = elem.querySelector("#speed_scale");
+    this.vertical_speed_scale = elem.querySelector("#vertical_speed_scale");
+    this.vertical_speed_indicator = elem.querySelector('#vertical_speed_indicator');
+    this.vertical_speed_line_indicator = elem.querySelector('#vertical_speed_line_indicator');
 
     printPitch(this.pitchElem);
-    printHeading(elem.querySelector("#heading_scale"));
+    printHeading(this.heading_scale);
+    printSpeed(this.speed_scale, { "max": 150,
+      "min": 100 });
+    printVerticalSpeed(this.vertical_speed_scale);
 
     this._rollValue = 0;
     this._pitchValue = 0;
     this._airspeed = 0;
     this._altitube = 0;
     this._currentHeading = 360;
+    this._verticalSpeed = 0;
   }
 
   horizontTransform() {
@@ -49,6 +60,7 @@ class Avionics {
   set airspeed(value) {
     this._airspeed = value;
     this.airspeedElem.textContent = this._pad(value, 3);
+    this.speed_scale.setAttribute("transform", `translate(100, ${value*8})`);
   }
 
   set altitude(value) {
@@ -79,6 +91,12 @@ class Avionics {
     return this._pitchValue;
   }
 
+  set verticalSpeed(value) {
+    this._verticalSpeed = value;
+    this.vertical_speed_indicator.setAttribute("transform", `translate(0, ${-this._verticalSpeed})`);
+    this.vertical_speed_line_indicator.setAttribute('y2', -this._verticalSpeed);
+  }
+
   set currentHeading(value) {
     this._currentHeading = (value == 0) ? 360 : value;
     this.heading_current_value.textContent = this._pad(this._currentHeading, 3)
@@ -99,6 +117,10 @@ class Avionics {
 
   set selectedAltitude (value) {
     this.selected_altitude_value.textContent = Math.round(value);
+  }
+
+  set barometricSetting (value) {
+    this.barometric_setting_value.textContent = value.toFixed(2);
   }
 
 }

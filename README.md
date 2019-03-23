@@ -1,4 +1,4 @@
-# Avionics JS [![Build Status](https://travis-ci.org/ivyknob/avionics_js.svg?branch=master)](https://travis-ci.org/ivyknob/avionics_js) [![Maintainability](https://api.codeclimate.com/v1/badges/80ccb6e63a5ac25bbab0/maintainability)](https://codeclimate.com/github/ivyknob/avionics_js/maintainability)
+# Avionics JS [![Build Status](https://travis-ci.org/ivyknob/avionics_js.svg?branch=master)](https://travis-ci.org/ivyknob/avionics_js) [![Maintainability](https://api.codeclimate.com/v1/badges/80ccb6e63a5ac25bbab0/maintainability)](https://codeclimate.com/github/ivyknob/avionics_js/maintainability) [![npm](https://img.shields.io/npm/v/@ivyknob/avionics_js.svg)](https://www.npmjs.com/package/@ivyknob/avionics_js)
 
 JavaScript library to make glass EFIS from any phone or tablet. Inspired by Garmin G5.
 Made by Ivy Knob.
