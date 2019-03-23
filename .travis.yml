@@ -37,5 +37,6 @@ deploy:
   on:
     tags: true
   email: poltorakovmb@gmail.com
+#  condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+
   api_key:
     secure: cEBOnx5WyLZmwNSheZNUBFK9G5e/JwOYmzUGnt+CqEq+bXGmCcpJJ9HUr6EKI0zAPhtEYQZrhkDNMAFHd0pbcSsg7TzIVBMdB6P4KtzANDKcUD8DTivzpasqq+Qun3CCmo0HRxel3G09lKRVu7g9ob0jDk3e9/1ETWMEouIC09XRaYBkL4r2hC7aCDra0pLj5bXESFRjsrT+rT019U7ELN1wsiRaKady6RhplTbcsp1GqpVLuUmwY/GLIr1Pr9lmxCpWt+nIo53VNWHh6XlzW+Jh9mSWDswEc2Yel0D8Ueqa+S3emggfVNNgbgI/FbbQ1aZfqC8X5Kg9DCtRKmBknnIzy3tuE/kZpYqo6grNIwRxbw8APYBEgp1EpnWbgz6bHgN0qh/2QDVVVaoqfbYmyvSc1ny6x2vVz3qv+H84Gc1JFs4v5Y6bZSI6U9SzO8pWAhvBEWpK6mqkibSYD2YPRuibeMQmVoJsoNZukqoCNM3F2hyAAx5TpYKqFm49yv8SHu4JSh/I1aZsx/z5ItXdTTyCbzn0oRwMMSxu2bFng4ksiK+e6KBES1pEq4hbzOjWLV0xZVBMNx/ZuDXdp13T+IzxpcF6arp5meaxt3zudwoR+ktE+uYg8Quvfp1RqvGB3IefW1h0okxkjgn0Uf27r/eGOs2Db2OCEaKl+1DbM1k=
