@@ -20,12 +20,12 @@ stages:
 jobs:
   include:
     - stage: build
-      name: "Make sure the build is successful"
+      name: Make sure the build is successful
       script:
         - yarn build
 
     - stage: check
-      name: "Auditing package dependencies for security vulnerabilities"
+      name: Audit package dependencies for security vulnerabilities
       script: yarn audit
 
     - stage: test
@@ -33,4 +33,4 @@ jobs:
       script: npx eslint ./src/avionics/
 
     - script: yarn test
-      name: "Run karma"
+      name: Run karma test suite

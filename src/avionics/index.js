@@ -28,7 +28,8 @@ class Avionics {
 
     printPitch(this.pitchElem);
     printHeading(this.heading_scale);
-    printSpeed(this.speed_scale, {min: 100, max: 150});
+    printSpeed(this.speed_scale, { "max": 150,
+      "min": 100 });
     printVerticalSpeed(this.vertical_speed_scale);
 
     this._rollValue = 0;
