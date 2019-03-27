@@ -32,10 +32,12 @@ describe("Avionics specs", function() {
       const avionics = createAvionics();
 
       avionics.altitude = 12345.32;
-      expect(avionics.elem.querySelector("#altitude_value").textContent).toEqual('12345');
+      expect(avionics.elem.querySelector("#altitude_value").textContent).toEqual('123');
+      expect(avionics.elem.querySelector("#altitude_value_residue_current").textContent).toEqual('40');
 
       avionics.altitude = 123.23;
-      expect(avionics.elem.querySelector("#altitude_value").textContent).toEqual('00123');
+      expect(avionics.elem.querySelector("#altitude_value").textContent).toEqual('001');
+      expect(avionics.elem.querySelector("#altitude_value_residue_current").textContent).toEqual('20');
       removeChild(avionics);
     });
 
