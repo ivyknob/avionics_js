@@ -3,6 +3,9 @@
     <clipPath id="pitchClip">
       <path d="M-100 400 -100 -100 C -50 -160, 50 -160, 100 -100 L 100 400z" transform="translate(0, -40)" />
     </clipPath>
+    <clipPath id="canvasPitch">
+      <path d="M-325 -250 h650 v500 h-650 z" />
+    </clipPath>
   </defs>
   <g id='horizont'>
     <defs>
@@ -15,6 +18,7 @@
     <line x1="-1000" y1="0" x2="1000" y2="0" stroke="white" stroke-width="2" />
   </g>
 
+  <g clip-path="url(#canvasPitch)">
   <g id="rotor" clip-path="url(#pitchClip)">
     <g id='pitch'>
       <defs>
@@ -71,13 +75,8 @@
   </g>
 
   <g transform="translate(-325, 0)">
-    <defs>
-      <clipPath id="speedClip">
-        <rect x="0" y="-250" width="100" height="500" fill="black" />
-      </clipPath>
-    </defs>
     <rect class='background-rect' y="-250" width="100" height="500" />
-    <g clip-path="url(#speedClip)">
+    <g>
       <g transform="translate(100,0)" id="speed_scale">
         <defs>
           <line x1="0" y1="0" x2="-8" y2="0" stroke="#fff" stroke-width="1.5" id="speed_scale_marker" />
@@ -156,4 +155,5 @@
     <polyline points="0,0 54,42 33,42 0,0" fill="none" stroke="black" stroke-width="1"/>
   </g>
   <use xlink:href="#triangles" transform="scale(-1,1)"/>
+  </g>
 </svg>
