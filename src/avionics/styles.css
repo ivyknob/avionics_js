@@ -17,6 +17,7 @@ svg.avionics {
   font-size:30px;
   dominant-baseline: central;
   fill: #fff;
+  text-anchor: end;
 }
 
 #ground_speed_value {
@@ -82,4 +83,10 @@ svg.avionics {
   fill: black;
   stroke: white;
   stroke-width: 1;
+}
+
+.altitude__scale-value {
+  font-size: 20px;
+  dominant-baseline: central;
+  fill: #fff;
 }

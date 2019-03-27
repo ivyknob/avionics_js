@@ -4,6 +4,8 @@ import printPitch from './printPitch.js'
 import printHeading from './printHeading.js'
 import printSpeed from './printSpeed.js'
 import printVerticalSpeed from './printVerticalSpeed.js'
+import printAltitude from './printAltitude.js'
+import { pad } from './helpers.js'
 
 class Avionics {
   constructor(elem) {
@@ -25,12 +27,16 @@ class Avionics {
     this.vertical_speed_scale = elem.querySelector("#vertical_speed_scale");
     this.vertical_speed_indicator = elem.querySelector('#vertical_speed_indicator');
     this.vertical_speed_line_indicator = elem.querySelector('#vertical_speed_line_indicator');
+    this.altitude_scale = elem.querySelector('#altitude_scale');
 
     printPitch(this.pitchElem);
     printHeading(this.heading_scale);
-    printSpeed(this.speed_scale, { "max": 150,
-      "min": 100 });
+    printSpeed(this.speed_scale, {
+      max: 150,
+      min: 100
+    });
     printVerticalSpeed(this.vertical_speed_scale);
+    printAltitude(this.altitude_scale, 300);
 
     this._rollValue = 0;
     this._pitchValue = 0;
@@ -52,20 +58,29 @@ class Avionics {
     }
   }
 
-  _pad(number, n) {
-    const arr = Math.round(number).toString().split("");
-    return (new Array(n - arr.length)).fill('0').concat(arr).join("");
-  }
-
   set airspeed(value) {
     this._airspeed = value;
-    this.airspeedElem.textContent = this._pad(value, 3);
+    this.airspeedElem.textContent = pad(value, 3);
     this.speed_scale.setAttribute("transform", `translate(100, ${value*8})`);
   }
 
   set altitude(value) {
     this._altitude = value;
-    this.altitudeElem.textContent = this._pad(value, 5);
+    const roundValue = Math.round(value);
+    const roughRoundValue = Math.round(roundValue/20)*20;
+    const residueValue = value%20;
+    this.altitudeElem.textContent = pad(
+      roundValue.toString().split('').slice(0, -2).join(""),
+      3
+    );
+    this.elem.querySelector('#altitude_value_residue').setAttribute(
+      'transform',
+      `translate(102,${(roundValue-roughRoundValue)*1.7})`
+    );
+    this.elem.querySelector('#altitude_value_residue_current').textContent = pad(roughRoundValue, 2);
+    this.elem.querySelector('#altitude_value_residue_before').textContent = pad(roughRoundValue - 20, 2);
+    this.elem.querySelector('#altitude_value_residue_after').textContent = pad(roughRoundValue + 20, 2);
+    this.altitude_scale.setAttribute('transform', `translate(0, ${value})`);
   }
 
   set roll(value) {
@@ -93,13 +108,13 @@ class Avionics {
 
   set verticalSpeed(value) {
     this._verticalSpeed = value;
-    this.vertical_speed_indicator.setAttribute("transform", `translate(0, ${-this._verticalSpeed})`);
-    this.vertical_speed_line_indicator.setAttribute('y2', -this._verticalSpeed);
+    this.vertical_speed_indicator.setAttribute("transform", `translate(0, ${-this._verticalSpeed*15})`);
+    this.vertical_speed_line_indicator.setAttribute('y2', -this._verticalSpeed*15);
   }
 
   set currentHeading(value) {
     this._currentHeading = (value == 0) ? 360 : value;
-    this.heading_current_value.textContent = this._pad(this._currentHeading, 3)
+    this.heading_current_value.textContent = pad(this._currentHeading, 3)
 
     let delta;
     if (this._currentHeading > 180) {

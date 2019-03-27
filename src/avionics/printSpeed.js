@@ -29,7 +29,7 @@ export default function printSpeed (elem, opts) {
       cloneText.setAttribute('y', -i * 40);
       elem.appendChild(cloneText);
     }
- else {
+    else {
       clone = marker.cloneNode();
     }
 
