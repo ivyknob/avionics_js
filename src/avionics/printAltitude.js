@@ -1,7 +1,7 @@
 import { pad } from './helpers'
 import createElem from './createElem.js'
 
-const setCompoundValue = value => {
+const setCompoundValue = (value) => {
   const thousands = Math.floor(value/1000);
   return [
     thousands ? `<tspan font-size="1.2em" font-weight="bold">${thousands}</tspan>` : '',
@@ -30,7 +30,8 @@ export default function printAltitude (elem, selectedAltitude = null) {
         cloneText.setAttribute('y', -i * 20);
         elem.appendChild(cloneText);
       }
-    } else {
+    }
+    else {
       clone = marker.cloneNode();
     }
 

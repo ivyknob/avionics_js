@@ -32,8 +32,8 @@ class Avionics {
     printPitch(this.pitchElem);
     printHeading(this.heading_scale);
     printSpeed(this.speed_scale, {
-      max: 150,
-      min: 100
+      "max": 150,
+      "min": 100
     });
     printVerticalSpeed(this.vertical_speed_scale);
     printAltitude(this.altitude_scale, 300);
@@ -66,9 +66,8 @@ class Avionics {
 
   set altitude(value) {
     this._altitude = value;
-    const roundValue = Math.round(value);
-    const roughRoundValue = Math.round(roundValue/20)*20;
-    const residueValue = value%20;
+    const roundValue = Math.round(value),
+          roughRoundValue = Math.round(roundValue/20)*20;
     this.altitudeElem.textContent = pad(
       roundValue.toString().split('').slice(0, -2).join(""),
       3
