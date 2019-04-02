@@ -40,7 +40,7 @@ jobs:
         provider: npm
         on:
           tags: true
-          # branch: master
+          branch: master
         email: poltorakovmb@gmail.com
         skip_cleanup: true
       #  condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+
