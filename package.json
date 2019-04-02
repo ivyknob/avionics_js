@@ -1,9 +1,15 @@
 {
   "name": "@ivyknob/avionics_js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "js all in one avionics module",
   "main": "dist/avionics.js",
-  "files": ["dist/avionics.js"],
+  "files": [
+    "dist/avionics.js",
+    "src",
+    "webpack.config.coffee",
+    "webpack.production.config.coffee",
+    "yarn.lock"
+  ],
   "unpkg": "dist/avionis.js",
   "scripts": {
     "start:docker": "webpack-dev-server --host 0.0.0.0",
