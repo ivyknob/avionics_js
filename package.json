@@ -1,6 +1,6 @@
 {
   "name": "@ivyknob/avionics_js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "js all in one avionics module",
   "main": "avionics.js",
   "scripts": {

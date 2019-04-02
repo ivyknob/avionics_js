@@ -35,28 +35,28 @@ jobs:
         - yarn build
         - cp dist/avionics.js avionics.js
         - git add .
-      deploy:
-        provider: npm
-        on:
-          tags: true
-          # branch: master
-        email: poltorakovmb@gmail.com
-        # skip_cleanup: true
-      #  condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+
-        api_key:
-          secure: cEBOnx5WyLZmwNSheZNUBFK9G5e/JwOYmzUGnt+CqEq+bXGmCcpJJ9HUr6EKI0zAPhtEYQZrhkDNMAFHd0pbcSsg7TzIVBMdB6P4KtzANDKcUD8DTivzpasqq+Qun3CCmo0HRxel3G09lKRVu7g9ob0jDk3e9/1ETWMEouIC09XRaYBkL4r2hC7aCDra0pLj5bXESFRjsrT+rT019U7ELN1wsiRaKady6RhplTbcsp1GqpVLuUmwY/GLIr1Pr9lmxCpWt+nIo53VNWHh6XlzW+Jh9mSWDswEc2Yel0D8Ueqa+S3emggfVNNgbgI/FbbQ1aZfqC8X5Kg9DCtRKmBknnIzy3tuE/kZpYqo6grNIwRxbw8APYBEgp1EpnWbgz6bHgN0qh/2QDVVVaoqfbYmyvSc1ny6x2vVz3qv+H84Gc1JFs4v5Y6bZSI6U9SzO8pWAhvBEWpK6mqkibSYD2YPRuibeMQmVoJsoNZukqoCNM3F2hyAAx5TpYKqFm49yv8SHu4JSh/I1aZsx/z5ItXdTTyCbzn0oRwMMSxu2bFng4ksiK+e6KBES1pEq4hbzOjWLV0xZVBMNx/ZuDXdp13T+IzxpcF6arp5meaxt3zudwoR+ktE+uYg8Quvfp1RqvGB3IefW1h0okxkjgn0Uf27r/eGOs2Db2OCEaKl+1DbM1k=
-    # - stage: release
-    #   name: Deploy to Github Releases
-    #   before_deploy:
-    #     - yarn build
-    #     - cp dist/avionics.js avionics.js
-    #   deploy:
-    #     provider: releases
-    #     api_key:
-    #       secure: 123
-    #     file:
-    #       - avionics.js
-    #     skip_cleanup: true
-    #     on:
-    #       branch: master
-    #       tags: true
+deploy:
+  provider: npm
+  on:
+    tags: true
+    # branch: master
+  email: poltorakovmb@gmail.com
+  # skip_cleanup: true
+#  condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+
+  api_key:
+    secure: cEBOnx5WyLZmwNSheZNUBFK9G5e/JwOYmzUGnt+CqEq+bXGmCcpJJ9HUr6EKI0zAPhtEYQZrhkDNMAFHd0pbcSsg7TzIVBMdB6P4KtzANDKcUD8DTivzpasqq+Qun3CCmo0HRxel3G09lKRVu7g9ob0jDk3e9/1ETWMEouIC09XRaYBkL4r2hC7aCDra0pLj5bXESFRjsrT+rT019U7ELN1wsiRaKady6RhplTbcsp1GqpVLuUmwY/GLIr1Pr9lmxCpWt+nIo53VNWHh6XlzW+Jh9mSWDswEc2Yel0D8Ueqa+S3emggfVNNgbgI/FbbQ1aZfqC8X5Kg9DCtRKmBknnIzy3tuE/kZpYqo6grNIwRxbw8APYBEgp1EpnWbgz6bHgN0qh/2QDVVVaoqfbYmyvSc1ny6x2vVz3qv+H84Gc1JFs4v5Y6bZSI6U9SzO8pWAhvBEWpK6mqkibSYD2YPRuibeMQmVoJsoNZukqoCNM3F2hyAAx5TpYKqFm49yv8SHu4JSh/I1aZsx/z5ItXdTTyCbzn0oRwMMSxu2bFng4ksiK+e6KBES1pEq4hbzOjWLV0xZVBMNx/ZuDXdp13T+IzxpcF6arp5meaxt3zudwoR+ktE+uYg8Quvfp1RqvGB3IefW1h0okxkjgn0Uf27r/eGOs2Db2OCEaKl+1DbM1k=
+# - stage: release
+#   name: Deploy to Github Releases
+#   before_deploy:
+#     - yarn build
+#     - cp dist/avionics.js avionics.js
+#   deploy:
+#     provider: releases
+#     api_key:
+#       secure: "HYOu3rAhBroiqMlJ618UKl7/Us0P1lfeLnw9fmCkZDdJMw3f5Ggr6nwpd4cXzY3B8x3RYkv1rOepItOjGgWBORyHLOq3/cXRJK2kRkzSP7hoYgmVs2Dv07JLMopVP3LqrfM3TgEP/3o2s4Oo/E8NdPORr7dmRofU4ySNAOeTtYWo4aNbc1yHKKL9qCZxoc/dsnXA6bbFWjMc7T4ppWL6YKOnVQmaXTuIkIxDctmlBKFvD84FlFpwPG8OizDgF2mxlzuUdlIWDVGGAoMVZ8+1iu+bGLOSAvOn5ckRC397sxDv0yawWbbQm4MMJia+fdEWDa3znneQuaMYcqQNV+YkO7Ff+0qDqO2oW8nPAzpwsyubyDpzhydydO7RzLkQIJUiY7cuQACg1wIWLd1pHbMeRUTeKL5rzotFuEQk7GprOjiJI8bZO9jjoUrEJrjyGMIRp7Cn8W027w6nZb50ZO9zSvilyPAEhbgx0wICRyw1PoKg0VZQ5Fv6uxZ6StQlEiQNG4E44uFx+gx0wlPpKldIpx3M+G2UgqsAeR5Y6TTRk+pq7WLxRIvjRr7hNxrTnvFeYWzBVJ6KkpXDiCII8QbFseXFZrZ4bQz5sOQPZg8wJ0HbVt/mkwP4tLYGstlSwb8HcN1tPu2pP2IEdGkRt8lszxuVvJPP51h+XxyBJ6m8hkQ="
+#     file:
+#       - avionics.js
+#     skip_cleanup: true
+#     on:
+#       branch: master
+#       tags: true
