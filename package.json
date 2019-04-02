@@ -3,6 +3,7 @@
   "version": "0.0.4",
   "description": "js all in one avionics module",
   "main": "avionics.js",
+  "files": ["dist/avionics.js"],
   "scripts": {
     "start:docker": "webpack-dev-server --host 0.0.0.0",
     "start:dev": "webpack-dev-server",

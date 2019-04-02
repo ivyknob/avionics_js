@@ -31,10 +31,8 @@ jobs:
       before_script:
         - Xvfb :99 & export DISPLAY=:99
         - sleep 5
-      before_deploy:
-        - yarn build
-        - cp dist/avionics.js avionics.js
-        - git add .
+before_deploy:
+  - yarn build
 deploy:
   provider: npm
   on:
