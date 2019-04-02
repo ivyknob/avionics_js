@@ -7,7 +7,7 @@ Made by Ivy Knob.
 
 ## Installation
 
-* Add `avionics_js` to `package.json`
+* Add `@ivyknob/avionics_js` to your project (`npm -i @ivyknob/avionics_js` or `yarn add @ivyknob/avionics_js`)
 * Run `yarn` or `npm install` to install all necessary libraries
 * Include avionics.js to your project
 
