@@ -11,6 +11,10 @@ Made by Ivy Knob.
 * Run `yarn` or `npm install` to install all necessary libraries
 * Include avionics.js to your project
 
+### Using CDN
+
+If you want to just include js on your page from the hosting, just add `https://unpkg.com/@ivyknob/avionics_js` as a script source
+
 ## Usage
 
 TODO: Write usage instructions
