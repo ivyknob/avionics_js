@@ -202,7 +202,7 @@ module.exports = {
         ],
         "object-property-newline": "error",
         "object-shorthand": "error",
-        "one-var": "error",
+        "one-var": 0,
         "one-var-declaration-per-line": "error",
         "operator-assignment": "error",
         "operator-linebreak": "error",
@@ -233,7 +233,7 @@ module.exports = {
             "last"
         ],
         "sort-keys": "error",
-        "sort-vars": "error",
+        "sort-vars": 0,
         "space-before-blocks": "error",
         "space-before-function-paren": "off",
         "space-in-parens": [

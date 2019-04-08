@@ -20,11 +20,13 @@ describe("Avionics specs", function() {
     it('Check set airspeed', function() {
       const avionics = createAvionics();
 
-      avionics.airspeed = 999.1;
-      expect(avionics.elem.querySelector('#airspeed_value').textContent).toEqual('999');
+      avionics.airspeed = 993.1;
+      expect(avionics.elem.querySelector('#airspeed_value').textContent).toEqual('99');
+      expect(avionics.elem.querySelector('#airspeed_value_residue_current').textContent).toEqual('3');
 
-      avionics.airspeed = 98.9;
-      expect(avionics.elem.querySelector('#airspeed_value').textContent).toEqual('099');
+      avionics.airspeed = 58.9;
+      expect(avionics.elem.querySelector('#airspeed_value').textContent).toEqual('05');
+      expect(avionics.elem.querySelector('#airspeed_value_residue_current').textContent).toEqual('9');
       removeChild(avionics);
     });
 
@@ -32,10 +34,12 @@ describe("Avionics specs", function() {
       const avionics = createAvionics();
 
       avionics.altitude = 12345.32;
-      expect(avionics.elem.querySelector("#altitude_value").textContent).toEqual('12345');
+      expect(avionics.elem.querySelector("#altitude_value").textContent).toEqual('123');
+      expect(avionics.elem.querySelector("#altitude_value_residue_current").textContent).toEqual('40');
 
       avionics.altitude = 123.23;
-      expect(avionics.elem.querySelector("#altitude_value").textContent).toEqual('00123');
+      expect(avionics.elem.querySelector("#altitude_value").textContent).toEqual('001');
+      expect(avionics.elem.querySelector("#altitude_value_residue_current").textContent).toEqual('20');
       removeChild(avionics);
     });
 

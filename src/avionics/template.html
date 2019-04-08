@@ -3,6 +3,9 @@
     <clipPath id="pitchClip">
       <path d="M-100 400 -100 -100 C -50 -160, 50 -160, 100 -100 L 100 400z" transform="translate(0, -40)" />
     </clipPath>
+    <clipPath id="canvasPitch">
+      <path d="M-325 -250 h650 v500 h-650 z" />
+    </clipPath>
   </defs>
   <g id='horizont'>
     <defs>
@@ -15,6 +18,7 @@
     <line x1="-1000" y1="0" x2="1000" y2="0" stroke="white" stroke-width="2" />
   </g>
 
+  <g clip-path="url(#canvasPitch)">
   <g id="rotor" clip-path="url(#pitchClip)">
     <g id='pitch'>
       <defs>
@@ -71,13 +75,8 @@
   </g>
 
   <g transform="translate(-325, 0)">
-    <defs>
-      <clipPath id="speedClip">
-        <rect x="0" y="-250" width="100" height="500" fill="black" />
-      </clipPath>
-    </defs>
     <rect class='background-rect' y="-250" width="100" height="500" />
-    <g clip-path="url(#speedClip)">
+    <g>
       <g transform="translate(100,0)" id="speed_scale">
         <defs>
           <line x1="0" y1="0" x2="-8" y2="0" stroke="#fff" stroke-width="1.5" id="speed_scale_marker" />
@@ -91,9 +90,21 @@
       <rect id="ground_speed" width="100" height="32" fill="black" stroke="white" stroke-width="1" />
       <text dx='95' dy='16' id='ground_speed_value'>0</text>
     </g>
-    <g transform='translate(12, 0)'>
-      <path d="M90, 0 l-10 10 v38 h-25 v-24 h-55 v-48 h55 v-25 h25 v38 z" class='roll' />
-      <text dx="6" class="airspeed-value" id="airspeed_value">999</text>
+    <g transform='translate(3, 0)'>
+      <defs>
+        <clipPath id="airspeed_value_clip">
+          <path d="M90, 0 l-10 10 v38 h-24 v-24 h-48 v-48 h48 v-25 h24 v38 z" />
+        </clipPath>
+      </defs>
+      <path d="M90, 0 l-10 10 v38 h-24 v-24 h-48 v-48 h48 v-25 h24 v38 z" class='roll' />
+      <text dx="8" class="airspeed-value" id="airspeed_value">00</text>
+      <g clip-path="url(#airspeed_value_clip)">
+        <g transform="translate(56, 0)" id='airspeed_value_residue'>
+          <text dy="-46" class='airspeed-value' id="airspeed_value_residue_after">1</text>
+          <text class='airspeed-value' id="airspeed_value_residue_current">0</text>
+          <text dy="46" class='airspeed-value' id="airspeed_value_residue_before">9</text>
+        </g>
+      </g>
     </g>
   </g>
 
@@ -111,9 +122,15 @@
       <polyline id='vertical_speed_indicator' transform="translate(0, 0)" points="0,0 -6,-6 -6,6, 0,0" fill='#fff' stroke='#000' />
     </g>
 
-    <g transform="translate(14, 50)" fill="#47cfe0">
-      <polyline points="-1,0 9,-10 9,-21 -14,-21 -14,21 9,21 9,10, -1,0" fill="#47cfe0" stroke="#000" stroke-width="1.5" />
-      <text dx="16" id='selected_altitude_bug_value'><tspan font-size='1.2em' font-weight="bold">2</tspan>500</text>
+    <g id='altitude_scale'>
+      <defs>
+        <line x1="0" y1="0" x2="8" y2="0" stroke="#fff" stroke-width="1.5" id="altitude_scale_marker" />
+        <line x1="0" y1="0" x2="15" y2="0" stroke="#fff" stroke-width="1.5" id="altitude_scale_large_marker" />
+        <g id='altitude_scale_selected' fill="#47cfe0">
+          <path d="m8 0 l10 10 v11 h-18 v-42 h18 v11 z" fill="#47cfe0" stroke="#000" stroke-width="1.5" />
+          <text dx="27" id='selected_altitude_bug_value'><tspan font-size='1.2em' font-weight="bold">2</tspan>500</text>
+        </g>
+      </defs>
     </g>
 
     <g transform="translate(0,-250)">
@@ -122,13 +139,25 @@
     </g>
 
     <g transform="translate(16, 0)">
-      <path d="M0 0 l10 10 v11 h58 v17 h42 v-76 h-42 v17 h-58 v11 z" class='roll' />
-      <text dx="16" class='altitude-value' id='altitude_value'>95336</text>
+      <defs>
+        <clipPath id="altitude_value_clip">
+          <path d="M0 0 l10 10 v11 h58 v17 h42 v-76 h-42 v17 h-58 v11 z" />
+        </clipPath>
+      </defs>
+      <path d="M0 0 l10 10 v11 h54 v17 h40 v-76 h-40 v17 h-54 v11 z" class='roll' />
+      <text dx="66" class='altitude-value' id='altitude_value'>000</text>
+      <g clip-path="url(#altitude_value_clip)">
+        <g transform="translate(102, 0)" id='altitude_value_residue'>
+          <text dy="-34" class='altitude-value' id="altitude_value_residue_after">20</text>
+          <text class='altitude-value' id="altitude_value_residue_current">00</text>
+          <text dy="34" class='altitude-value' id="altitude_value_residue_before">80</text>
+        </g>
+      </g>
     </g>
 
     <g transform="translate(0, 218)">
       <rect id="barometric_setting" x="0" y="0" width="134" height="32" fill="black" stroke="#909090" stroke-width="1" opacity="1" />
-      <text dx="129" dy="16" id="barometric_setting_value">1013.05</text>
+      <text dx="129" dy="16" id="barometric_setting_value">0.00</text>
     </g>
   </g>
 
@@ -138,4 +167,5 @@
     <polyline points="0,0 54,42 33,42 0,0" fill="none" stroke="black" stroke-width="1"/>
   </g>
   <use xlink:href="#triangles" transform="scale(-1,1)"/>
+  </g>
 </svg>
