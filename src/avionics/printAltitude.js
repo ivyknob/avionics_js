@@ -4,7 +4,7 @@ const text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
 text.setAttribute('x', 27);
 text.classList.add('altitude__scale-value');
 
-export default function printAltitude (elem, selectedAltitude = null) {
+export default function printAltitude (elem) {
   const marker = createElem('altitude_scale_marker'),
         large_marker = createElem('altitude_scale_large_marker');
 

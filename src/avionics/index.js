@@ -47,7 +47,7 @@ class Avionics {
     });
     printVerticalSpeed(this.vertical_speed_scale);
     printAltitude(this.altitude_scale);
-    this.selectedAltitudeBugValue = altitude_scale.querySelector('#selected_altitude_bug_value');
+    this.selectedAltitudeBugValue = this.altitude_scale.querySelector('#selected_altitude_bug_value');
     this.altitudeCarriageElem = this.printAltitudeCarriage(null);
 
     this._rollValue = 0;
@@ -171,7 +171,8 @@ class Avionics {
 
     if (value === null) {
       this.altitudeCarriageElem.setAttribute('visibility', 'hidden');
-    } else {
+    }
+    else {
       this.altitudeCarriageElem.setAttribute('visibility', 'visible');
       this.altitudeCarriageElem.setAttribute('transform', `translate(0, ${-value})`);
       this.selectedAltitudeBugValue.innerHTML = compoundValue(roundValue);
