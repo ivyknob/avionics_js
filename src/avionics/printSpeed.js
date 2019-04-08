@@ -1,4 +1,4 @@
-import createElem from './createElem.js'
+import { createElem } from './helpers.js'
 
 const text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
 text.setAttribute('x', -20);

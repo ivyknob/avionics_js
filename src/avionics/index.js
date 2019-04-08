@@ -5,7 +5,7 @@ import printHeading from './printHeading.js'
 import printSpeed from './printSpeed.js'
 import printVerticalSpeed from './printVerticalSpeed.js'
 import printAltitude from './printAltitude.js'
-import { pad } from './helpers.js'
+import { pad, compoundValue, createElem } from './helpers.js'
 
 class Avionics {
   constructor(elem) {
@@ -29,6 +29,16 @@ class Avionics {
     this.vertical_speed_line_indicator = elem.querySelector('#vertical_speed_line_indicator');
     this.altitude_scale = elem.querySelector('#altitude_scale');
 
+    this.altitudeBarrelElem = this.elem.querySelector('#altitude_value_residue');
+    this.altitudeBarrelElemCurrent = this.altitudeBarrelElem.querySelector('#altitude_value_residue_current');
+    this.altitudeBarrelElemBefore = this.altitudeBarrelElem.querySelector('#altitude_value_residue_before');
+    this.altitudeBarrelElemAfter = this.altitudeBarrelElem.querySelector('#altitude_value_residue_after');
+
+    this.airspeedBarrelElem = this.elem.querySelector('#airspeed_value_residue');
+    this.airspeedBarrelElemCurrent = this.airspeedBarrelElem.querySelector('#airspeed_value_residue_current');
+    this.airspeedBarrelElemBefore = this.airspeedBarrelElem.querySelector('#airspeed_value_residue_before');
+    this.airspeedBarrelElemAfter = this.airspeedBarrelElem.querySelector('#airspeed_value_residue_after');
+
     printPitch(this.pitchElem);
     printHeading(this.heading_scale);
     printSpeed(this.speed_scale, {
@@ -36,7 +46,9 @@ class Avionics {
       "min": 100
     });
     printVerticalSpeed(this.vertical_speed_scale);
-    printAltitude(this.altitude_scale, 300);
+    printAltitude(this.altitude_scale);
+    this.selectedAltitudeBugValue = altitude_scale.querySelector('#selected_altitude_bug_value');
+    this.altitudeCarriageElem = this.printAltitudeCarriage(null);
 
     this._rollValue = 0;
     this._pitchValue = 0;
@@ -44,6 +56,14 @@ class Avionics {
     this._altitube = 0;
     this._currentHeading = 360;
     this._verticalSpeed = 0;
+  }
+
+  printAltitudeCarriage() {
+    const carriage = createElem('altitude_scale_selected');
+    this.altitude_scale.appendChild(carriage);
+    carriage.setAttribute('visibility', 'hidden');
+
+    return carriage;
   }
 
   horizontTransform() {
@@ -60,8 +80,23 @@ class Avionics {
 
   set airspeed(value) {
     this._airspeed = value;
-    this.airspeedElem.textContent = pad(value, 3);
     this.speed_scale.setAttribute("transform", `translate(100, ${value*8})`);
+    const roundValue = Math.round(value),
+          roughRoundValue = roundValue;
+
+    this.airspeedElem.textContent = pad(
+      roundValue.toString().split('').slice(0, -1).join(""),
+      2
+    );
+
+    this.airspeedBarrelElem.setAttribute(
+      'transform',
+      `translate(56,${(value-roundValue)*46})`
+    );
+
+    this.airspeedBarrelElemCurrent.textContent = pad(roughRoundValue, 1);
+    this.airspeedBarrelElemBefore.textContent = pad(roughRoundValue - 1, 1);
+    this.airspeedBarrelElemAfter.textContent = pad(roughRoundValue + 1, 1);
   }
 
   set altitude(value) {
@@ -72,13 +107,14 @@ class Avionics {
       roundValue.toString().split('').slice(0, -2).join(""),
       3
     );
-    this.elem.querySelector('#altitude_value_residue').setAttribute(
+
+    this.altitudeBarrelElem.setAttribute(
       'transform',
-      `translate(102,${(roundValue-roughRoundValue)*1.7})`
+      `translate(102,${(value-roughRoundValue)*1.7})`
     );
-    this.elem.querySelector('#altitude_value_residue_current').textContent = pad(roughRoundValue, 2);
-    this.elem.querySelector('#altitude_value_residue_before').textContent = pad(roughRoundValue - 20, 2);
-    this.elem.querySelector('#altitude_value_residue_after').textContent = pad(roughRoundValue + 20, 2);
+    this.altitudeBarrelElemCurrent.textContent = pad(roughRoundValue, 2);
+    this.altitudeBarrelElemBefore.textContent = pad(roughRoundValue - 20, 2);
+    this.altitudeBarrelElemAfter.textContent = pad(roughRoundValue + 20, 2);
     this.altitude_scale.setAttribute('transform', `translate(0, ${value})`);
   }
 
@@ -130,7 +166,16 @@ class Avionics {
   }
 
   set selectedAltitude (value) {
-    this.selected_altitude_value.textContent = Math.round(value);
+    const roundValue = Math.round(value);
+    this.selected_altitude_value.textContent = roundValue;
+
+    if (value === null) {
+      this.altitudeCarriageElem.setAttribute('visibility', 'hidden');
+    } else {
+      this.altitudeCarriageElem.setAttribute('visibility', 'visible');
+      this.altitudeCarriageElem.setAttribute('transform', `translate(0, ${-value})`);
+      this.selectedAltitudeBugValue.innerHTML = compoundValue(roundValue);
+    }
   }
 
   set barometricSetting (value) {

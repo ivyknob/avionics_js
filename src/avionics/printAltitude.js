@@ -1,13 +1,4 @@
-import { pad } from './helpers'
-import createElem from './createElem.js'
-
-const setCompoundValue = (value) => {
-  const thousands = Math.floor(value/1000);
-  return [
-    thousands ? `<tspan font-size="1.2em" font-weight="bold">${thousands}</tspan>` : '',
-    pad(value%1000, 3)
-  ].join("");
-}
+import { createElem, compoundValue } from './helpers.js'
 
 const text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
 text.setAttribute('x', 27);
@@ -26,7 +17,7 @@ export default function printAltitude (elem, selectedAltitude = null) {
       clone = large_marker.cloneNode();
       if (i > 0) {
         const cloneText = text.cloneNode();
-        cloneText.innerHTML = setCompoundValue(i * 20);
+        cloneText.innerHTML = compoundValue(i * 20);
         cloneText.setAttribute('y', -i * 20);
         elem.appendChild(cloneText);
       }
@@ -39,12 +30,5 @@ export default function printAltitude (elem, selectedAltitude = null) {
     elem.appendChild(clone);
 
     i += 1;
-  }
-
-  if (selectedAltitude) {
-    const carriage = createElem('altitude_scale_selected');
-    carriage.setAttribute('transform', `translate(0, ${-selectedAltitude})`);
-    elem.querySelector('#selected_altitude_bug_value').innerHTML = setCompoundValue(selectedAltitude);
-    elem.appendChild(carriage);
   }
 }

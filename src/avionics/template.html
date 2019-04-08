@@ -91,8 +91,20 @@
       <text dx='95' dy='16' id='ground_speed_value'>0</text>
     </g>
     <g transform='translate(3, 0)'>
-      <path d="M90, 0 l-10 10 v38 h-24 v-24 h-50 v-48 h50 v-25 h24 v38 z" class='roll' />
-      <text dx="7" class="airspeed-value" id="airspeed_value">000</text>
+      <defs>
+        <clipPath id="airspeed_value_clip">
+          <path d="M90, 0 l-10 10 v38 h-24 v-24 h-48 v-48 h48 v-25 h24 v38 z" />
+        </clipPath>
+      </defs>
+      <path d="M90, 0 l-10 10 v38 h-24 v-24 h-48 v-48 h48 v-25 h24 v38 z" class='roll' />
+      <text dx="8" class="airspeed-value" id="airspeed_value">00</text>
+      <g clip-path="url(#airspeed_value_clip)">
+        <g transform="translate(56, 0)" id='airspeed_value_residue'>
+          <text dy="-46" class='airspeed-value' id="airspeed_value_residue_after">1</text>
+          <text class='airspeed-value' id="airspeed_value_residue_current">0</text>
+          <text dy="46" class='airspeed-value' id="airspeed_value_residue_before">9</text>
+        </g>
+      </g>
     </g>
   </g>
 
@@ -145,7 +157,7 @@
 
     <g transform="translate(0, 218)">
       <rect id="barometric_setting" x="0" y="0" width="134" height="32" fill="black" stroke="#909090" stroke-width="1" opacity="1" />
-      <text dx="129" dy="16" id="barometric_setting_value">1013.05</text>
+      <text dx="129" dy="16" id="barometric_setting_value">0.00</text>
     </g>
   </g>
 
