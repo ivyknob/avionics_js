@@ -8,27 +8,25 @@ export default function printAltitude (elem) {
   const marker = createElem('altitude_scale_marker'),
         large_marker = createElem('altitude_scale_large_marker');
 
-  let i = -15;
+  let i = 0;
 
-  while (i <= 500) {
+  while (i <= 10000) {
     let clone;
 
-    if (i % 5 === 0) {
+    if (i % 100 === 0) {
       clone = large_marker.cloneNode();
-      if (i > 0) {
-        const cloneText = text.cloneNode();
-        cloneText.innerHTML = compoundValue(i * 20);
-        cloneText.setAttribute('y', -i * 20);
-        elem.appendChild(cloneText);
-      }
+      const cloneText = text.cloneNode();
+      cloneText.innerHTML = i === 0 ? '0' : compoundValue(i);
+      cloneText.setAttribute('y', -i);
+      elem.appendChild(cloneText);
     }
     else {
       clone = marker.cloneNode();
     }
 
-    clone.setAttribute('y', -i * 20);
+    clone.setAttribute('y', -i);
     elem.appendChild(clone);
 
-    i += 1;
+    i += 20;
   }
 }
