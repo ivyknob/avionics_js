@@ -8,17 +8,16 @@ textLeft.setAttribute('x', -45);
 textRight.setAttribute('x', 45);
 
 export default function printPitch (elem) {
-  var appendFn, i;
+  let i = -220;
   const large = createElem('large-pitch'),
-   medium = createElem('medium-pitch'),
-   small = createElem('small-pitch');
-  i = -220;
-  appendFn = function(text) {
-    var value = Math.abs(i);
-    text.textContent = value > 180 ? 360 - value : value;
-    text.setAttribute('y', -i * 8);
-    elem.appendChild(text);
-  };
+        medium = createElem('medium-pitch'),
+        small = createElem('small-pitch'),
+        appendFn = (text) => {
+          const value = Math.abs(i);
+          text.textContent = value > 180 ? 360 - value : value;
+          text.setAttribute('y', -i * 8);
+          elem.appendChild(text);
+        };
   while (i <= 220) {
     let texts, use;
     if (i === 0) {

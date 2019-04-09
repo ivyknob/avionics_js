@@ -5,10 +5,10 @@ text.setAttribute('x', -12);
 text.classList.add('vertical-speed__scale-value');
 
 export default function printVerticalSpeed (elem) {
-  let i = -15;
-  const large_marker = createElem('vertical_speed_scale_large_marker'),
-    marker = createElem('vertical_speed_scale_marker');
+  const marker = createElem('vertical_speed_scale_marker'),
+        large_marker = createElem('vertical_speed_scale_large_marker');
 
+  let i = -15;
   while (i <= 15) {
     let clone;
 

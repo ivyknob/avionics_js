@@ -7,7 +7,7 @@ text.classList.add('speed__scale-value');
 export default function printSpeed (elem, opts) {
   if (typeof opts.min === 'number' && typeof opts.max === 'number' && opts.min < opts.max) {
     const greenLine = elem.querySelector('#speed_green_line'),
-      redLine = elem.querySelector('#speed_red_line');
+          redLine = elem.querySelector('#speed_red_line');
 
     redLine.setAttribute('y1', 0);
     redLine.setAttribute('y2', 300 * -8);
@@ -15,10 +15,9 @@ export default function printSpeed (elem, opts) {
     greenLine.setAttribute('y1', opts.min * -8);
     greenLine.setAttribute('y2', opts.max * -8);
   }
+  const marker = createElem('speed_scale_marker'),
+        large_marker = createElem('speed_scale_large_marker');
   let i = 0;
-  const large_marker = createElem('speed_scale_large_marker'),
-    marker = createElem('speed_scale_marker');
-
   while (i <= 100) {
     let clone;
 

@@ -8,10 +8,9 @@ text.setAttribute('text-anchor', 'middle');
 text.setAttribute('y', -10);
 
 export default function printHeading (elem) {
-  let i;
-  const large_marker = createElem('heading_scale_large_marker'),
-    marker = createElem('heading_scale_marker');
-  i = -200;
+  const marker = createElem('heading_scale_marker'),
+        large_marker = createElem('heading_scale_large_marker');
+  let i = -200;
   while (i <= 200) {
     let clone;
     if (i % 5 === 0) {
