@@ -19,8 +19,8 @@ interpolation = (current_ts, min, max, attribute)->
 
 createData = ->
   ct = current_tick()
-  min = DATA_TABLE.filter( (i) => i.ts <= ct ).sort((a,b) => b.ts-a.ts)[0]
-  max = DATA_TABLE.filter( (i) => i.ts >= ct ).sort((a,b) => a.ts-b.ts)[0]
+  min = DATA_TABLE.filter( (i) -> i.ts <= ct ).sort((a,b) -> b.ts-a.ts)[0]
+  max = DATA_TABLE.filter( (i) -> i.ts >= ct ).sort((a,b) -> a.ts-b.ts)[0]
 
   {
     pitch: interpolation(ct, min, max, 'p'),
