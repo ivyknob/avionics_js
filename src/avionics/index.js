@@ -7,7 +7,7 @@ import printVerticalSpeed from './printVerticalSpeed.js'
 import printAltitude from './printAltitude.js'
 import printAltitudeCarriage from './printAltitudeCarriage.js'
 
-import { pad, compoundValue, createElem } from './helpers.js'
+import { pad, compoundValue } from './helpers.js'
 
 /* eslint no-undef: "error" */
 /* eslint-env node */
