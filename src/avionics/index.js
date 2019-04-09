@@ -5,6 +5,8 @@ import printHeading from './printHeading.js'
 import printSpeed from './printSpeed.js'
 import printVerticalSpeed from './printVerticalSpeed.js'
 import printAltitude from './printAltitude.js'
+import printAltitudeCarriage from './printAltitudeCarriage.js'
+
 import { pad, compoundValue, createElem } from './helpers.js'
 
 /* eslint no-undef: "error" */
@@ -52,7 +54,7 @@ class Avionics {
     printVerticalSpeed(this.vertical_speed_scale);
     printAltitude(this.altitude_scale);
     this.selectedAltitudeBugValue = this.altitude_scale.querySelector('#selected_altitude_bug_value');
-    this.altitudeCarriageElem = this.printAltitudeCarriage(null);
+    this.altitudeCarriageElem = printAltitudeCarriage(this.altitude_scale);
 
     this._rollValue = 0;
     this._pitchValue = 0;
@@ -66,15 +68,7 @@ class Avionics {
     return VERSION;
   }
 
-  printAltitudeCarriage() {
-    const carriage = createElem('altitude_scale_selected');
-    this.altitude_scale.appendChild(carriage);
-    carriage.setAttribute('visibility', 'hidden');
-
-    return carriage;
-  }
-
-  horizontTransform() {
+  _horizontTransform() {
     if (this.pitch > 90) {
       this.horizont.setAttribute("transform", `rotate(${this.roll}) scale(1,-1) translate(0 ${parseFloat(720 - this.pitch*4)})`)
     }
@@ -128,7 +122,7 @@ class Avionics {
 
   set roll(value) {
     this._rollValue = parseFloat(value);
-    this.horizontTransform();
+    this._horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
     this.pitchElem.setAttribute("transform", `translate(0 ${this._pitchValue*8})`);
     this.roll_triangle.setAttribute("transform", `rotate(${this._rollValue})`);
@@ -140,7 +134,7 @@ class Avionics {
 
   set pitch(value) {
     this._pitchValue = parseFloat(value);
-    this.horizontTransform();
+    this._horizontTransform();
     this.rotor.setAttribute("transform", `rotate(${this._rollValue})`);
     this.pitchElem.setAttribute('transform', `translate(0 ${this._pitchValue*8})`);
   }
