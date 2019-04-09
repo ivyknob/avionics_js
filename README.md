@@ -17,8 +17,31 @@ If you want to just include js on your page from the hosting, just add `https://
 
 ## Usage
 
-TODO: Write usage instructions
-We will add instructions later, for now look at the examples code [here](https://github.com/ivyknob/avionics_js/blob/master/src/demo.coffee)
+Look at the examples code [here](https://github.com/ivyknob/avionics_js/blob/master/src/demo.coffee)
+
+### Initialization and usage
+```js
+var avionics = new Avionics(nodeElement);
+avionics.selectedAltitude = 100;
+```
+
+### API
+| Available setter-methods |
+| :--- |
+| airspeed |
+| altitude |
+| roll |
+| pitch |
+| verticalSpeed |
+| currentHeading |
+| groundSpeed |
+| selectedAltitude |
+| barometricSetting |
+
+```js
+// You can run it in browser console to see current available methods
+Object.getOwnPropertyNames(avionics.__proto__).filter(i => !i.startsWith('_') && i !== 'constructor')
+```
 
 ## Contributing
 
