@@ -7,6 +7,10 @@ import printVerticalSpeed from './printVerticalSpeed.js'
 import printAltitude from './printAltitude.js'
 import { pad, compoundValue, createElem } from './helpers.js'
 
+/* eslint no-undef: "error" */
+/* eslint-env node */
+const VERSION = require('../../package.json').version;
+
 class Avionics {
   constructor(elem) {
     this.elem = elem;
@@ -56,6 +60,10 @@ class Avionics {
     this._altitube = 0;
     this._currentHeading = 360;
     this._verticalSpeed = 0;
+  }
+
+  static get version() {
+    return VERSION;
   }
 
   printAltitudeCarriage() {
