@@ -33,10 +33,10 @@ avionics.selectedAltitude = 100;
 | roll |
 | pitch |
 | verticalSpeed |
-| currentHeading |
+| heading |
 | groundSpeed |
 | selectedAltitude |
-| barometricSetting |
+| qnh |
 
 ```js
 // You can run it in browser console to see current available methods

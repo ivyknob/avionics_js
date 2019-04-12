@@ -60,7 +60,7 @@ class Avionics {
     this._pitchValue = 0;
     this._airspeed = 0;
     this._altitube = 0;
-    this._currentHeading = 360;
+    this._heading = 360;
     this._verticalSpeed = 0;
   }
 
@@ -149,16 +149,16 @@ class Avionics {
     this.vertical_speed_line_indicator.setAttribute('y2', -this._verticalSpeed*15);
   }
 
-  set currentHeading(value) {
-    this._currentHeading = (value == 0) ? 360 : value;
-    this.heading_current_value.textContent = pad(this._currentHeading, 3)
+  set heading(value) {
+    this._heading = (value == 0) ? 360 : value;
+    this.heading_current_value.textContent = pad(this._heading, 3)
 
     let delta;
-    if (this._currentHeading > 180) {
-      delta = (360 - this._currentHeading)*10
+    if (this._heading > 180) {
+      delta = (360 - this._heading)*10
     }
     else {
-      delta = -this._currentHeading*10
+      delta = -this._heading*10
     }
     this.heading_scale.setAttribute("transform", `translate(${delta},22.5)`)
   }
@@ -181,7 +181,7 @@ class Avionics {
     }
   }
 
-  set barometricSetting (value) {
+  set qnh (value) {
     this.barometric_setting_value.textContent = value.toFixed(2);
   }
 

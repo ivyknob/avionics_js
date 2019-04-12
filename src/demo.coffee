@@ -27,11 +27,11 @@ createData = ->
     roll: interpolation(ct, min, max, 'r'),
     airspeed: interpolation(ct, min, max, 'as'),
     groundSpeed: interpolation(ct, min, max, 'gs'),
-    currentHeading: interpolation(ct, min, max, 'h'),
+    heading: interpolation(ct, min, max, 'h'),
     # selected_heading: interpolation(ct, min, max, 'sh'),
     altitude: interpolation(ct, min, max, 'a'),
     selectedAltitude: min.sa,
-    barometricSetting: interpolation(ct, min, max, 'abp'),
+    qnh: interpolation(ct, min, max, 'abp'),
     verticalSpeed: interpolation(ct, min, max, 'vsi')
   }
 
