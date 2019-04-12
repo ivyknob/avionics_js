@@ -31,13 +31,13 @@ If you want to just include js on your page from the hosting, just add `https://
       var avionics = new Avionics(document.body);
       avionics.pitch = 10;
       avionics.roll = 5;
-      avionics.currentHeading = 300;
+      avionics.heading = 300;
       avionics.altitude = 800;
       avionics.airspeed = 150;
       avionics.selectedAltitude = 1000;
       avionics.verticalSpeed = 2;
       avionics.groundSpeed = 130;
-      avionics.barometricSetting = 1030.15;
+      avionics.qnh = 1030.15;
     })
   </script>
 </head>
