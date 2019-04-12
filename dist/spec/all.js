@@ -76,13 +76,13 @@ describe("Avionics specs", function() {
       removeChild(avionics);
     });
 
-    it('Check set currentHeading', function() {
+    it('Check set heading', function() {
       const avionics = createAvionics();
-      avionics.currentHeading = 350.25;
+      avionics.heading = 350.25;
       expect(avionics.heading_current_value.textContent).toEqual('350');
       expect(avionics.heading_scale.getAttribute("transform")).toEqual("translate(97.5,22.5)");
 
-      avionics.currentHeading = 50.2;
+      avionics.heading = 50.2;
       expect(avionics.heading_current_value.textContent).toEqual('050');
       expect(avionics.heading_scale.getAttribute("transform")).toEqual("translate(-502,22.5)");
       removeChild(avionics);
