@@ -1,40 +1,9 @@
-path = require('path')
+merge = require('webpack-merge')
+common = require('./webpack.common.config.coffee')
+HtmlWebpackPlugin = require('html-webpack-plugin')
+htmlWebpackPluginOptions = require('./htmlWebpackPluginConfig.js')
 
-module.exports =
+module.exports = merge(common, {
   mode: 'development'
-  entry:
-    avionics: './src/avionics/index.js'
-    demo: './src/demo.coffee'
-    demoKeys: './src/demoKeys.coffee'
-  output:
-    path: path.resolve(__dirname, 'dist')
-    filename: '[name].js',
-  module:
-    rules: [{
-      test: /\.css$/
-      use: ['style-loader', 'css-loader']
-    },{
-      test: /\.coffee$/
-      use: ['coffee-loader']
-    },{
-      test: /\.html$/
-      use: [{
-        loader: 'html-loader',
-        options: {
-          minimize: true          
-        }
-      }]
-    },{
-      test: /\.js$/
-      exclude: /node_modules/
-      use:
-        loader: 'babel-loader'
-        options:
-          presets: ['@babel/preset-env']
-    }]
-  resolve:
-    extensions: ['.js', '.coffee']
-  devServer:
-    contentBase: path.join(__dirname, 'dist')
-  # закоментировал, иначе не работает coffeescript
-  watchOptions: { ignored: /node_modules/ }
+  plugins: common.plugins.concat(htmlWebpackPluginOptions.map((i) -> new HtmlWebpackPlugin(i)))
+})

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Avionics js</title>
+  <script defer src="<%= htmlWebpackPlugin.options.scriptSrc %>"></script>
+  <script defer src="demo.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      window.avionics = new Avionics(document.body);
+    });
+  </script>
+</head>
+<body></body>
+</html>
