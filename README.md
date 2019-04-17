@@ -93,11 +93,27 @@ Pitch values of the aircraft, def. Nose up is for upper semisphere, down for low
 
 #### Airspeed
 
-Indicated airspeed, knots, m/h or km/h. Can show values from 0 to 500. Setter name: `airspeed`.
+Indicates airspeed, knots, m/h or km/h. Can show values from 0 to 500. Setter name: `airspeed`.
 
 #### Altitude
 
 Shows altitude, feet or m, Can show values from -10000 to 10000 (but scale only starts from 0). Values below zero is possible with different settings of qnh. Setter name: `altitude`.
+
+#### Vertical speed (VSI)
+
+Gives rate information for the climb or descent, m/s. Usually in the range −30 to +30 m/s (-6000 to +6000 fpm). Setter name: `verticalSpeed`.
+
+#### Heading
+
+Shows heading of the aircraft, similar to a magnetic compass, deg. North direction corresponds to zero angle. Setter name: `heading`.
+
+#### Ground speed
+
+Indicates ground speed, knots, m/h or km/h. Can show values _from 0 to 500_ (why???). Setter name: `groundSpeed`.
+
+#### Selected altitude
+
+Shows selected altitude, feet or m, Can show values from -10000 to 10000 (but scale only starts from 0). Values below zero is possible with different settings of qnh. Setter name: `selected Altitude`.
 
 
 ## Contributing
