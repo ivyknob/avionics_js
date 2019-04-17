@@ -17,7 +17,8 @@
     "build": "webpack --config webpack.production.config.coffee",
     "test": "karma start karma.conf.js --single-run",
     "lint": "npx eslint ./src/avionics/",
-    "test:local": "karma start karma.conf.js --browsers Chrome,ChromeHeadless"
+    "test:local": "karma start karma.conf.js --browsers Chrome,ChromeHeadless",
+    "gh-pages": "npx push-dir --dir=dist --branch=gh-pages"
   },
   "publishConfig": {
     "access": "public"
