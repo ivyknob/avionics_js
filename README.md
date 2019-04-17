@@ -3,7 +3,7 @@
 JavaScript library to make glass EFIS from any phone or tablet. Inspired by Garmin G5.
 Made by Ivy Knob.
 
-[Live Demo](https://ivyknob.github.io/avionics_js/dist/demo.html)
+[Live Demo](https://ivyknob.github.io/avionics_js/demo.html)
 
 ## Installation
 
