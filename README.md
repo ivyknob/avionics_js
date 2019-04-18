@@ -97,7 +97,7 @@ Indicates airspeed, knots, m/h or km/h. Can show values from 0 to 500. Setter na
 
 #### Altitude
 
-Shows altitude, feet or m, Can show values from -10000 to 10000 (but scale only starts from 0). Values below zero is possible with different settings of qnh. Setter name: `altitude`.
+Shows altitude, feet or m. Can show values from -10000 to 10000 (but scale only starts from 0). Values below zero is possible with different settings of qnh. Setter name: `altitude`.
 
 #### Vertical speed (VSI)
 
@@ -113,7 +113,11 @@ Indicates ground speed, knots, m/h or km/h. Can show values _from 0 to 500_ (why
 
 #### Selected altitude
 
-Shows selected altitude, feet or m, Can show values from -10000 to 10000 (but scale only starts from 0). Values below zero is possible with different settings of qnh. Setter name: `selected Altitude`.
+Shows selected altitude, feet or m. Can show values from -10000 to 10000 (but scale only starts from 0). Values below zero is possible with different settings of qnh. Setter name: `selected Altitude`.
+
+#### QNH
+
+Shows QNH: the pressure measured at station then reduced down to mean sea level pressure; mmHg, inHg, _hPA_. Can show values from -900 to 1200 (hPa). Setter name: `qnh`.
 
 
 ## Contributing
