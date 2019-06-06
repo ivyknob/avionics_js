@@ -1,0 +1,82 @@
+describe 'Avionics specs', ->
+  it 'Global object "Avionics" to be defined', ->
+    expect(Avionics).toBeDefined()
+
+  describe 'with real draw', ->
+    createAvionics = ->
+      div = document.createElement('div')
+      div.id = 'app'
+      document.body.appendChild div
+      new Avionics(document.querySelector('#app'))
+
+    removeChild = (avionics) ->
+      document.body.removeChild avionics.elem
+
+    it 'Check set airspeed', ->
+      avionics = createAvionics()
+      avionics.airspeed = 993.1
+      expect(avionics.elem.querySelector('#airspeed_value').textContent).toEqual '99'
+      expect(avionics.elem.querySelector('#airspeed_value_residue_current').textContent).toEqual '3'
+      avionics.airspeed = 58.9
+      expect(avionics.elem.querySelector('#airspeed_value').textContent).toEqual '05'
+      expect(avionics.elem.querySelector('#airspeed_value_residue_current').textContent).toEqual '9'
+      removeChild avionics
+
+    it 'Check set altitude', ->
+      avionics = createAvionics()
+      avionics.altitude = 12345.32
+      expect(avionics.elem.querySelector('#altitude_value').textContent).toEqual '123'
+      expect(avionics.elem.querySelector('#altitude_value_residue_current').textContent).toEqual '40'
+      avionics.altitude = 123.23
+      expect(avionics.elem.querySelector('#altitude_value').textContent).toEqual '001'
+      expect(avionics.elem.querySelector('#altitude_value_residue_current').textContent).toEqual '20'
+      removeChild avionics
+
+    it 'Check set roll', ->
+      avionics = createAvionics()
+      avionics.roll = 10
+      expect(avionics.horizont.getAttribute('transform')).toEqual 'rotate(10) translate(0 0)'
+      expect(avionics.rotor.getAttribute('transform')).toEqual 'rotate(10)'
+      expect(avionics.pitchElem.getAttribute('transform')).toEqual 'translate(0 0)'
+      expect(avionics.roll_triangle.getAttribute('transform')).toEqual 'rotate(10)'
+      removeChild avionics
+
+    it 'Check set pitch', ->
+      avionics = createAvionics()
+      avionics.pitch = 5.1
+      expect(avionics.horizont.getAttribute('transform')).toEqual 'rotate(0) translate(0 20.4)'
+      expect(avionics.rotor.getAttribute('transform')).toEqual 'rotate(0)'
+      expect(avionics.pitchElem.getAttribute('transform')).toEqual 'translate(0 40.8)'
+      removeChild avionics
+
+    it 'Check set roll and pitch together', ->
+      avionics = createAvionics()
+      avionics.roll = 10.2
+      avionics.pitch = 5.1
+      expect(avionics.horizont.getAttribute('transform')).toEqual 'rotate(10.2) translate(0 20.4)'
+      expect(avionics.rotor.getAttribute('transform')).toEqual 'rotate(10.2)'
+      expect(avionics.pitchElem.getAttribute('transform')).toEqual 'translate(0 40.8)'
+      expect(avionics.roll_triangle.getAttribute('transform')).toEqual 'rotate(10.2)'
+      removeChild avionics
+
+    it 'Check set heading', ->
+      avionics = createAvionics()
+      avionics.heading = 350.25
+      expect(avionics.heading_current_value.textContent).toEqual '350'
+      expect(avionics.heading_scale.getAttribute('transform')).toEqual 'translate(97.5,22.5)'
+      avionics.heading = 50.2
+      expect(avionics.heading_current_value.textContent).toEqual '050'
+      expect(avionics.heading_scale.getAttribute('transform')).toEqual 'translate(-502,22.5)'
+      removeChild avionics
+
+    it 'Check set groundSpeed', ->
+      avionics = createAvionics()
+      avionics.groundSpeed = 257.2
+      expect(avionics.elem.querySelector('#ground_speed_value').textContent).toEqual '257'
+      removeChild avionics
+
+    it 'Check set selectedAltitude', ->
+      avionics = createAvionics()
+      avionics.selectedAltitude = 344.9
+      expect(avionics.elem.querySelector('#selected_altitude_value').textContent).toEqual '345'
+      removeChild avionics

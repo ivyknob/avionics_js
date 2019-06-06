@@ -16,7 +16,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'dist/avionics.js',
-      'spec/all.js'
+      'spec/index.coffee'
     ],
 
 
@@ -28,8 +28,18 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'spec/index.coffee': ['webpack']
     },
 
+    webpack: {
+      mode: 'none',
+      module: {
+        rules: [{
+          test: /\.coffee$/,
+          use: ['coffee-loader']
+        }]
+      }
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
@@ -59,7 +69,7 @@ module.exports = function(config) {
     browsers: ['Chrome', 'ChromeHeadless', 'Firefox'],
 
     // plugins : ['karma-jasmine', 'karma-phantomjs-launcher', 'karma-chrome'],
-    plugins : ['karma-jasmine', 'karma-chrome-launcher', 'karma-firefox-launcher'],
+    plugins : ['karma-jasmine', 'karma-chrome-launcher', 'karma-firefox-launcher', 'karma-webpack'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

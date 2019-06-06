@@ -6,6 +6,7 @@ module.exports =
     avionics: './src/avionics/index.js'
     demo: './src/demo.coffee'
     demoKeys: './src/demoKeys.coffee'
+    specs: './spec/index.coffee'
   output:
     path: path.resolve(__dirname, 'dist')
     filename: '[name].js',
@@ -39,7 +40,6 @@ module.exports =
       { from: 'node_modules/jasmine-core/lib/jasmine-core/boot.js', to: 'lib/jasmine' }
       { from: 'node_modules/jasmine-core/lib/jasmine-core/jasmine.css', to: 'lib/jasmine' }
       { from: 'node_modules/jasmine-core/images/jasmine_favicon.png', to: 'lib/jasmine' }
-      { from: 'spec', to: 'spec' }
     ]
   ]
   resolve:
