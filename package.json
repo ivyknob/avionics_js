@@ -17,7 +17,7 @@
     "build": "webpack --config webpack.production.config.coffee",
     "test": "karma start karma.conf.js --single-run",
     "lint": "npx eslint ./src/avionics/",
-    "test:local": "karma start karma.conf.js --browsers Chrome,ChromeHeadless",
+    "test:local": "karma start karma.conf.js --browsers Chrome,ChromeHeadless --concurrency Infinity",
     "gh-pages": "npx push-dir --dir=dist --branch=gh-pages"
   },
   "publishConfig": {
@@ -51,6 +51,7 @@
     "karma-firefox-launcher": "^1.1.0",
     "karma-jasmine": "^2.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
+    "karma-webpack": "^3.0.5",
     "push-dir": "^0.4.1",
     "style-loader": "^0.23.1",
     "webpack": "^4.29.6",
