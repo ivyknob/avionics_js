@@ -36,6 +36,7 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
+    "@semantic-release/npm": "^5.1.13",
     "babel-loader": "^8.0.5",
     "coffee-loader": "^0.9.0",
     "coffeescript": "^2.3.2",
