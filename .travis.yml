@@ -1,7 +1,7 @@
 dist: xenial
 language: node_js
 node_js:
-  - 10
+  - 12
 # stages:
 #   - build
 #   - check
@@ -18,7 +18,7 @@ jobs:
 
     - name: Run linter (ESLint)
       script: yarn lint
-  
+
     - stage: "Test"
       name: Run karma test suite
       addons:
@@ -30,7 +30,7 @@ jobs:
       before_script:
         - Xvfb :99 & export DISPLAY=:99
         - sleep 5
-    
+
     - stage: "Deploy"
       name: "Deploy to NPM JS"
       script: skip
