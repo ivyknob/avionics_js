@@ -11,6 +11,7 @@ import { pad, compoundValue } from './helpers.js'
 
 /* eslint no-undef: "error" */
 /* eslint-env node */
+/* eslint accessor-pairs: ["error", { "setWithoutGet": false }] */
 const VERSION = require('../../package.json').version;
 
 class Avionics {
