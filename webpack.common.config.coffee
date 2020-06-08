@@ -33,7 +33,7 @@ module.exports =
           presets: ['@babel/preset-env']
     }]
   plugins: [
-    new CopyPlugin([
+    new CopyPlugin({
       patterns: [
         { from: 'node_modules/jasmine-core/lib/jasmine-core/jasmine.js', to: 'lib/jasmine' }
         { from: 'node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js', to: 'lib/jasmine' }
@@ -42,7 +42,7 @@ module.exports =
         { from: 'node_modules/jasmine-core/images/jasmine_favicon.png', to: 'lib/jasmine' }
         { from: 'spec', to: 'spec' }
       ]
-    ])
+    })
   ]
   resolve:
     extensions: ['.js', '.coffee']
