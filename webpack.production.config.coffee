@@ -1,4 +1,4 @@
-merge = require('webpack-merge')
+{ merge } = require('webpack-merge')
 common = require('./webpack.common.config.coffee')
 HtmlWebpackPlugin = require('html-webpack-plugin')
 htmlWebpackPluginOptions = require('./htmlWebpackPluginConfig.js')
