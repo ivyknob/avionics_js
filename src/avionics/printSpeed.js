@@ -4,17 +4,7 @@ const text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
 text.setAttribute('x', -20);
 text.classList.add('speed__scale-value');
 
-export default function printSpeed (elem, opts) {
-  if (typeof opts.min === 'number' && typeof opts.max === 'number' && opts.min < opts.max) {
-    const greenLine = elem.querySelector('#speed_green_line'),
-          redLine = elem.querySelector('#speed_red_line');
-
-    redLine.setAttribute('y1', 0);
-    redLine.setAttribute('y2', 300 * -8);
-
-    greenLine.setAttribute('y1', opts.min * -8);
-    greenLine.setAttribute('y2', opts.max * -8);
-  }
+export default function printSpeed (elem) {
   const marker = createElem('speed_scale_marker'),
         large_marker = createElem('speed_scale_large_marker');
   let i = 0;

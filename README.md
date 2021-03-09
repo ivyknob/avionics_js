@@ -38,6 +38,7 @@ If you want to just include js on your page from the hosting, just add `https://
       avionics.verticalSpeed = 2;
       avionics.groundSpeed = 130;
       avionics.qnh = 1030.15;
+      this.speedBar = [40, 80, 180, 200];
     })
   </script>
 </head>
@@ -64,7 +65,7 @@ avionics.pitch = 10;
 
 ### API
 
-Here is the list of available setter-methods: 
+Here is the list of available setter-methods:
 
 | Available setter-methods |
 | :--- |

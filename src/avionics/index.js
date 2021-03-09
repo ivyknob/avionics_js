@@ -48,10 +48,8 @@ class Avionics {
 
     printPitch(this.pitchElem);
     printHeading(this.heading_scale);
-    printSpeed(this.speed_scale, {
-      "max": 150,
-      "min": 100
-    });
+    printSpeed(this.speed_scale);
+    this.speedBar = [40, 80, 180, 200] // default
     printVerticalSpeed(this.vertical_speed_scale);
     printAltitude(this.altitude_scale);
     this.selectedAltitudeBugValue = this.altitude_scale.querySelector('#selected_altitude_bug_value');
@@ -184,6 +182,37 @@ class Avionics {
 
   set qnh (value) {
     this.barometric_setting_value.textContent = value.toFixed(2);
+  }
+
+  set speedBar (arr) {
+    const [arg1, arg2, arg3, arg4] = arr;
+    if (!(
+      arr.every(i => typeof i === 'number')
+        && arg1 >= 0 && arg2 >= arg1 && arg3 >= arg2 && arg4 >= arg3
+    )) {
+      throw new Error('Incorrect speed scale')
+    }
+
+    const redBar = this.speed_scale.querySelector('#speed_red_bar'),
+          whiteBar = this.speed_scale.querySelector('#speed_white_bar'),
+          greenBar = this.speed_scale.querySelector('#speed_green_bar'),
+          yellowBar = this.speed_scale.querySelector('#speed_yellow_bar'),
+          redWhiteBar = this.speed_scale.querySelector('#speed_redwhite_bar');
+
+    redBar.setAttribute('y1', 0);
+    redBar.setAttribute('y2', arg1 * -8);
+
+    whiteBar.setAttribute('y1', arg1 * -8);
+    whiteBar.setAttribute('y2', arg2 * -8);
+
+    greenBar.setAttribute('y1', arg2 * -8);
+    greenBar.setAttribute('y2', arg3 * -8);
+
+    yellowBar.setAttribute('y1', arg3 * -8);
+    yellowBar.setAttribute('y2', arg4 * -8);
+
+    redWhiteBar.setAttribute('y1', arg4 * -8);
+    redWhiteBar.setAttribute('y2', (arg4 + 200) * -8);
   }
 
 }
